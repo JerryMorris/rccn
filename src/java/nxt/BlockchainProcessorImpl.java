@@ -66,6 +66,11 @@ import java.util.concurrent.ThreadLocalRandom;
 final class BlockchainProcessorImpl implements BlockchainProcessor {
 
     private static final NavigableMap<Integer, byte[]> checksums;
+    private static final boolean LOG_DOWNLOADING_STATS = true;
+    private int statsTotalTxCount;
+    private int[] statsTxByType = new int[TransactionType.TYPE_SHUFFLING + 1];
+    private long statsProcessingTime;
+
     static {
         NavigableMap<Integer, byte[]> map = new TreeMap<>();
         map.put(0, null);
@@ -214,6 +219,16 @@ final class BlockchainProcessorImpl implements BlockchainProcessor {
                         -85, 58, 123, -14, 80, -34, -109, -78, -92, 86, 62, 2, -14, -36, 41, -13,
                         -56, 50, 17, -18, 44, -31, -34, 56, 113, -11, -74, 98, 32, -87, -9, -87
                 });
+        map.put(Constants.CHECKSUM_BLOCK_27, Constants.isTestnet ?
+                new byte[] {
+                        -61, -118, -76, 124, -66, -86, -8, 96, -102, 51, 97, -36, -81, -57, 1, 7,
+                        -42, -59, 50, -63, -14, -23, -109, 106, 86, 19, 101, -89, -59, 28, -30, -65
+                }
+                :
+                new byte[] {
+                        -124, 127, -56, 18, -49, -13, 99, 43, 34, 13, -118, -93, -17, -128, 59,
+                        52, 41, -126, -85, -40, 52, 48, -13, 95, 56, 52, 61, -76, 105, -80, 54, -75
+                });
         checksums = Collections.unmodifiableNavigableMap(map);
     }
 
@@ -243,6 +258,7 @@ final class BlockchainProcessorImpl implements BlockchainProcessor {
     private volatile int lastBlockchainFeederHeight;
     private volatile boolean getMoreBlocks = true;
 
+    private volatile boolean isShuttingDown;
     private volatile boolean isTrimming;
     private volatile boolean isScanning;
     private volatile boolean isDownloading;
@@ -422,6 +438,13 @@ final class BlockchainProcessorImpl implements BlockchainProcessor {
                         Logger.logMessage("Downloaded " + numBlocks + " blocks in "
                                 + time / 1000 + " s, " + (totalBlocks * 1000) / totalTime + " per s, "
                                 + totalTime * (lastBlockchainFeederHeight - blockchain.getHeight()) / (totalBlocks * 1000 * 60) + " min left");
+                        if (LOG_DOWNLOADING_STATS) {
+                            Logger.logMessage("Tx total: " + statsTotalTxCount + " by type: " +
+                                    Arrays.toString(statsTxByType) + " processing time: " + statsProcessingTime + "ms");
+                            statsTotalTxCount = 0;
+                            Arrays.fill(statsTxByType, 0);
+                            statsProcessingTime = 0;
+                        }
                     } else {
                         Logger.logDebugMessage("Did not accept peer's blocks, back to our own fork");
                     }
@@ -652,10 +675,17 @@ final class BlockchainProcessorImpl implements BlockchainProcessor {
                     if (peerBlock == null) {
                         break;
                     }
+                    if (!getMoreBlocks) {
+                        break;
+                    }
                     BlockImpl block = peerBlock.getBlock();
                     if (blockchain.getLastBlock().getId() == block.getPreviousBlockId()) {
                         try {
+                            long time = LOG_DOWNLOADING_STATS ? System.currentTimeMillis() : 0;
                             pushBlock(block);
+                            if (LOG_DOWNLOADING_STATS) {
+                                statsProcessingTime += System.currentTimeMillis() - time;
+                            }
                         } catch (BlockNotAcceptedException e) {
                             peerBlock.getPeer().blacklist(e);
                         }
@@ -1110,6 +1140,7 @@ final class BlockchainProcessorImpl implements BlockchainProcessor {
             if (block.getHeight() % 5000 == 0) {
                 Logger.logMessage("received block " + block.getHeight());
                 if (!isDownloading || block.getHeight() % 50000 == 0) {
+                    Logger.logMessage("Analyzing tables");
                     networkService.submit(Db.db::analyzeTables);
                 }
             }
@@ -1155,6 +1186,11 @@ final class BlockchainProcessorImpl implements BlockchainProcessor {
             }
         }, false);
 
+//        ThreadPool.runBeforeStart(() -> {
+//            trimDerivedTables();
+//            System.exit(0);
+//        }, true);
+
         if (!Constants.isLightClient && !Constants.isOffline) {
             ThreadPool.scheduleThread("GetMoreBlocks", getMoreBlocksThread, 1);
         }
@@ -1198,9 +1234,19 @@ final class BlockchainProcessorImpl implements BlockchainProcessor {
         lastTrimHeight = Math.max(blockchain.getHeight() - Constants.MAX_ROLLBACK, 0);
         if (lastTrimHeight > 0) {
             for (DerivedDbTable table : derivedTables) {
+                if (isShuttingDown) {
+                    break;
+                }
                 blockchain.readLock();
                 try {
+                    long time = LOG_DOWNLOADING_STATS ? System.currentTimeMillis() : 0;
                     table.trim(lastTrimHeight);
+                    if (LOG_DOWNLOADING_STATS) {
+                        time = System.currentTimeMillis() - time;
+                        if (time > 300) {
+                            Logger.logDebugMessage("Trimming " + table + " took " + time + "ms");
+                        }
+                    }
                     Db.db.commitTransaction();
                 } finally {
                     blockchain.readUnlock();
@@ -1406,7 +1452,8 @@ final class BlockchainProcessorImpl implements BlockchainProcessor {
     }
 
     void shutdown() {
-        ThreadPool.shutdownExecutor("networkService", networkService, 5);
+        isShuttingDown = true;
+        ThreadPool.shutdownExecutor("networkService", networkService, 10);
     }
 
     private void addBlock(BlockImpl block) {
@@ -1500,6 +1547,7 @@ final class BlockchainProcessorImpl implements BlockchainProcessor {
                 try {
                     addBlock(block);
                     accept(block, validPhasedTransactions, invalidPhasedTransactions, duplicates);
+
                     Db.db.commitTransaction();
                 } catch (Exception e) {
                     Logger.logInfoMessage("Failed to accept an already validated block", e);
@@ -1674,6 +1722,10 @@ final class BlockchainProcessorImpl implements BlockchainProcessor {
         try {
             isProcessingBlock = true;
             for (TransactionImpl transaction : block.getTransactions()) {
+                if (LOG_DOWNLOADING_STATS) {
+                    statsTotalTxCount++;
+                    statsTxByType[transaction.getType().getType()]++;
+                }
                 if (! transaction.applyUnconfirmed()) {
                     throw new TransactionNotAcceptedException("Double spending", transaction);
                 }

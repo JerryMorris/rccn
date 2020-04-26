@@ -26,10 +26,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Locale;
 
-public abstract class EntityDbTable<T> extends DerivedDbTable {
-
-    private final boolean multiversion;
-    protected final DbKey.Factory<T> dbKeyFactory;
+public abstract class EntityDbTable<T> extends TrimmableDbTable<T> {
     private final String defaultSort;
     private final String fullTextSearchColumns;
 
@@ -42,9 +39,7 @@ public abstract class EntityDbTable<T> extends DerivedDbTable {
     }
 
     EntityDbTable(String table, DbKey.Factory<T> dbKeyFactory, boolean multiversion, String fullTextSearchColumns) {
-        super(table);
-        this.dbKeyFactory = dbKeyFactory;
-        this.multiversion = multiversion;
+        super(table, dbKeyFactory, multiversion);
         this.defaultSort = " ORDER BY " + (multiversion ? dbKeyFactory.getPKColumns() : " height DESC, db_id DESC ");
         this.fullTextSearchColumns = fullTextSearchColumns;
     }
@@ -432,24 +427,6 @@ public abstract class EntityDbTable<T> extends DerivedDbTable {
             save(con, t);
         } catch (SQLException e) {
             throw new RuntimeException(e.toString(), e);
-        }
-    }
-
-    @Override
-    public void popOffTo(int height) {
-        if (multiversion) {
-            VersionedEntityDbTable.popOff(db, table, height, dbKeyFactory);
-        } else {
-            super.popOffTo(height);
-        }
-    }
-
-    @Override
-    public void trim(int height) {
-        if (multiversion) {
-            VersionedEntityDbTable.trim(db, table, height, dbKeyFactory);
-        } else {
-            super.trim(height);
         }
     }
 

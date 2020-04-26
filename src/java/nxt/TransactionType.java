@@ -22,9 +22,6 @@ import nxt.Attachment.AbstractAttachment;
 import nxt.NxtException.ValidationException;
 import nxt.VoteWeighting.VotingModel;
 import nxt.util.Convert;
-import nxt.util.Logger;
-import org.apache.tika.Tika;
-import org.apache.tika.mime.MediaType;
 import org.json.simple.JSONObject;
 
 import java.nio.ByteBuffer;
@@ -1815,9 +1812,6 @@ public abstract class TransactionType {
 
             @Override
             void validateAttachment(Transaction transaction) throws NxtException.ValidationException {
-                if (Nxt.getBlockchain().getHeight() < Constants.ASSET_INCREASE_BLOCK) {
-                    throw new NxtException.NotYetEnabledException("Asset increase transaction not yet enabled");
-                }
                 Attachment.ColoredCoinsAssetIncrease attachment = (Attachment.ColoredCoinsAssetIncrease) transaction.getAttachment();
                 if (attachment.getAssetId() == 0) {
                     throw new NxtException.NotValidException("Invalid asset identifier: " + attachment.getJSONObject());
@@ -2211,10 +2205,6 @@ public abstract class TransactionType {
             @Override
             void validateAttachment(Transaction transaction) throws NxtException.ValidationException {
                 Attachment.ColoredCoinsDividendPayment attachment = (Attachment.ColoredCoinsDividendPayment)transaction.getAttachment();
-                if (attachment.getHoldingType() != HoldingType.NXT && Nxt.getBlockchain().getHeight() < Constants.ASSET_INCREASE_BLOCK) {
-                    throw new NxtException.NotYetEnabledException("Dividend payments on asset or currency not enabled until height " +
-                            Constants.ASSET_INCREASE_BLOCK);
-                }
                 if (attachment.getHeight() > Nxt.getBlockchain().getHeight()) {
                     throw new NxtException.NotCurrentlyValidException("Invalid dividend payment height: " + attachment.getHeight()
                             + ", must not exceed current blockchain height " + Nxt.getBlockchain().getHeight());
@@ -2350,9 +2340,6 @@ public abstract class TransactionType {
 
             @Override
             void validateAttachment(Transaction transaction) throws ValidationException {
-                if (Nxt.getBlockchain().getHeight() < Constants.ASSET_INCREASE_BLOCK) {
-                    throw new NxtException.NotYetEnabledException("Set asset property transaction not yet enabled");
-                }
                 Attachment.ColoredCoinsAssetProperty attachment = (Attachment.ColoredCoinsAssetProperty) transaction.getAttachment();
                 if (!Attachment.ColoredCoinsAssetProperty.PROPERTY_NAME_RW.validate(attachment.getProperty())
                         || attachment.getProperty().length() == 0
@@ -2413,9 +2400,6 @@ public abstract class TransactionType {
 
             @Override
             void validateAttachment(Transaction transaction) throws ValidationException {
-                if (Nxt.getBlockchain().getHeight() < Constants.ASSET_INCREASE_BLOCK) {
-                    throw new NxtException.NotYetEnabledException("Delete asset property transaction not yet enabled");
-                }
                 Attachment.PropertyDeleteAttachment attachment = (Attachment.PropertyDeleteAttachment) transaction.getAttachment();
                 Asset.AssetProperty property = Asset.getProperty(attachment.getPropertyId());
                 if (property == null) {
@@ -2538,24 +2522,6 @@ public abstract class TransactionType {
                         || attachment.getQuantity() < 0 || attachment.getQuantity() > Constants.MAX_DGS_LISTING_QUANTITY
                         || attachment.getPriceNQT() <= 0 || attachment.getPriceNQT() > Constants.MAX_BALANCE_NQT) {
                     throw new NxtException.NotValidException("Invalid digital goods listing: " + attachment.getJSONObject());
-                }
-                Appendix.PrunablePlainMessage prunablePlainMessage = transaction.getPrunablePlainMessage();
-                if (!Constants.DISABLE_METADATA_DETECTION && prunablePlainMessage != null
-                        && Nxt.getBlockchain().getHeight() < Constants.ASSET_INCREASE_BLOCK) {
-                    byte[] image = prunablePlainMessage.getMessage();
-                    if (image != null) {
-                        Tika tika = new Tika();
-                        MediaType mediaType = null;
-                        try {
-                            String mediaTypeName = tika.detect(image);
-                            mediaType = MediaType.parse(mediaTypeName);
-                        } catch (NoClassDefFoundError e) {
-                            Logger.logErrorMessage("Error running Tika parsers", e);
-                        }
-                        if (mediaType == null || !"image".equals(mediaType.getType())) {
-                            throw new NxtException.NotValidException("Only image attachments allowed for DGS listing, media type is " + mediaType);
-                        }
-                    }
                 }
             }
 

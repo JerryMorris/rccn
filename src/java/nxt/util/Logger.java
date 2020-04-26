@@ -201,19 +201,17 @@ public final class Logger {
     }
 
     public static void logShutdownMessage(String message) {
-        if (LogManager.getLogManager() instanceof NxtLogManager) {
-            logMessage(message);
-        } else {
+        logMessage(message);
+        if (!(LogManager.getLogManager() instanceof NxtLogManager)) {
             System.out.println(message);
         }
     }
 
     public static void logShutdownMessage(String message, Exception e) {
-        if (LogManager.getLogManager() instanceof NxtLogManager) {
-            logMessage(message, e);
-        } else {
+        logMessage(message, e);
+        if (!(LogManager.getLogManager() instanceof NxtLogManager)) {
             System.out.println(message);
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
     }
 

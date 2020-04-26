@@ -165,13 +165,14 @@ public final class Constants {
     public static final int CHECKSUM_BLOCK_25 = isTestnet ? 1825000 : 1865000;
     public static final int CHECKSUM_BLOCK_26 = isTestnet ? 2496000 : 2532000;
     public static final int ASSET_INCREASE_BLOCK = isTestnet ? isAutomatedTest ? 0 : 2500000 : 2870000;
+    public static final int CHECKSUM_BLOCK_27 = isTestnet ? 2847000 : 2880000;
 
-    public static final int LAST_CHECKSUM_BLOCK = CHECKSUM_BLOCK_26;
+    public static final int LAST_CHECKSUM_BLOCK = CHECKSUM_BLOCK_27;
     // LAST_KNOWN_BLOCK must also be set in html/www/js/nrs.constants.js
-    public static final int LAST_KNOWN_BLOCK = CHECKSUM_BLOCK_26;
+    public static final int LAST_KNOWN_BLOCK = CHECKSUM_BLOCK_27;
 
-    public static final int[] MIN_VERSION = isTestnet ? new int[] {1, 12} : new int[] {1, 11, 6};
-    public static final int[] MIN_PROXY_VERSION = isTestnet ? new int[] {1, 12} : new int[] {1, 11, 6};
+    public static final int[] MIN_VERSION = new int[] {1, 12, 1};
+    public static final int[] MIN_PROXY_VERSION = new int[] {1, 12, 1};
 
     static final long UNCONFIRMED_POOL_DEPOSIT_NQT = (isTestnet ? 50 : 100) * ONE_NXT;
     public static final long SHUFFLING_DEPOSIT_NQT = (isTestnet ? 7 : 1000) * ONE_NXT;

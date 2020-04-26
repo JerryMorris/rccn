@@ -1,3 +1,63 @@
+nxt-client-1.12.1, released 2020-02-27:
+
+This stable release is a mandatory upgrade for all mainnet Nxt nodes.
+
+A hardfork to activate several new features that have already been enabled on
+testnet in 1.12.0e has been scheduled for block 2870000, expected around April
+15, 2020. The following new features will be activated on mainnet:
+
+    Asset Dividends payment by asset or currency, allowing paying asset
+    dividends not only in NXT, but also in any asset or monetary system
+    currency.
+
+    Asset Properties, setting arbitrary name/value metadata on assets.
+
+    Asset Increase transaction, allowing asset issuers to increase the total
+    number of asset shares available.
+
+More details about the above features were published in the previous 1.12.0e
+changelog.
+
+Optimize checkpoint calculation by using hash of checkpoint block bytes
+instead of hashing all intermediate transactions.
+
+Simplified setting up https on a public node without the need for a reverse
+proxy. The new pem.to.pkcs12.keystore.certbot.hook.sh script can be used to
+convert an SSL certificate issued by Let's Encrypt to a keystore file that
+the Nxt node can use. The run.sh script now supports authbind, if started with
+the --authbind modified, to allow the Nxt software to listen on port 443
+without having to run it as root.
+
+A new managePeersNetworking API has been added, to allow disabling or
+enabling the node peer networking at runtime. It takes a single "operation"
+parameter, with possible values: "enable", "disable", and "query", and
+requires the adminPassword when run on a public node.
+
+Added a new GetEpochTime API, to return the blockchain epoch time given a unix
+timestamp.
+
+Added a new property nxt.stopDownloadHeight to allow forcing the blockchain
+download to stop once a certain height is reached.
+
+The compact.sh script has been improved to better reduce the database size.
+A new property has been added, nxt.disableCompactOnShutdown=false to allow
+disabling database compact on shutdown, for faster restarts during development.
+
+A new property has been added, nxt.deleteProcessedVotes=true, to optionally
+disable the deletion of votes records when trimming the votes table. Note
+that even if votes are not deleted, re-calculation of poll results may require
+data that are no longer available (such as account or asset balances at the
+time of poll finish), unless a blockchain rescan is done, this is why the
+default is still to delete old votes records.
+
+Various UI fixes and improvements.
+
+Updated Jetty to version 9.3.28, H2 to 1.4.200. If using a custom nxt.dbParams
+or nxt.dbUrl properties, remove any MVCC settings from them, MVCC is now the
+default and not configurable.
+
+
+--------------------------------------------------------------------------------
 nxt-client-1.12.0e:
 
 This is an experimental release, enabling several new features on testnet

@@ -1266,6 +1266,8 @@ class NxtDbVersion extends DbVersion {
             case 514:
                 apply("ALTER TABLE asset_dividend ADD COLUMN holding_type TINYINT NOT NULL DEFAULT 0 AFTER holding_id");
             case 515:
+                apply("CREATE ALIAS CAN_BE_TRIMMED FOR \"nxt.db.TrimmableDbTable.canBeTrimmed\"");
+            case 516:
                 return;
             default:
                 throw new RuntimeException("Blockchain database inconsistent with code, at update " + nextUpdate

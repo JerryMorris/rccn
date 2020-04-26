@@ -582,10 +582,10 @@ var NRS = (function (NRS, $, undefined) {
         }
 
         if (transaction.recipient !== data.recipient) {
-            if ((data.recipient == NRS.constants.GENESIS || data.recipient == "") && transaction.recipient == "0") {
-                //ok
-            } else {
-                return false;
+            if (!((data.recipient == NRS.constants.GENESIS || data.recipient == "") && transaction.recipient == "0")) {
+                if (!NRS.isSpecialRecipient(requestType)) {
+                    return false;
+                }
             }
         }
 
@@ -1713,6 +1713,16 @@ var NRS = (function (NRS, $, undefined) {
         pos++;
         return pos;
     }
+
+    /**
+     * Special case for transaction types which set the recipient to account which is not part of the transaction data.
+     * For example to the asset issuer account in asset property transactions.
+     * @param requestType the request type
+     * @returns {boolean} is it a requestType which creates a transaction with special recipient
+     */
+    NRS.isSpecialRecipient = function (requestType) {
+        return requestType == "setAssetProperty" || requestType == "deleteAssetProperty";
+    };
 
     return NRS;
 }(isNode ? client : NRS || {}, jQuery));

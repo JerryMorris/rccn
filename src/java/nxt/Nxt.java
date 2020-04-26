@@ -53,7 +53,7 @@ import java.util.Properties;
 
 public final class Nxt {
 
-    public static final String VERSION = "1.12.1";
+    public static final String VERSION = "1.12.2";
     public static final String APPLICATION = "NRS";
 
     private static volatile Time time = new Time.EpochTime();
@@ -335,6 +335,7 @@ public final class Nxt {
         API.shutdown();
         Users.shutdown();
         FundingMonitor.shutdown();
+        BlockchainProcessorImpl.getInstance().setGetMoreBlocks(false);
         ThreadPool.shutdown();
         BlockchainProcessorImpl.getInstance().shutdown();
         Peers.shutdown();

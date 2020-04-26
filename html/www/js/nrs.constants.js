@@ -69,8 +69,8 @@ var NRS = (function (NRS, $) {
         'FORGING': 'forging',
         'NOT_FORGING': 'not_forging',
         'UNKNOWN': 'unknown',
-        'LAST_KNOWN_BLOCK': { id: "12867872999574551211", height: "2532000" },
-        'LAST_KNOWN_TESTNET_BLOCK': { id: "11273677639410705531", height: "2496000" },
+        'LAST_KNOWN_BLOCK': { id: "3126610637024165764", height: "2880000" },
+        'LAST_KNOWN_TESTNET_BLOCK': { id: "6987522556978039491", height: "2847000" },
         'IGNIS_CURRENCY_CODE': "JLRDA",
         'SCHEDULE_PREFIX': "schedule"
     };

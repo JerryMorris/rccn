@@ -165,6 +165,7 @@ public class BasicDb {
             Statement stmt = con.createStatement();
             boolean compact = ! Nxt.getBooleanProperty("nxt.disableCompactOnShutdown");
             if (compact) {
+                Logger.logShutdownMessage("Shutting down with compacting...");
                 stmt.execute("SHUTDOWN COMPACT");
                 Logger.logShutdownMessage("Database shutdown completed");
             } else {

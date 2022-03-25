@@ -1,5 +1,5 @@
 /*
- * Copyright © 2020 Jelurida IP B.V.
+ * Copyright © 2020-2022 Jelurida IP B.V.
  *
  * See the LICENSE.txt file at the top-level directory of this distribution
  * for licensing information.
@@ -62,6 +62,9 @@ public class TrimmableDbTable<T> extends DerivedDbTable {
                 map(String::trim).map(String::toUpperCase).toArray(String[]::new);
 
         try (Connection con = db.getConnection();
+             PreparedStatement pstmtColumn = con.prepareStatement("SELECT TYPE_NAME FROM INFORMATION_SCHEMA.COLUMNS" +
+                     " WHERE TABLE_NAME = '" + table + "' " +
+                     " AND COLUMN_NAME = '" + keyColumns[0] + "'");
              PreparedStatement pstmtIndex = con.prepareStatement(
                      "SELECT ID, INDEX_NAME, ASC_OR_DESC FROM INFORMATION_SCHEMA.INDEXES " +
                      " WHERE TABLE_NAME = '" + table + "' AND COLUMN_NAME = '" + keyColumns[0] + "' " +
@@ -69,6 +72,20 @@ public class TrimmableDbTable<T> extends DerivedDbTable {
              PreparedStatement pstmtColumns = con.prepareStatement(
                      "SELECT COLUMN_NAME, ASC_OR_DESC FROM INFORMATION_SCHEMA.INDEXES " +
                              " WHERE ID = ? ORDER BY ORDINAL_POSITION")) {
+            try (ResultSet rs = pstmtColumn.executeQuery()) {
+                if (rs.next()) {
+                    String columnType = rs.getString("TYPE_NAME");
+                    if (rs.next()) {
+                        Logger.logWarningMessage("More than one index on column named " + keyColumns[0]);
+                        return false;
+                    }
+                    if (!"BIGINT".equals(columnType)) {
+                        Logger.logWarningMessage("Column " + keyColumns[0] + " in " + table + " is not BIGINT. " +
+                                "Fast trimming is disabled");
+                        return false;
+                    }
+                }
+            }
             try (ResultSet rs = pstmtIndex.executeQuery()) {
                 if (rs.next()) {
                     String indexName = rs.getString("INDEX_NAME");
@@ -94,7 +111,7 @@ public class TrimmableDbTable<T> extends DerivedDbTable {
                                 if (!keyColumns[column].equalsIgnoreCase(columnName)) {
                                     Logger.logWarningMessage("Column in position " + (column + 1) +
                                             " in " + indexName + " is '" + columnName + "' instead of '"
-                                            +  keyColumns[0] + "'." +
+                                            +  keyColumns[column] + "'." +
                                             " Fast trimming is disabled for table " + table);
                                     return false;
                                 }
@@ -166,7 +183,7 @@ public class TrimmableDbTable<T> extends DerivedDbTable {
         private int trimHeight;
         private Value[] prevRowKey;
         private boolean isDeleted;
-        private boolean isHighestRowBeforeTrimSkipped;
+        private int highestRowsBeforeTrim;
         private long lastBatchMarker;
     }
 
@@ -188,7 +205,7 @@ public class TrimmableDbTable<T> extends DerivedDbTable {
                      " AND CAN_BE_TRIMMED(height, latest, " + dbKeyFactory.getPKColumns() + ") LIMIT " + Constants.BATCH_COMMIT_SIZE)) {
             int deleted;
             do {
-                context.isHighestRowBeforeTrimSkipped = false;
+                context.highestRowsBeforeTrim = Integer.MIN_VALUE;
                 pstmt.setLong(1, context.lastBatchMarker);
                 deleted = pstmt.executeUpdate();
                 db.commitTransaction();
@@ -205,16 +222,16 @@ public class TrimmableDbTable<T> extends DerivedDbTable {
         if (!Arrays.equals(context.prevRowKey, key)) {
             context.prevRowKey = key;
             context.isDeleted = height < context.trimHeight && !latest;
-            context.isHighestRowBeforeTrimSkipped = false;
+            context.highestRowsBeforeTrim = Integer.MIN_VALUE;
         }
         if (height < context.trimHeight && height >= 0) {
             if (context.isDeleted) {
                 result = true;
             } else {
-                if (context.isHighestRowBeforeTrimSkipped) {
+                if (height < context.highestRowsBeforeTrim) {
                     result = true;
                 } else {
-                    context.isHighestRowBeforeTrimSkipped = true;
+                    context.highestRowsBeforeTrim = height;
                 }
             }
         }

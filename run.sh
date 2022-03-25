@@ -33,6 +33,14 @@ if [ $desktop -eq 1 ] && [ $daemon -eq 1 ]; then
     exit 1
 fi
 
+DIR=`dirname "$0"`
+cd "${DIR}"
+
+# setenv.sh can be locally used to provide environment variables values
+if [ -r ./setenv.sh ]; then
+  . ./setenv.sh
+fi
+
 if [ -x jdk/bin/java ]; then
     JAVACMD=./jdk/bin/java
 else
@@ -43,27 +51,36 @@ if [ $authbind -eq 1 ]; then
     JAVACMD="authbind ${JAVACMD}"
 fi
 
-if [ $desktop -eq 1 ]; then
-  echo "Starting desktop mode in current directory"
-  ${JAVACMD} -cp classes:lib/*:conf:addons/classes:addons/lib/*:javafx-sdk/lib/* -Dnxt.runtime.mode=desktop -Dnxt.runtime.dirProvider=nxt.env.DefaultDirProvider nxt.Nxt
-elif [ $daemon -eq 1 ]; then
-  echo "Starting daemon mode"
-  if [ -e ~/.nxt/nxt.pid ]; then
-    PID=`cat ~/.nxt/nxt.pid`
-    ps -p $PID > /dev/null
-    STATUS=$?
-    if [ $STATUS -eq 0 ]; then
-        echo "Nxt server already running"
-        exit 1
-    fi
-  fi
-  mkdir -p ~/.nxt/
-  DIR=`dirname "$0"`
-  cd "${DIR}"
-  nohup ${JAVACMD} -cp classes:lib/*:conf:addons/classes:addons/lib/*:javafx-sdk/lib/* nxt.Nxt > /dev/null 2>&1 &
-  echo $! > ~/.nxt/nxt.pid
-  cd - > /dev/null
-else
-  echo "Starting default mode"
-  ${JAVACMD} -cp classes:lib/*:conf:addons/classes:addons/lib/*:javafx-sdk/lib/* nxt.Nxt
+JVM_OPTS=-Xms256M
+if [ -n "${NXT_JVM_OPTS}" ]; then
+    echo "JVM options: ${NXT_JVM_OPTS}"
+    JVM_OPTS=${NXT_JVM_OPTS}
 fi
+
+if [ -z "${NXT_PID_FILE}" ]; then
+    NXT_PID_FILE=~/.nxt/nxt.pid
+fi
+
+if [ $desktop -eq 1 ]; then
+    echo "Starting desktop mode in current directory"
+    ${JAVACMD} ${JVM_OPTS} -cp classes:lib/*:conf:addons/classes:addons/lib/*:javafx-sdk/lib/* -Dnxt.runtime.mode=desktop -Dnxt.runtime.dirProvider=nxt.env.DefaultDirProvider nxt.Nxt
+elif [ $daemon -eq 1 ]; then
+    echo "Starting daemon mode"
+    if [ -e ${NXT_PID_FILE} ]; then
+        PID=`cat ${NXT_PID_FILE}`
+        ps -p $PID > /dev/null
+        STATUS=$?
+        if [ $STATUS -eq 0 ]; then
+            echo "Nxt server already running"
+            exit 1
+        fi
+    fi
+    mkdir -p "$(dirname "${NXT_PID_FILE}")"
+    nohup ${JAVACMD} ${JVM_OPTS} -cp classes:lib/*:conf:addons/classes:addons/lib/*:javafx-sdk/lib/* nxt.Nxt > /dev/null 2>&1 &
+    echo $! > ${NXT_PID_FILE}
+else
+    echo "Starting default mode"
+    ${JAVACMD} ${JVM_OPTS} -cp classes:lib/*:conf:addons/classes:addons/lib/*:javafx-sdk/lib/* nxt.Nxt
+fi
+
+cd - > /dev/null

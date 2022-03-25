@@ -1,6 +1,6 @@
 /*
  * Copyright © 2013-2016 The Nxt Core Developers.
- * Copyright © 2016-2020 Jelurida IP B.V.
+ * Copyright © 2016-2022 Jelurida IP B.V.
  *
  * See the LICENSE.txt file at the top-level directory of this distribution
  * for licensing information.
@@ -53,7 +53,7 @@ import java.util.Properties;
 
 public final class Nxt {
 
-    public static final String VERSION = "1.12.2";
+    public static final String VERSION = "1.12.3";
     public static final String APPLICATION = "NRS";
 
     private static volatile Time time = new Time.EpochTime();
@@ -411,9 +411,7 @@ public final class Nxt {
                 long currentTime = System.currentTimeMillis();
                 Logger.logMessage("Initialization took " + (currentTime - startTime) / 1000 + " seconds");
                 Logger.logMessage("Nxt server " + VERSION + " started successfully.");
-                Logger.logMessage("Copyright © 2013-2016 The Nxt Core Developers.");
-                Logger.logMessage("Copyright © 2016-2020 Jelurida IP B.V.");
-                Logger.logMessage("Distributed under the Jelurida Public License version 1.2 for the Nxt Public Blockchain Platform, with ABSOLUTELY NO WARRANTY.");
+                runtimeMode.getCopyrightMessage().forEach(Logger::logMessage);
                 if (API.getWelcomePageUri() != null) {
                     Logger.logMessage("Client UI is at " + API.getWelcomePageUri());
                 }

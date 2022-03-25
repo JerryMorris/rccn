@@ -1,14 +1,14 @@
--injars classes
--outjars nxt/classes
+-injars classes #exclude_for_R8
+-outjars nxt/classes #exclude_for_R8
 
--libraryjars <java.home>/lib/rt.jar
--libraryjars <java.home>/lib/jce.jar
--libraryjars <java.home>/lib/ext/jfxrt.jar
--libraryjars conf
--libraryjars lib
+-libraryjars <java.home>/lib/rt.jar #exclude_for_R8
+-libraryjars <java.home>/lib/jce.jar #exclude_for_R8
+-libraryjars <java.home>/lib/ext/jfxrt.jar #exclude_for_R8
+-libraryjars conf #exclude_for_R8
+-libraryjars lib #exclude_for_R8
 
--dontoptimize
--printmapping ../nxt.map
+-dontoptimize #exclude_for_R8
+-printmapping ../nxt.map #exclude_for_R8
 -dontusemixedcaseclassnames
 -flattenpackagehierarchy nxt
 -repackageclasses nxt
@@ -23,6 +23,11 @@
 -keep class * extends nxt.env.DirProvider
 -keep class * extends nxt.addons.AddOn
 -keep class nxt.addons.AddOn
+-keep class nxt.db.pool.ConnectionPool
+-keep class * extends nxt.db.pool.ConnectionPool
+-keep class nxt.http.CustomAPISetup
+-keep class * extends nxt.http.CustomAPISetup
+
 -keep,includedescriptorclasses class nxtdesktop.JavaScriptBridge, nxtdesktop.DesktopApplication, nxtdesktop.WalletContextMenu {
     <methods>;
 }
@@ -46,6 +51,11 @@
     void shutdown();
     void refresh();
 }
+
+-keepclasseswithmembers class nxt.db.TrimmableDbTable {
+    public static boolean canBeTrimmed(...);
+}
+
 # Keep - Applications. Keep all application classes, along with their 'main'
 # methods.
 -keepclasseswithmembers public class * {

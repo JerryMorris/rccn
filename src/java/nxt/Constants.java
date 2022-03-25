@@ -1,6 +1,6 @@
 /*
  * Copyright © 2013-2016 The Nxt Core Developers.
- * Copyright © 2016-2020 Jelurida IP B.V.
+ * Copyright © 2016-2022 Jelurida IP B.V.
  *
  * See the LICENSE.txt file at the top-level directory of this distribution
  * for licensing information.
@@ -166,10 +166,11 @@ public final class Constants {
     public static final int CHECKSUM_BLOCK_26 = isTestnet ? 2496000 : 2532000;
     public static final int ASSET_INCREASE_BLOCK = isTestnet ? isAutomatedTest ? 0 : 2500000 : 2870000;
     public static final int CHECKSUM_BLOCK_27 = isTestnet ? 2847000 : 2880000;
+    public static final int CHECKSUM_BLOCK_28 = isTestnet ? 3872000 : 3906000;
 
-    public static final int LAST_CHECKSUM_BLOCK = CHECKSUM_BLOCK_27;
+    public static final int LAST_CHECKSUM_BLOCK = CHECKSUM_BLOCK_28;
     // LAST_KNOWN_BLOCK must also be set in html/www/js/nrs.constants.js
-    public static final int LAST_KNOWN_BLOCK = CHECKSUM_BLOCK_27;
+    public static final int LAST_KNOWN_BLOCK = CHECKSUM_BLOCK_28;
 
     public static final int[] MIN_VERSION = new int[] {1, 12, 1};
     public static final int[] MIN_PROXY_VERSION = new int[] {1, 12, 1};

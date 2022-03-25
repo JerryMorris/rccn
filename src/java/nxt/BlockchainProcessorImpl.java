@@ -1,6 +1,6 @@
 /*
  * Copyright © 2013-2016 The Nxt Core Developers.
- * Copyright © 2016-2020 Jelurida IP B.V.
+ * Copyright © 2016-2022 Jelurida IP B.V.
  *
  * See the LICENSE.txt file at the top-level directory of this distribution
  * for licensing information.
@@ -228,6 +228,16 @@ final class BlockchainProcessorImpl implements BlockchainProcessor {
                 new byte[] {
                         -124, 127, -56, 18, -49, -13, 99, 43, 34, 13, -118, -93, -17, -128, 59,
                         52, 41, -126, -85, -40, 52, 48, -13, 95, 56, 52, 61, -76, 105, -80, 54, -75
+                });
+        map.put(Constants.CHECKSUM_BLOCK_28, Constants.isTestnet ?
+                new byte[] {
+                        -65, 98, 18, -77, 61, -75, 48, -36, 24, 109, 27, 47, -34, 32, 61, 123, 12,
+                        -100, -37, 42, -100, 6, -79, 69, -56, 103, 84, -57, -17, -104, 126, -62
+                }
+                :
+                new byte[] {
+                        -57, 55, 105, 105, -67, -92, -9, 121, 46, 118, -106, -107, 73, 20, -24, 62,
+                        -60, 12, -124, 50, 25, 26, -88, -106, 83, 46, 89, -110, -104, 83, -110, -86
                 });
         checksums = Collections.unmodifiableNavigableMap(map);
     }
@@ -1133,8 +1143,11 @@ final class BlockchainProcessorImpl implements BlockchainProcessor {
             if (trimDerivedTables && block.getHeight() % trimFrequency == 0 && !isTrimming) {
                 isTrimming = true;
                 networkService.submit(() -> {
-                    trimDerivedTables();
-                    isTrimming = false;
+                    try {
+                        trimDerivedTables();
+                    } finally {
+                        isTrimming = false;
+                    }
                 });
             }
             if (block.getHeight() % 5000 == 0) {

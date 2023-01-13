@@ -1,12 +1,12 @@
 /*
- * Copyright © 2013-2016 The Nxt Core Developers.
+ * Copyright © 2013-2016 The rcc Core Developers.
  * Copyright © 2016-2022 Jelurida IP B.V.
  *
  * See the LICENSE.txt file at the top-level directory of this distribution
  * for licensing information.
  *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,
- * no part of the Nxt software, including this file, may be copied, modified,
+ * no part of the rcc software, including this file, may be copied, modified,
  * propagated, or distributed except according to the terms contained in the
  * LICENSE.txt file.
  *
@@ -14,11 +14,11 @@
  *
  */
 
-package nxt;
+package rcc;
 
-import nxt.crypto.Crypto;
-import nxt.util.Listener;
-import nxt.util.Logger;
+import rcc.crypto.Crypto;
+import rcc.util.Listener;
+import rcc.util.Logger;
 import org.junit.Assert;
 
 import java.util.Properties;
@@ -32,26 +32,26 @@ public abstract class AbstractBlockchainTest {
 
     protected static Properties newTestProperties() {
         Properties testProperties = new Properties();
-        testProperties.setProperty("nxt.shareMyAddress", "false");
-        testProperties.setProperty("nxt.savePeers", "false");
-        //testProperties.setProperty("nxt.enableAPIServer", "false");
-        //testProperties.setProperty("nxt.enableUIServer", "false");
-        testProperties.setProperty("nxt.disableGenerateBlocksThread", "true");
-        //testProperties.setProperty("nxt.disableProcessTransactionsThread", "true");
-        //testProperties.setProperty("nxt.disableRemoveUnconfirmedTransactionsThread", "true");
-        //testProperties.setProperty("nxt.disableRebroadcastTransactionsThread", "true");
-        //testProperties.setProperty("nxt.disablePeerUnBlacklistingThread", "true");
-        //testProperties.setProperty("nxt.getMorePeers", "false");
-        testProperties.setProperty("nxt.testUnconfirmedTransactions", "true");
-        testProperties.setProperty("nxt.debugTraceAccounts", "");
-        testProperties.setProperty("nxt.debugLogUnconfirmed", "false");
-        testProperties.setProperty("nxt.debugTraceQuote", "\"");
-        //testProperties.setProperty("nxt.numberOfForkConfirmations", "0");
+        testProperties.setProperty("rcc.shareMyAddress", "false");
+        testProperties.setProperty("rcc.savePeers", "false");
+        //testProperties.setProperty("rcc.enableAPIServer", "false");
+        //testProperties.setProperty("rcc.enableUIServer", "false");
+        testProperties.setProperty("rcc.disableGenerateBlocksThread", "true");
+        //testProperties.setProperty("rcc.disableProcessTransactionsThread", "true");
+        //testProperties.setProperty("rcc.disableRemoveUnconfirmedTransactionsThread", "true");
+        //testProperties.setProperty("rcc.disableRebroadcastTransactionsThread", "true");
+        //testProperties.setProperty("rcc.disablePeerUnBlacklistingThread", "true");
+        //testProperties.setProperty("rcc.getMorePeers", "false");
+        testProperties.setProperty("rcc.testUnconfirmedTransactions", "true");
+        testProperties.setProperty("rcc.debugTraceAccounts", "");
+        testProperties.setProperty("rcc.debugLogUnconfirmed", "false");
+        testProperties.setProperty("rcc.debugTraceQuote", "\"");
+        //testProperties.setProperty("rcc.numberOfForkConfirmations", "0");
         return testProperties;
     }
 
     protected static void init(Properties testProperties) {
-        Nxt.init(testProperties);
+        rcc.init(testProperties);
         blockchain = BlockchainImpl.getInstance();
         blockchainProcessor = BlockchainProcessorImpl.getInstance();
         blockchainProcessor.setGetMoreBlocks(false);
@@ -79,7 +79,7 @@ public abstract class AbstractBlockchainTest {
                     done = true;
                     blockchainProcessor.setGetMoreBlocks(false);
                     doneLock.notifyAll();
-                    throw new NxtException.StopException("Reached height " + endHeight);
+                    throw new rccException.StopException("Reached height " + endHeight);
                 }
             }
         };

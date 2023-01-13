@@ -1,5 +1,5 @@
 /localstorage
-/nxt.properties
+/rcc.properties
 /logging.properties
 /processes/
 !/processes/readme.txt

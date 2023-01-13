@@ -1,12 +1,12 @@
 /******************************************************************************
- * Copyright © 2013-2016 The Nxt Core Developers.                             *
+ * Copyright © 2013-2016 The rcc Core Developers.                             *
  * Copyright © 2016-2022 Jelurida IP B.V.                                     *
  *                                                                            *
  * See the LICENSE.txt file at the top-level directory of this distribution   *
  * for licensing information.                                                 *
  *                                                                            *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,*
- * no part of the Nxt software, including this file, may be copied, modified, *
+ * no part of the rcc software, including this file, may be copied, modified, *
  * propagated, or distributed except according to the terms contained in the  *
  * LICENSE.txt file.                                                          *
  *                                                                            *
@@ -23,15 +23,15 @@ var NRS = (function(NRS, $) {
     var SUPPORTED_COINS = {};
 
     var coinToPair = function (op, coin) {
-        return (op == "buy") ? "NXT_" + coin : coin + "_NXT";
+        return (op == "buy") ? "rcc_" + coin : coin + "_rcc";
     };
 
     var pairToCoin = function (pair) {
-        if (pair.indexOf("NXT_") == 0) {
-            return pair.substring("NXT_".length);
+        if (pair.indexOf("rcc_") == 0) {
+            return pair.substring("rcc_".length);
         }
-        if (pair.indexOf("_NXT") == pair.length - "_NXT".length) {
-            return pair.substring(0, pair.indexOf("_NXT"));
+        if (pair.indexOf("_rcc") == pair.length - "_rcc".length) {
+            return pair.substring(0, pair.indexOf("_rcc"));
         }
         throw "illegal pair " + pair;
     };
@@ -175,7 +175,7 @@ var NRS = (function(NRS, $) {
         }
         NRS.logConsole(tasks.length + " tasks ready to run");
         async.series(tasks, function (err, results) {
-            var table = $("#p_shape_shift_" + op + "_nxt");
+            var table = $("#p_shape_shift_" + op + "_rcc");
             if (err) {
                 NRS.logConsole("Err: ", err, "\nResults:", results);
                 table.find("tbody").empty();
@@ -279,7 +279,7 @@ var NRS = (function(NRS, $) {
             if (data) {
                 for (var i = 0; i < data.length; i++) {
                     var transaction = data[i];
-                    if (String(transaction.curIn).escapeHTML() != "NXT" && String(transaction.curOut).escapeHTML() != "NXT") {
+                    if (String(transaction.curIn).escapeHTML() != "rcc" && String(transaction.curOut).escapeHTML() != "rcc") {
                         continue;
                     }
                     rows += "<tr>";
@@ -297,12 +297,12 @@ var NRS = (function(NRS, $) {
         });
     }
 
-    function renderNxtLimit() {
-        apiCall('limit/nxt_btc', {}, 'GET', function (data) {
+    function renderrccLimit() {
+        apiCall('limit/rcc_btc', {}, 'GET', function (data) {
             NRS.logConsole("limit1 " + data.limit);
             if (data.limit) {
                 $('#shape_shift_status').html('ok');
-                $('#shape_shift_nxt_avail').html(String(data.limit).escapeHTML());
+                $('#shape_shift_rcc_avail').html(String(data.limit).escapeHTML());
             }
         });
     }
@@ -314,7 +314,7 @@ var NRS = (function(NRS, $) {
                 inputFields[i].empty();
                 var isSelectionAvailable = false;
                 $.each(data, function (code, coin) {
-                    if (code != 'NXT' && coin['status'] == 'available') {
+                    if (code != 'rcc' && coin['status'] == 'available') {
                         inputFields[i].append('<option value="' + code + '">' + coin['name'] + ' [' + code + ']</option>');
                         SUPPORTED_COINS[code] = coin;
                     }
@@ -359,7 +359,7 @@ var NRS = (function(NRS, $) {
         exchangePageContent.show();
         NRS.pageLoading();
         loadCoins();
-        renderNxtLimit();
+        renderrccLimit();
         renderExchangeTable("buy");
         renderExchangeTable("sell");
         renderMyExchangesTable();
@@ -393,7 +393,7 @@ var NRS = (function(NRS, $) {
             "<span>" + $.t("fund_account_warning_3") + "</span><br>" +
             "</div>" +
             "<a href='#' class='btn btn-xs btn-default' data-toggle='modal' data-target='#m_send_amount_sell_modal' " +
-            "data-pair='BTC_NXT'>" + $.t("fund_account_message") + "</a>";
+            "data-pair='BTC_rcc'>" + $.t("fund_account_message") + "</a>";
     };
 
     $('.coin-select.shape-shift ').change(function() {
@@ -415,13 +415,13 @@ var NRS = (function(NRS, $) {
         $("#shape_shift_buy_pair").val(pair);
         var coin = pairToCoin(pair);
         NRS.logConsole("modal invoked pair " + pair + " coin " + coin);
-        $("#shape_shift_buy_title").html($.t("exchange_nxt_to_coin_shift", { coin: coin }));
+        $("#shape_shift_buy_title").html($.t("exchange_rcc_to_coin_shift", { coin: coin }));
         $("#shape_shift_buy_min").val(invoker.data("min"));
-        $("#shape_shift_buy_min_coin").html("NXT");
+        $("#shape_shift_buy_min_coin").html("rcc");
         $("#shape_shift_buy_max").val(invoker.data("max"));
-        $("#shape_shift_buy_max_coin").html("NXT");
+        $("#shape_shift_buy_max_coin").html("rcc");
         $("#shape_shift_buy_rate").val(invoker.data("rate"));
-        $("#shape_shift_buy_rate_text").html("NXT/" + coin);
+        $("#shape_shift_buy_rate_text").html("rcc/" + coin);
         $("#shape_shift_withdrawal_address_coin").html(coin);
         $("#shape_shift_buy_fee").val(invoker.data("fee"));
         $("#shape_shift_buy_fee_coin").html(coin);
@@ -446,7 +446,7 @@ var NRS = (function(NRS, $) {
             if (data.error) {
                 return;
             }
-            if (data.depositType != "NXT") {
+            if (data.depositType != "rcc") {
                 msg = "incorrect deposit coin " + data.depositType;
                 NRS.logConsole(msg);
                 NRS.showModalError(msg, $modal);
@@ -490,9 +490,9 @@ var NRS = (function(NRS, $) {
         var pair = invoker.data("pair");
         var coin = pairToCoin(pair);
         NRS.logConsole("modal invoked pair " + pair + " coin " + coin);
-        $("#m_send_amount_buy_title").html($.t("exchange_nxt_to_coin_send_amount", { coin: coin }));
+        $("#m_send_amount_buy_title").html($.t("exchange_rcc_to_coin_send_amount", { coin: coin }));
         $("#m_send_amount_buy_withdrawal_amount_coin").html(coin);
-        $("#m_send_amount_buy_rate_text").html("NXT/" + coin);
+        $("#m_send_amount_buy_rate_text").html("rcc/" + coin);
         $("#m_send_amount_withdrawal_address_coin").html(coin + " address");
         $("#m_send_amount_buy_fee_coin").html(coin);
         $("#m_send_amount_buy_pair").val(pair);
@@ -545,7 +545,7 @@ var NRS = (function(NRS, $) {
                 modal.find(".error_message").html("").hide();
                 rate.val(data.success.quotedRate);
                 fee.val(data.success.minerFee);
-                // add 1 NXT fee to make sure the net amount is what requested by shape shift
+                // add 1 rcc fee to make sure the net amount is what requested by shape shift
                 depositAmount.val(parseFloat(data.success.depositAmount) + 1);
                 depositAddress.val(data.success.deposit);
                 expiration.val(NRS.formatTimestamp(data.success.expiration, false, true));
@@ -589,7 +589,7 @@ var NRS = (function(NRS, $) {
         var pair = invoker.data("pair");
         var coin = pairToCoin(pair);
         NRS.logConsole("modal invoked pair " + pair + " coin " + coin);
-        $("#shape_shift_sell_title").html($.t("exchange_coin_to_nxt_shift", { coin: coin }));
+        $("#shape_shift_sell_title").html($.t("exchange_coin_to_rcc_shift", { coin: coin }));
         $("#shape_shift_sell_qr_code").html("");
         var data = invoker.data;
         modal.css('cursor','wait');
@@ -613,9 +613,9 @@ var NRS = (function(NRS, $) {
                 $("#shape_shift_sell_max").val(data.max);
                 $("#shape_shift_sell_max_coin").html(coin);
                 $("#shape_shift_sell_rate").val(data.rate);
-                $("#shape_shift_sell_rate_text").html(coin + "/NXT");
+                $("#shape_shift_sell_rate_text").html(coin + "/rcc");
                 $("#shape_shift_sell_fee").val(data.fee);
-                $("#shape_shift_sell_fee_coin").html("NXT");
+                $("#shape_shift_sell_fee_coin").html("rcc");
                 $("#shape_shift_sell_pair").val(pair);
                 var publicKey = NRS.publicKey;
                 if (publicKey == "" && NRS.accountInfo) {
@@ -640,7 +640,7 @@ var NRS = (function(NRS, $) {
                         callback(null);
                         return;
                     }
-                    if (data.withdrawalType != "NXT") {
+                    if (data.withdrawalType != "rcc") {
                         msg = "incorrect withdrawal coin " + data.withdrawalType;
                         NRS.logConsole(msg);
                         NRS.showModalError(msg, modal);
@@ -700,10 +700,10 @@ var NRS = (function(NRS, $) {
         var pair = invoker.data("pair");
         var coin = pairToCoin(pair);
         NRS.logConsole("modal invoked pair " + pair + " coin " + coin);
-        $("#m_send_amount_sell_title").html($.t("exchange_coin_to_nxt_send_amount", { coin: coin }));
-        $("#m_send_amount_sell_rate_text").html("NXT/" + coin);
-        $("#m_send_amount_sell_fee_coin").html("NXT");
-        $("#m_send_amount_sell_withdrawal_amount_coin").html("NXT");
+        $("#m_send_amount_sell_title").html($.t("exchange_coin_to_rcc_send_amount", { coin: coin }));
+        $("#m_send_amount_sell_rate_text").html("rcc/" + coin);
+        $("#m_send_amount_sell_fee_coin").html("rcc");
+        $("#m_send_amount_sell_withdrawal_amount_coin").html("rcc");
         $("#m_send_amount_sell_deposit_amount_coin").html(coin);
         $("#m_send_amount_sell_deposit_address").html("");
         $("#m_send_amount_sell_qr_code").html("<span style='color: blue'>" + $.t("please_enter_withdrawal_amount") + "</span>");

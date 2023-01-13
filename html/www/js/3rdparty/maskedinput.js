@@ -91,7 +91,7 @@
                     //console.log("androidInputEvent " + pos.begin + "-" + pos.end + " " + curVal + " " + oldVal);
 
                     if (settings.unmask !== false) {
-                        if (oldVal && oldVal == "NXT-____-____-____-_____"
+                        if (oldVal && oldVal == "rcc-____-____-____-_____"
                                 && (curVal.length == 0
                                     || (oldVal.length > curVal.length && pos.begin == 3))) {
                             //Deleted the whole string, or a backspaces was pressed after the prefix
@@ -112,10 +112,10 @@
                         androidSetCaret(input, pos.end);
                     } else {
                         var curValUpper = curVal.toUpperCase();
-                        var addressStart = curValUpper.indexOf('NXT-', 4);
+                        var addressStart = curValUpper.indexOf('rcc-', 4);
                         if (addressStart > 0) {
                             var insertedAddress = curValUpper.substr(addressStart, 24);
-                            if (/NXT\-[A-Z0-9]{4}\-[A-Z0-9]{4}\-[A-Z0-9]{4}\-[A-Z0-9]{5}/.test(insertedAddress)) {
+                            if (/rcc\-[A-Z0-9]{4}\-[A-Z0-9]{4}\-[A-Z0-9]{4}\-[A-Z0-9]{5}/.test(insertedAddress)) {
                                 //since pasting into a masked field will first trigger androidInputEvent, search for inserted address and use it
                                 input.val(insertedAddress);
                             }
@@ -171,7 +171,7 @@
 
                         if (settings.unmask !== false) {
                             //backspace, remove
-                            if ((pos.begin == 0 && pos.end == 24) || (currentInput == "NXT-____-____-____-_____" && pos.begin == 4)) {
+                            if ((pos.begin == 0 && pos.end == 24) || (currentInput == "rcc-____-____-____-_____" && pos.begin == 4)) {
                                 input.val("");
                                 $(this).trigger("unmask");
                                 return;
@@ -247,19 +247,19 @@
                     return "?" != c ? defs[c] ? getPlaceholder(i) : c : void 0;
                 }), defaultBuffer = buffer.join(""), focusText = input.val();
                 input.bind("keyup.remask", function(e) {
-                    if (input.val().toLowerCase() == "nxt-") {
-                        input.val("").mask("NXT-****-****-****-*****")./*unbind(".remask").*/trigger("focus");
+                    if (input.val().toLowerCase() == "rcc-") {
+                        input.val("").mask("rcc-****-****-****-*****")./*unbind(".remask").*/trigger("focus");
                     }
                 }).bind("paste.remask", function(e) {
                     setTimeout(function() {
                         var newInput = input.val();
                         var pastedData = newInput.substring(4).toUpperCase();
-                        if (/NXT\-[A-Z0-9]{4}\-[A-Z0-9]{4}\-[A-Z0-9]{4}\-[A-Z0-9]{5}/i.test(pastedData)) {
-                            var newAddress = String(pastedData.match("NXT\-[A-Z0-9]{4}\-[A-Z0-9]{4}\-[A-Z0-9]{4}\-[A-Z0-9]{5}"));
+                        if (/rcc\-[A-Z0-9]{4}\-[A-Z0-9]{4}\-[A-Z0-9]{4}\-[A-Z0-9]{5}/i.test(pastedData)) {
+                            var newAddress = String(pastedData.match("rcc\-[A-Z0-9]{4}\-[A-Z0-9]{4}\-[A-Z0-9]{4}\-[A-Z0-9]{5}"));
                             input.val(newAddress);
                             checkVal(true);
-                        } else if (/^NXT\-[A-Z0-9]{4}\-[A-Z0-9]{4}\-[A-Z0-9]{4}\-[A-Z0-9]{5}/i.test(newInput) || /^NXT[A-Z0-9]{17}/i.test(newInput)) {
-                            input.mask("NXT-****-****-****-*****").trigger("checkRecipient")/*.unbind(".remask")*/;
+                        } else if (/^rcc\-[A-Z0-9]{4}\-[A-Z0-9]{4}\-[A-Z0-9]{4}\-[A-Z0-9]{5}/i.test(newInput) || /^rcc[A-Z0-9]{17}/i.test(newInput)) {
+                            input.mask("rcc-****-****-****-*****").trigger("checkRecipient")/*.unbind(".remask")*/;
                         }
                     }, 0);
                 });

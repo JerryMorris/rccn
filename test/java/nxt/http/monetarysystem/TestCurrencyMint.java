@@ -1,12 +1,12 @@
 /*
- * Copyright © 2013-2016 The Nxt Core Developers.
+ * Copyright © 2013-2016 The rcc Core Developers.
  * Copyright © 2016-2022 Jelurida IP B.V.
  *
  * See the LICENSE.txt file at the top-level directory of this distribution
  * for licensing information.
  *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,
- * no part of the Nxt software, including this file, may be copied, modified,
+ * no part of the rcc software, including this file, may be copied, modified,
  * propagated, or distributed except according to the terms contained in the
  * LICENSE.txt file.
  *
@@ -14,19 +14,19 @@
  *
  */
 
-package nxt.http.monetarysystem;
+package rcc.http.monetarysystem;
 
-import nxt.BlockchainTest;
-import nxt.Constants;
-import nxt.CurrencyMinting;
-import nxt.CurrencyType;
-import nxt.crypto.HashFunction;
-import nxt.http.APICall;
-import nxt.http.callers.CurrencyMintCall;
-import nxt.http.callers.GetCurrencyCall;
-import nxt.http.callers.GetMintingTargetCall;
-import nxt.util.Convert;
-import nxt.util.Logger;
+import rcc.BlockchainTest;
+import rcc.Constants;
+import rcc.CurrencyMinting;
+import rcc.CurrencyType;
+import rcc.crypto.HashFunction;
+import rcc.http.APICall;
+import rcc.http.callers.CurrencyMintCall;
+import rcc.http.callers.GetCurrencyCall;
+import rcc.http.callers.GetMintingTargetCall;
+import rcc.util.Convert;
+import rcc.util.Logger;
 import org.json.simple.JSONObject;
 import org.junit.Assert;
 import org.junit.Test;
@@ -51,7 +51,7 @@ public class TestCurrencyMint extends BlockchainTest {
         // Failed attempt to mint
         APICall apiCall = CurrencyMintCall.create().
                 secretPhrase(ALICE.getSecretPhrase()).
-                feeNQT(Constants.ONE_NXT).
+                feeNQT(Constants.ONE_rcc).
                 currency(currencyId).
                 nonce("123456").
                 units(1000).
@@ -61,7 +61,7 @@ public class TestCurrencyMint extends BlockchainTest {
         Logger.logDebugMessage("mintResponse: " + mintResponse);
         generateBlock();
         apiCall = GetCurrencyCall.create().
-//                feeNQT(Constants.ONE_NXT).
+//                feeNQT(Constants.ONE_rcc).
         currency(currencyId).
                         build();
         JSONObject getCurrencyResponse = apiCall.invoke();
@@ -81,7 +81,7 @@ public class TestCurrencyMint extends BlockchainTest {
         Logger.logDebugMessage("nonce: " + nonce);
         apiCall = CurrencyMintCall.create().
                 secretPhrase(ALICE.getSecretPhrase()).
-                feeNQT(Constants.ONE_NXT).
+                feeNQT(Constants.ONE_rcc).
                 currency(currencyId).
                 nonce("" + nonce).
                 units(units).

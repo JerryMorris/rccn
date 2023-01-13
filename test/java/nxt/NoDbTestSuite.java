@@ -1,5 +1,5 @@
 /*
- * Copyright © 2013-2016 The Nxt Core Developers.
+ * Copyright © 2013-2016 The rcc Core Developers.
  * Copyright © 2016-2022 Jelurida IP B.V.
  *
  * See the LICENSE.txt file at the top-level directory of this distribution
@@ -14,14 +14,14 @@
  *
  */
 
-package nxt;
+package rcc;
 
-import nxt.crypto.CryptoSuite;
-import nxt.http.APIProxyServletTest;
-import nxt.http.APIRemoteConnectorTest;
-import nxt.http.MockedRequestTest;
-import nxt.peer.HallmarkTest;
-import nxt.util.UtilSuite;
+import rcc.crypto.CryptoSuite;
+import rcc.http.APIProxyServletTest;
+import rcc.http.APIRemoteConnectorTest;
+import rcc.http.MockedRequestTest;
+import rcc.peer.HallmarkTest;
+import rcc.util.UtilSuite;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 

@@ -1,12 +1,12 @@
 /*
- * Copyright © 2013-2016 The Nxt Core Developers.
+ * Copyright © 2013-2016 The rcc Core Developers.
  * Copyright © 2016-2022 Jelurida IP B.V.
  *
  * See the LICENSE.txt file at the top-level directory of this distribution
  * for licensing information.
  *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,
- * no part of the Nxt software, including this file, may be copied, modified,
+ * no part of the rcc software, including this file, may be copied, modified,
  * propagated, or distributed except according to the terms contained in the
  * LICENSE.txt file.
  *
@@ -14,18 +14,18 @@
  *
  */
 
-package nxt.http.monetarysystem;
+package rcc.http.monetarysystem;
 
-import nxt.BlockchainTest;
-import nxt.Constants;
-import nxt.CurrencyType;
-import nxt.http.APICall;
-import nxt.http.callers.CreateTransactionCallBuilder;
+import rcc.BlockchainTest;
+import rcc.Constants;
+import rcc.CurrencyType;
+import rcc.http.APICall;
+import rcc.http.callers.CreateTransactionCallBuilder;
 import org.json.simple.JSONObject;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static nxt.http.callers.ApiSpec.issueCurrency;
+import static rcc.http.callers.ApiSpec.issueCurrency;
 
 public class TestCurrencyIssuance extends BlockchainTest {
 
@@ -39,9 +39,9 @@ public class TestCurrencyIssuance extends BlockchainTest {
     public void issueMultipleCurrencies() {
         APICall apiCall = new Builder().naming("axc", "AXC", "Currency A").build();
         issueCurrencyApi(apiCall);
-        apiCall = new Builder().naming("bXbx", "BXBX", "Currency B").feeNQT(1000 * Constants.ONE_NXT).build();
+        apiCall = new Builder().naming("bXbx", "BXBX", "Currency B").feeNQT(1000 * Constants.ONE_rcc).build();
         issueCurrencyApi(apiCall);
-        apiCall = new Builder().naming("ccXcc", "CCCXC", "Currency C").feeNQT(40 * Constants.ONE_NXT).build();
+        apiCall = new Builder().naming("ccXcc", "CCCXC", "Currency C").feeNQT(40 * Constants.ONE_rcc).build();
         issueCurrencyApi(apiCall);
         apiCall = new APICall.Builder("getCurrency").param("code", "BXBX").build();
         JSONObject response = apiCall.invoke();
@@ -65,7 +65,7 @@ public class TestCurrencyIssuance extends BlockchainTest {
             super(issueCurrency);
             secretPhrase(ALICE.getSecretPhrase());
             feeNQT(0L);
-            //feeNQT(25000 * Constants.ONE_NXT);
+            //feeNQT(25000 * Constants.ONE_rcc);
             param("name", "Test1");
             param("code", "TSXXX");
             param("description", "Test Currency 1");

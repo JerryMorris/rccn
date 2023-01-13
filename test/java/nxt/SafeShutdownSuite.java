@@ -1,5 +1,5 @@
 /*
- * Copyright © 2013-2016 The Nxt Core Developers.
+ * Copyright © 2013-2016 The rcc Core Developers.
  * Copyright © 2016-2022 Jelurida IP B.V.
  *
  * See the LICENSE.txt file at the top-level directory of this distribution
@@ -14,13 +14,13 @@
  *
  */
 
-package nxt;
+package rcc;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
 /**
- * Suite that shuts down Nxt after the last test only. Can be
+ * Suite that shuts down rcc after the last test only. Can be
  */
 public class SafeShutdownSuite {
     private static int embeddingsCount = 0;
@@ -34,7 +34,7 @@ public class SafeShutdownSuite {
     @AfterClass
     public static void safeSuiteShutdown() {
         if (--embeddingsCount == 0) {
-            Nxt.shutdown();
+            rcc.shutdown();
         }
     }
 }

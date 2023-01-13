@@ -1,5 +1,5 @@
 /*
- * Copyright © 2013-2016 The Nxt Core Developers.
+ * Copyright © 2013-2016 The rcc Core Developers.
  * Copyright © 2016-2022 Jelurida IP B.V.
  *
  * See the LICENSE.txt file at the top-level directory of this distribution
@@ -14,23 +14,23 @@
  *
  */
 
-package nxt.http.shuffling;
+package rcc.http.shuffling;
 
-import nxt.Constants;
-import nxt.HoldingType;
-import nxt.Tester;
-import nxt.http.APICall;
-import nxt.http.callers.ShufflingCreateCall;
-import nxt.http.callers.TransferCurrencyCall;
-import nxt.http.monetarysystem.TestCurrencyIssuance;
-import nxt.util.Logger;
+import rcc.Constants;
+import rcc.HoldingType;
+import rcc.Tester;
+import rcc.http.APICall;
+import rcc.http.callers.ShufflingCreateCall;
+import rcc.http.callers.TransferCurrencyCall;
+import rcc.http.monetarysystem.TestCurrencyIssuance;
+import rcc.util.Logger;
 import org.json.simple.JSONObject;
 
 import java.util.stream.Stream;
 
-import static nxt.http.monetarysystem.TestCurrencyIssuance.issueCurrencyApi;
-import static nxt.http.shuffling.ShufflingUtil.defaultHoldingShufflingAmount;
-import static nxt.http.shuffling.ShufflingUtil.defaultShufflingAmount;
+import static rcc.http.monetarysystem.TestCurrencyIssuance.issueCurrencyApi;
+import static rcc.http.shuffling.ShufflingUtil.defaultHoldingShufflingAmount;
+import static rcc.http.shuffling.ShufflingUtil.defaultShufflingAmount;
 
 class CurrencyShufflingUtil {
     private final long shufflingCurrency;
@@ -59,7 +59,7 @@ class CurrencyShufflingUtil {
     JSONObject createCurrencyShuffling(Tester creator) {
         APICall apiCall = ShufflingCreateCall.create().
                 secretPhrase(creator.getSecretPhrase()).
-                feeNQT(Constants.ONE_NXT).
+                feeNQT(Constants.ONE_rcc).
                 param("amount", String.valueOf(defaultHoldingShufflingAmount)).
                 param("participantCount", "4").
                 param("registrationPeriod", 10).

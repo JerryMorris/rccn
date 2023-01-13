@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="iso-8859-1"  ?>
 <installation version="5.0">
     <properties>
-        <property file="conf/nxt-default.properties" prefix="runtime"/>
+        <property file="conf/rcc-default.properties" prefix="runtime"/>
     </properties>
     <info>
-        <appname>NXT</appname>
-        <appversion>@{runtime.nxt.version}</appversion>
-        <url>https://www.jelurida.com/</url>
+        <appname>rcc</appname>
+        <appversion>@{runtime.rcc.version}</appversion>
+        <url>https://www.redcobracoin.com/</url>
         <run-privileged condition="izpack.windowsinstall"/>
     </info>
 
     <listeners>
         <listener classname="SummaryLoggerInstallerListener" stage="install"/>
-        <listener classname="nxt.installer.InstallListener" stage="install"/>
+        <listener classname="rcc.installer.InstallListener" stage="install"/>
     </listeners>
 
     <guiprefs height="700" resizable="yes" width="870">
@@ -57,19 +57,19 @@
     </locale>
 
     <resources>
-        <res id="InfoPanel.info" src="changelogs/nxt-client-@{runtime.nxt.version}.changelog.txt" parse="yes"/>
+        <res id="InfoPanel.info" src="changelogs/rcc-client-@{runtime.rcc.version}.changelog.txt" parse="yes"/>
         <res id="LicencePanel.licence" src="LICENSE.txt"/>
         <res id="Installer.image" src="html/www/img/installer_left_pane.png"/>
         <res id="shortcutSpec.xml" src="../installer/shortcutSpec.xml"/>
         <res id="Unix_shortcutSpec.xml" src="../installer/Unix_shortcutSpec.xml"/>
         <res id="RegistrySpec.xml" src="../installer/RegistrySpec.xml"/>
-        <res id="installer.langsel.img" src="html/www/img/nxt_logo.png"/>
+        <res id="installer.langsel.img" src="html/www/img/rcc_logo.png"/>
 	</resources>
 
     <variables>
         <variable name="$InstallerFrame.logfilePath" value="default"/>
         <variable name="DesktopShortcutCheckboxEnabled" value="true"/>
-        <variable name="TargetPanel.dir.mac" value="/Applications/nxt.app"/>
+        <variable name="TargetPanel.dir.mac" value="/Applications/rcc.app"/>
     </variables>
 
     <panels>
@@ -77,7 +77,7 @@
         <panel classname="LicencePanel"/>
         <panel classname="InfoPanel"/>
         <panel classname="TargetPanel"/>
-        <panel classname="nxt.installer.ConfigPanel"/>
+        <panel classname="rcc.installer.ConfigPanel"/>
         <panel classname="ShortcutPanel" condition="!izpack.macinstall"/>
         <panel classname="InstallPanel"/>
         <panel classname="SimpleFinishPanel"/>
@@ -86,9 +86,9 @@
     <packs>
         <pack name="server" required="yes">
             <description>Common Server Files</description>
-            <file src="nxt.jar" targetdir="${INSTALL_PATH}" override="true"/>
+            <file src="rcc.jar" targetdir="${INSTALL_PATH}" override="true"/>
             <file src="README.txt" targetdir="${INSTALL_PATH}" override="true"/>
-            <file src="NXT_Wallet.url" targetdir="${INSTALL_PATH}" override="true"/>
+            <file src="rcc_Wallet.url" targetdir="${INSTALL_PATH}" override="true"/>
             <file src="3RD-PARTY-LICENSES.txt" targetdir="${INSTALL_PATH}" override="true"/>
             <file src="AUTHORS.txt" targetdir="${INSTALL_PATH}" override="true"/>
             <file src="LICENSE.txt" targetdir="${INSTALL_PATH}" override="true"/>
@@ -97,9 +97,9 @@
             <file src="OPERATORS-GUIDE.md" targetdir="${INSTALL_PATH}" override="true"/>
             <file src="README.md" targetdir="${INSTALL_PATH}" override="true"/>
             <file src="USERS-GUIDE.md" targetdir="${INSTALL_PATH}" override="true"/>
-            <file src="nxt.policy" targetdir="${INSTALL_PATH}" override="true"/>
-            <file src="nxtdesktop.policy" targetdir="${INSTALL_PATH}" override="true"/>
-            <file src="conf/nxt-default.properties" targetdir="${INSTALL_PATH}/conf" override="true"/>
+            <file src="rcc.policy" targetdir="${INSTALL_PATH}" override="true"/>
+            <file src="rccdesktop.policy" targetdir="${INSTALL_PATH}" override="true"/>
+            <file src="conf/rcc-default.properties" targetdir="${INSTALL_PATH}/conf" override="true"/>
             <file src="conf/logging-default.properties" targetdir="${INSTALL_PATH}/conf" override="true"/>
             <file src="conf/fxt.json" targetdir="${INSTALL_PATH}/conf" override="true"/>
             <file src="conf/fxt-testnet.json" targetdir="${INSTALL_PATH}/conf" override="true"/>
@@ -107,7 +107,7 @@
             <fileset dir="changelogs" targetdir="${INSTALL_PATH}/changelogs" override="true" excludes=".gitignore"/>
             <fileset dir="classes" targetdir="${INSTALL_PATH}/classes" override="true" excludes=".gitignore"/>
             <fileset dir="html" targetdir="${INSTALL_PATH}/html" override="true" excludes=".gitignore"/>
-            <fileset dir="src" targetdir="${INSTALL_PATH}/src" override="true" excludes=".gitignore nxt-private.iml"/>
+            <fileset dir="src" targetdir="${INSTALL_PATH}/src" override="true" excludes=".gitignore rcc-private.iml"/>
             <fileset dir="contrib" targetdir="${INSTALL_PATH}/contrib" override="true" excludes=".gitignore"/>
             <fileset dir="logs" targetdir="${INSTALL_PATH}/logs" override="true" excludes=".gitignore"/>
             <fileset dir="addons" targetdir="${INSTALL_PATH}/addons" override="true" excludes=".gitignore"/>

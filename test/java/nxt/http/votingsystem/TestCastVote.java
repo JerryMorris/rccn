@@ -1,12 +1,12 @@
 /*
- * Copyright © 2013-2016 The Nxt Core Developers.
+ * Copyright © 2013-2016 The rcc Core Developers.
  * Copyright © 2016-2022 Jelurida IP B.V.
  *
  * See the LICENSE.txt file at the top-level directory of this distribution
  * for licensing information.
  *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,
- * no part of the Nxt software, including this file, may be copied, modified,
+ * no part of the rcc software, including this file, may be copied, modified,
  * propagated, or distributed except according to the terms contained in the
  * LICENSE.txt file.
  *
@@ -14,14 +14,14 @@
  *
  */
 
-package nxt.http.votingsystem;
+package rcc.http.votingsystem;
 
-import nxt.BlockchainTest;
-import nxt.Constants;
-import nxt.http.APICall;
-import nxt.http.callers.CastVoteCall;
-import nxt.http.votingsystem.TestCreatePoll.CreatePollBuilder;
-import nxt.util.Logger;
+import rcc.BlockchainTest;
+import rcc.Constants;
+import rcc.http.APICall;
+import rcc.http.callers.CastVoteCall;
+import rcc.http.votingsystem.TestCreatePoll.CreatePollBuilder;
+import rcc.util.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.junit.Assert;
@@ -42,7 +42,7 @@ public class TestCastVote extends BlockchainTest {
                 .poll(poll)
                 .vote00(1)
                 .vote01(0)
-                .feeNQT(Constants.ONE_NXT)
+                .feeNQT(Constants.ONE_rcc)
                 .build();
 
         JSONObject response = apiCall.invoke();
@@ -78,7 +78,7 @@ public class TestCastVote extends BlockchainTest {
                 .param("vote1", 1)
                 .param("vote2", 1)
                 .param("vote3", 1)
-                .param("feeNQT", Constants.ONE_NXT)
+                .param("feeNQT", Constants.ONE_rcc)
                 .build();
 
         JSONObject response = apiCall.invoke();

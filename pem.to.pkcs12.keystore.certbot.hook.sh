@@ -4,14 +4,14 @@
 ## This script takes the pem files from a Let's Encrypt / Certbot
 ## directory and bundles them together for use by the current NRS
 ## installation, reading the corresponding properties from the
-## nxt.properties file.
+## rcc.properties file.
 ##
 ## It is designed to be run from the --deploy-hook Certbot option,
 ## meaning that it expects the RENEWED_LINEAGE environment variable
 ## to point to a directory with the PEM encoded files.
 #######################################################################
 
-PROPERTIES_PATH="conf/nxt.properties"
+PROPERTIES_PATH="conf/rcc.properties"
 
 if [ -z $RENEWED_LINEAGE ]; then
 	echo "RENEWED_LINEAGE environment variable not found, running from certbot --deploy-hook ?"
@@ -23,28 +23,28 @@ SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
 cd $SCRIPTPATH
 
 if [ ! -r $PROPERTIES_PATH ]; then
-	echo "nxt.properties file not found"
+	echo "rcc.properties file not found"
 	exit
 fi
 
-KEYSTORE=$(grep "^nxt.keyStorePath=" $PROPERTIES_PATH | cut -d'=' -f2)
+KEYSTORE=$(grep "^rcc.keyStorePath=" $PROPERTIES_PATH | cut -d'=' -f2)
 
 if [ -z $KEYSTORE ]; then
-	echo "You need to define nxt.keyStorePath on nxt.properties"
+	echo "You need to define rcc.keyStorePath on rcc.properties"
 	exit
 fi
 
-KEYSTORE_PASS=$(grep "^nxt.keyStorePassword=" $PROPERTIES_PATH | cut -d'=' -f2)
+KEYSTORE_PASS=$(grep "^rcc.keyStorePassword=" $PROPERTIES_PATH | cut -d'=' -f2)
 
 if [ -z $KEYSTORE_PASS ]; then
-	echo "You need to define nxt.keyStorePassword on nxt.properties"
+	echo "You need to define rcc.keyStorePassword on rcc.properties"
 	exit
 fi
 
-KEYSTORE_TYPE=$(grep "^nxt.keyStoreType=" $PROPERTIES_PATH | cut -d'=' -f2)
+KEYSTORE_TYPE=$(grep "^rcc.keyStoreType=" $PROPERTIES_PATH | cut -d'=' -f2)
 
 if [ -z $KEYSTORE_TYPE ] || [ $KEYSTORE_TYPE != "PKCS12" ]; then
-	echo "You need to define the keystore type as PKCS12. Add \"nxt.keyStoreType=PKCS12\" to your nxt.properties file "
+	echo "You need to define the keystore type as PKCS12. Add \"rcc.keyStoreType=PKCS12\" to your rcc.properties file "
 	exit
 fi
 

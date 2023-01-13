@@ -13,11 +13,11 @@
  *
  */
 
-package nxt.http.client;
+package rcc.http.client;
 
-import nxt.Constants;
-import nxt.Tester;
-import nxt.http.APICall;
+import rcc.Constants;
+import rcc.Tester;
+import rcc.http.APICall;
 import org.json.simple.JSONObject;
 
 public class IssueAssetBuilder {
@@ -30,7 +30,7 @@ public class IssueAssetBuilder {
     private String description = "asset testing";
     private int quantityQNT = ASSET_QNT;
     private int decimals = ASSET_DECIMALS;
-    private long feeNQT = 1000 * Constants.ONE_NXT;
+    private long feeNQT = 1000 * Constants.ONE_rcc;
     private int deadline = 1440;
 
     public IssueAssetBuilder(Tester creator, String name) {

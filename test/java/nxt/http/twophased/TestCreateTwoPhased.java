@@ -1,12 +1,12 @@
 /*
- * Copyright © 2013-2016 The Nxt Core Developers.
+ * Copyright © 2013-2016 The rcc Core Developers.
  * Copyright © 2016-2022 Jelurida IP B.V.
  *
  * See the LICENSE.txt file at the top-level directory of this distribution
  * for licensing information.
  *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,
- * no part of the Nxt software, including this file, may be copied, modified,
+ * no part of the rcc software, including this file, may be copied, modified,
  * propagated, or distributed except according to the terms contained in the
  * LICENSE.txt file.
  *
@@ -14,15 +14,15 @@
  *
  */
 
-package nxt.http.twophased;
+package rcc.http.twophased;
 
-import nxt.BlockchainTest;
-import nxt.Constants;
-import nxt.Nxt;
-import nxt.VoteWeighting;
-import nxt.http.APICall;
-import nxt.http.callers.SendMoneyCall;
-import nxt.util.Logger;
+import rcc.BlockchainTest;
+import rcc.Constants;
+import rcc.rcc;
+import rcc.VoteWeighting;
+import rcc.http.APICall;
+import rcc.http.callers.SendMoneyCall;
+import rcc.util.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.junit.Assert;
@@ -57,12 +57,12 @@ public class TestCreateTwoPhased extends BlockchainTest {
 
         public TwoPhasedMoneyTransferBuilder() {
 
-            int height = Nxt.getBlockchain().getHeight();
+            int height = rcc.getBlockchain().getHeight();
 
             builder.secretPhrase(ALICE.getSecretPhrase());
-            builder.feeNQT(2*Constants.ONE_NXT);
+            builder.feeNQT(2*Constants.ONE_rcc);
             builder.recipient(BOB.getId());
-            builder.param("amountNQT", 50 * Constants.ONE_NXT);
+            builder.param("amountNQT", 50 * Constants.ONE_rcc);
             builder.param("phased", "true");
             builder.param("phasingVotingModel", VoteWeighting.VotingModel.ACCOUNT.getCode());
             builder.param("phasingQuorum", 1);
@@ -125,7 +125,7 @@ public class TestCreateTwoPhased extends BlockchainTest {
 
     @Test
     public void invalidMoneyTransfer() {
-        int height = Nxt.getBlockchain().getHeight();
+        int height = rcc.getBlockchain().getHeight();
 
         APICall apiCall = new TwoPhasedMoneyTransferBuilder().finishHeight(height).build();
         issueCreateTwoPhasedFailed(apiCall);

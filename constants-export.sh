@@ -11,6 +11,6 @@ if [ "$OSTYPE" = "cygwin" ] ; then
 PATHSEP=";" 
 fi
 
-${JAVA} -cp "classes${PATHSEP}lib/*${PATHSEP}conf" nxt.tools.ConstantsExporter html/www/js/data/constants.js
+${JAVA} -cp "classes${PATHSEP}lib/*${PATHSEP}conf" rcc.tools.ConstantsExporter html/www/js/data/constants.js
 
 

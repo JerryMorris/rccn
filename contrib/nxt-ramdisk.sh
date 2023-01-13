@@ -16,21 +16,21 @@ log_msg "ramdisk started: $*"
 
 cd "$(dirname "$0")/.." || on_error "Failed to cd $(dirname "$0")/.."
 
-PRODUCT_NAME=Nxt
+PRODUCT_NAME=rcc
 
 PRODUCT_DIR="$( pwd -P )"
 
 THIS_SCRIPT=$PRODUCT_DIR/contrib/$(basename "$0")
 
-MOUNT_POINT=/mnt/nxt_ramdisk
+MOUNT_POINT=/mnt/rcc_ramdisk
 
 RAMDISK_SIZE=5400M
 
 MAX_BACKUP_DBS=3
 
-BASE_LOG_NAME=nxt
+BASE_LOG_NAME=rcc
 
-if grep -e "^nxt.isTestnet=true$" "${PRODUCT_DIR}/conf/nxt.properties" > /dev/null; then
+if grep -e "^rcc.isTestnet=true$" "${PRODUCT_DIR}/conf/rcc.properties" > /dev/null; then
   IS_TESTNET=1
   BACKUPS_DIR=$PRODUCT_DIR/contrib/ramdisk-backups/testnet
 else
@@ -42,11 +42,11 @@ log_msg "IS_TESTNET=$IS_TESTNET"
 RAMDISK_SIZE=5000M
 
 if [ $IS_TESTNET -eq 1 ]; then
-  DB_DIR=nxt_test_db
-  DB_FULL_PATH=$MOUNT_POINT/$DB_DIR/nxt
+  DB_DIR=rcc_test_db
+  DB_FULL_PATH=$MOUNT_POINT/$DB_DIR/rcc
 else
-  DB_DIR=nxt_db
-  DB_FULL_PATH=$MOUNT_POINT/$DB_DIR/nxt
+  DB_DIR=rcc_db
+  DB_FULL_PATH=$MOUNT_POINT/$DB_DIR/rcc
 fi
 
 help()
@@ -83,14 +83,14 @@ EOM
 init_ramdisk()
 {
   if [ $IS_TESTNET -eq 1 ]; then
-    DB_PROPERTY=nxt.testDbDir
+    DB_PROPERTY=rcc.testDbDir
   else
-    DB_PROPERTY=nxt.dbDir
+    DB_PROPERTY=rcc.dbDir
   fi
 
-  grep -e "^$DB_PROPERTY=$DB_FULL_PATH$" "${PRODUCT_DIR}/conf/nxt.properties" > /dev/null || on_error \
+  grep -e "^$DB_PROPERTY=$DB_FULL_PATH$" "${PRODUCT_DIR}/conf/rcc.properties" > /dev/null || on_error \
     "$PRODUCT_NAME not configured to write the database on the ramdisk.\n"\
-    "Add the following line to ${PRODUCT_DIR}/conf/nxt.properties\n"\
+    "Add the following line to ${PRODUCT_DIR}/conf/rcc.properties\n"\
     "$DB_PROPERTY=$DB_FULL_PATH\n"
 
 

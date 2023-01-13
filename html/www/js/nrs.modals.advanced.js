@@ -1,12 +1,12 @@
 /******************************************************************************
- * Copyright © 2013-2016 The Nxt Core Developers.                             *
+ * Copyright © 2013-2016 The rcc Core Developers.                             *
  * Copyright © 2016-2022 Jelurida IP B.V.                                     *
  *                                                                            *
  * See the LICENSE.txt file at the top-level directory of this distribution   *
  * for licensing information.                                                 *
  *                                                                            *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,*
- * no part of the Nxt software, including this file, may be copied, modified, *
+ * no part of the rcc software, including this file, may be copied, modified, *
  * propagated, or distributed except according to the terms contained in the  *
  * LICENSE.txt file.                                                          *
  *                                                                            *
@@ -190,14 +190,14 @@ var NRS = (function(NRS, $, undefined) {
 		$elems.find('input').prop("disabled", true);
 
 		context = {
-			labelText: "Amount NXT",
-			labelI18n: "amount_nxt",
+			labelText: "Amount rcc",
+			labelI18n: "amount_rcc",
 			helpI18n: "approve_transaction_amount_help",
-			inputName: "phasingQuorumNXT",
-			addonText: "NXT",
-			addonI18n: "nxt_unit"
+			inputName: "phasingQuorumrcc",
+			addonText: "rcc",
+			addonI18n: "rcc_unit"
 		};
-		$elems = NRS.initModalUIElement($modal, '.approve_transaction_amount_nxt', 'simple_input_with_addon_modal_ui_element', context);
+		$elems = NRS.initModalUIElement($modal, '.approve_transaction_amount_rcc', 'simple_input_with_addon_modal_ui_element', context);
 		$elems.find('input').prop("disabled", true);
 
 		context = {
@@ -261,10 +261,10 @@ var NRS = (function(NRS, $, undefined) {
 			addonText: "",
 			addonI18n: ""
 		};
-		context['inputName'] = 'phasingMinBalanceNXT';
-		context['addonText'] = 'NXT';
-		context['addonI18n'] = 'nxt_unit';
-		$elems = NRS.initModalUIElement($modal, '.approve_min_balance_nxt', 'simple_input_with_addon_modal_ui_element', context);
+		context['inputName'] = 'phasingMinBalancercc';
+		context['addonText'] = 'rcc';
+		context['addonI18n'] = 'rcc_unit';
+		$elems = NRS.initModalUIElement($modal, '.approve_min_balance_rcc', 'simple_input_with_addon_modal_ui_element', context);
 		$elems.find('input').prop("disabled", true);
 		$elems.hide();
 

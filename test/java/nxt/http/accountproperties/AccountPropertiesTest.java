@@ -13,11 +13,11 @@
  *
  */
 
-package nxt.http.accountproperties;
+package rcc.http.accountproperties;
 
-import nxt.BlockchainTest;
-import nxt.Constants;
-import nxt.http.callers.SetAccountPropertyCall;
+import rcc.BlockchainTest;
+import rcc.Constants;
+import rcc.http.callers.SetAccountPropertyCall;
 import org.json.simple.JSONObject;
 import org.junit.Assert;
 import org.junit.Test;
@@ -32,7 +32,7 @@ public class AccountPropertiesTest extends BlockchainTest {
     @Test
     public void accountProperty1() {
         JSONObject response = SetAccountPropertyCall.create().
-                secretPhrase(ALICE.getSecretPhrase()).feeNQT(Constants.ONE_NXT * 20).
+                secretPhrase(ALICE.getSecretPhrase()).feeNQT(Constants.ONE_rcc * 20).
                 recipient(BOB.getStrId()).
                 property(KEY1).
                 value(VALUE1).
@@ -53,7 +53,7 @@ public class AccountPropertiesTest extends BlockchainTest {
         String value = sb.toString();
         JSONObject response = SetAccountPropertyCall.create().
                 secretPhrase(ALICE.getSecretPhrase()).
-                feeNQT(Constants.ONE_NXT * 20).
+                feeNQT(Constants.ONE_rcc * 20).
                 recipient(BOB.getStrId()).
                 property(KEY1).
                 value(value).
@@ -74,7 +74,7 @@ public class AccountPropertiesTest extends BlockchainTest {
         String value = sb.toString();
         JSONObject response = SetAccountPropertyCall.create().
                 secretPhrase(ALICE.getSecretPhrase()).
-                feeNQT(Constants.ONE_NXT * 20).
+                feeNQT(Constants.ONE_rcc * 20).
                 recipient(BOB.getStrId()).
                 property(KEY1).
                 value(value).
@@ -94,7 +94,7 @@ public class AccountPropertiesTest extends BlockchainTest {
         String name = sb.toString();
         JSONObject response = SetAccountPropertyCall.create().
                 secretPhrase(ALICE.getSecretPhrase()).
-                feeNQT(Constants.ONE_NXT * 20).
+                feeNQT(Constants.ONE_rcc * 20).
                 recipient(BOB.getStrId()).
                 property(name).
                 value("").

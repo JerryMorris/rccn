@@ -1,12 +1,12 @@
 /*
- * Copyright © 2013-2016 The Nxt Core Developers.
+ * Copyright © 2013-2016 The rcc Core Developers.
  * Copyright © 2016-2022 Jelurida IP B.V.
  *
  * See the LICENSE.txt file at the top-level directory of this distribution
  * for licensing information.
  *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,
- * no part of the Nxt software, including this file, may be copied, modified,
+ * no part of the rcc software, including this file, may be copied, modified,
  * propagated, or distributed except according to the terms contained in the
  * LICENSE.txt file.
  *
@@ -14,15 +14,15 @@
  *
  */
 
-package nxtdesktop;
+package rccdesktop;
 
 import javafx.application.Platform;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
-import nxt.Nxt;
-import nxt.http.API;
-import nxt.util.JSON;
-import nxt.util.Logger;
+import rcc.rcc;
+import rcc.http.API;
+import rcc.util.JSON;
+import rcc.util.Logger;
 import org.json.simple.JSONObject;
 
 import java.awt.*;
@@ -66,13 +66,13 @@ public class JavaScriptBridge {
         String fileName = "contacts.json";
         byte[] bytes;
         try {
-            bytes = Files.readAllBytes(Paths.get(Nxt.getUserHomeDir(), fileName));
+            bytes = Files.readAllBytes(Paths.get(rcc.getUserHomeDir(), fileName));
         } catch (IOException e) {
             Logger.logInfoMessage("Cannot read file " + fileName + " error " + e.getMessage());
             JSONObject response = new JSONObject();
             response.put("error", "contacts_file_not_found");
             response.put("file", fileName);
-            response.put("folder", Nxt.getUserHomeDir());
+            response.put("folder", rcc.getUserHomeDir());
             response.put("type", "1");
             return JSON.toJSONString(response);
         }

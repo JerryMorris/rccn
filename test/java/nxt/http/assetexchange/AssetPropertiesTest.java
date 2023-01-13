@@ -13,15 +13,15 @@
  *
  */
 
-package nxt.http.assetexchange;
+package rcc.http.assetexchange;
 
-import nxt.BlockchainTest;
-import nxt.Constants;
-import nxt.Tester;
-import nxt.http.APICall;
-import nxt.http.client.GetAssetPropertiesBuilder;
-import nxt.http.client.SetAssetPropertyBuilder;
-import nxt.util.JSONAssert;
+import rcc.BlockchainTest;
+import rcc.Constants;
+import rcc.Tester;
+import rcc.http.APICall;
+import rcc.http.client.GetAssetPropertiesBuilder;
+import rcc.http.client.SetAssetPropertyBuilder;
+import rcc.util.JSONAssert;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.junit.Assert;
@@ -101,7 +101,7 @@ public class AssetPropertiesTest extends BlockchainTest {
         return new APICall.Builder("deleteAssetProperty").
                 param("secretPhrase", requester.getSecretPhrase()).
                 param("asset", Long.toUnsignedString(assetId)).
-                param("feeNQT", 3 * Constants.ONE_NXT).
+                param("feeNQT", 3 * Constants.ONE_rcc).
                 param("property", property);
     }
 

@@ -13,10 +13,10 @@
  *
  */
 
-package nxt.http.client;
+package rcc.http.client;
 
-import nxt.Tester;
-import nxt.http.APICall;
+import rcc.Tester;
+import rcc.http.APICall;
 import org.json.simple.JSONObject;
 
 public class GetAssetPropertiesBuilder {

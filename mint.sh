@@ -6,4 +6,4 @@ else
     JAVA=java
 fi
 
-${JAVA} -cp classes:lib/*:conf nxt.mint.MintWorker
+${JAVA} -cp classes:lib/*:conf rcc.mint.MintWorker

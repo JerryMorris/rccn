@@ -13,9 +13,9 @@
  *
  */
 
-package nxt.http.accountproperties;
+package rcc.http.accountproperties;
 
-import nxt.http.AbstractHttpApiSuite;
+import rcc.http.AbstractHttpApiSuite;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 

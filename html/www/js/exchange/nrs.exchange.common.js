@@ -1,12 +1,12 @@
 /******************************************************************************
- * Copyright © 2013-2016 The Nxt Core Developers.                             *
+ * Copyright © 2013-2016 The rcc Core Developers.                             *
  * Copyright © 2016-2022 Jelurida IP B.V.                                     *
  *                                                                            *
  * See the LICENSE.txt file at the top-level directory of this distribution   *
  * for licensing information.                                                 *
  *                                                                            *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,*
- * no part of the Nxt software, including this file, may be copied, modified, *
+ * no part of the rcc software, including this file, may be copied, modified, *
  * propagated, or distributed except according to the terms contained in the  *
  * LICENSE.txt file.                                                          *
  *                                                                            *
@@ -62,7 +62,7 @@ var NRS = (function(NRS, $) {
     };
 
     NRS.getExchangeAddressLink = function (address, coin) {
-        if (coin.toUpperCase() === "NXT") {
+        if (coin.toUpperCase() === "rcc") {
             return NRS.getAccountLink({ accountRS: address }, "account");
         }
         if (coin.toUpperCase() === "BTC") {
@@ -72,7 +72,7 @@ var NRS = (function(NRS, $) {
     };
 
     NRS.getExchangeTransactionLink = function (transaction, coin) {
-        if (coin.toUpperCase() === "NXT") {
+        if (coin.toUpperCase() === "rcc") {
             return "<a href='#' class='show_transaction_modal_action' data-transaction='" + transaction + "'>" + transaction + "</a>";
         }
         if (coin.toUpperCase() === "BTC") {

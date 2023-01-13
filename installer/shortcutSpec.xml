@@ -1,13 +1,13 @@
 <shortcuts>
 	<skipIfNotSupported/>
 	<defaultCurrentUser/>
-	<programGroup defaultName="NXT" location="startMenu"/>
+	<programGroup defaultName="rcc" location="startMenu"/>
 	<shortcut
-		name="Nxt Server"
-		target="$INSTALL_PATH\nxt.exe"
+		name="rcc Server"
+		target="$INSTALL_PATH\rcc.exe"
 		commandLine=""
 		workingDirectory="$INSTALL_PATH"
-        description="Start NXT server"
+        description="Start rcc server"
 		iconFile="$INSTALL_PATH\html\www\favicon.ico"
         iconIndex="0"
         initialState="normal"

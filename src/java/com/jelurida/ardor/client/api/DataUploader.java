@@ -15,8 +15,8 @@
 
 package com.jelurida.ardor.client.api;
 
-import nxt.addons.JO;
-import nxt.http.callers.UploadTaggedDataCall;
+import rcc.addons.JO;
+import rcc.http.callers.UploadTaggedDataCall;
 
 import java.net.URL;
 
@@ -29,7 +29,7 @@ public class DataUploader {
     private static final String SECRET_PHRASE = "hope peace happen touch easy pretend worthless talk them indeed wheel state";
 
     public static void main(String[] args) throws Exception {
-        URL url = new URL("https://testnxt.jelurida.com/nxt");
+        URL url = new URL("https://testrcc.redcobracoin.com/rcc");
         DataUploader dataUploader = new DataUploader();
         dataUploader.upload(url);
     }

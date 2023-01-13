@@ -1,12 +1,12 @@
 /******************************************************************************
- * Copyright © 2013-2016 The Nxt Core Developers.                             *
+ * Copyright © 2013-2016 The rcc Core Developers.                             *
  * Copyright © 2016-2022 Jelurida IP B.V.                                     *
  *                                                                            *
  * See the LICENSE.txt file at the top-level directory of this distribution   *
  * for licensing information.                                                 *
  *                                                                            *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,*
- * no part of the Nxt software, including this file, may be copied, modified, *
+ * no part of the rcc software, including this file, may be copied, modified, *
  * propagated, or distributed except according to the terms contained in the  *
  * LICENSE.txt file.                                                          *
  *                                                                            *
@@ -86,11 +86,11 @@ var NRS = (function(NRS, $) {
                 return function (callback) {
                     var from, to;
                     if (op == "buy") {
-                        from = "NXT";
+                        from = "rcc";
                         to = coins[i];
                     } else {
                         from = coins[i];
-                        to = "NXT";
+                        to = "rcc";
                     }
                     async.waterfall([
                         function(callback) {
@@ -118,7 +118,7 @@ var NRS = (function(NRS, $) {
                             symbol = coins[i];
                         } else {
                             rate = response.rate;
-                            symbol = "NXT";
+                            symbol = "rcc";
                         }
                         var row = "<tr><td>" + coins[i] + "</td>";
                         row += "<td><span>" + String(response.minAmount).escapeHTML() + "</span>&nbsp<span>" + symbol + "</span></td>";
@@ -133,7 +133,7 @@ var NRS = (function(NRS, $) {
         }
         NRS.logConsole(tasks.length + " tasks ready to run");
         async.series(tasks, function (err, results) {
-            var table = $("#p_changelly_" + op + "_nxt");
+            var table = $("#p_changelly_" + op + "_rcc");
             if (err) {
                 NRS.logConsole("Err: ", err, "\nResults:", results);
                 table.find("tbody").empty();
@@ -242,7 +242,7 @@ var NRS = (function(NRS, $) {
                 var isSelectionAvailable = false;
                 for (var j = 0; j < data.result.length; j++) {
                     var code = String(data.result[j]).toUpperCase();
-                    if (code !== 'NXT') {
+                    if (code !== 'rcc') {
                         inputFields[i].append('<option value="' + code + '">' + code + '</option>');
                         SUPPORTED_COINS[code] = code;
                     }
@@ -320,11 +320,11 @@ var NRS = (function(NRS, $) {
         $("#changelly_buy_from").val(from);
         $("#changelly_buy_to").val(to);
         NRS.logConsole("modal invoked from " + from + " to " + to);
-        $("#changelly_buy_title").html($.t("exchange_nxt_to_coin", { coin: to }));
+        $("#changelly_buy_title").html($.t("exchange_rcc_to_coin", { coin: to }));
         $("#changelly_buy_min").val(invoker.data("min"));
-        $("#changelly_buy_min_coin").html("NXT");
+        $("#changelly_buy_min_coin").html("rcc");
         $("#changelly_buy_rate").val(invoker.data("rate"));
-        $("#changelly_buy_rate_text").html("NXT/" + to);
+        $("#changelly_buy_rate_text").html("rcc/" + to);
         $('#changelly_buy_estimated_amount').val("");
         $("#changelly_buy_estimated_amount_text").html(to);
         $("#changelly_withdrawal_address_coin").html(to);
@@ -334,15 +334,15 @@ var NRS = (function(NRS, $) {
         e.preventDefault();
         var $modal = $(this).closest(".modal");
         var $btn = NRS.lockForm($modal);
-        var amountNXT = $("#changelly_buy_amount").val();
+        var amountrcc = $("#changelly_buy_amount").val();
         var minAmount = $("#changelly_buy_min").val();
-        if (parseFloat(amountNXT) <= parseFloat(minAmount)) {
+        if (parseFloat(amountrcc) <= parseFloat(minAmount)) {
             var msg = "amount is lower tham minimum amount " + minAmount;
             NRS.logConsole(msg);
             NRS.showModalError(msg, $modal);
             return;
         }
-        var amountNQT = NRS.convertToNQT(amountNXT);
+        var amountNQT = NRS.convertToNQT(amountrcc);
         var withdrawal = $("#changelly_buy_withdrawal_address").val();
         var from = $("#changelly_buy_from").val();
         var to = $("#changelly_buy_to").val();
@@ -365,7 +365,7 @@ var NRS = (function(NRS, $) {
                 return;
             }
 
-            NRS.logConsole("NXT deposit address " + depositAddress);
+            NRS.logConsole("rcc deposit address " + depositAddress);
             NRS.sendRequest("sendMoney", {
                 "recipient": depositAddress,
                 "amountNQT": amountNQT,
@@ -420,12 +420,12 @@ var NRS = (function(NRS, $) {
         var rate = invoker.data("rate");
         var min = invoker.data("min");
         NRS.logConsole("sell modal exchange from " + from + " to " + to);
-        $("#changelly_sell_title").html($.t("exchange_coin_to_nxt_changelly", { coin: from }));
+        $("#changelly_sell_title").html($.t("exchange_coin_to_rcc_changelly", { coin: from }));
         $("#changelly_sell_qr_code").html("");
         $("#changelly_sell_min").val(min);
         $("#changelly_sell_min_coin").html(from);
         $("#changelly_sell_rate").val(rate);
-        $("#changelly_sell_rate_text").html(from + "/NXT");
+        $("#changelly_sell_rate_text").html(from + "/rcc");
         $("#changelly_sell_amount_text").html(from);
         $("#changelly_sell_estimated_amount").val("");
         $("#changelly_sell_from").val(from);

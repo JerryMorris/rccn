@@ -1,12 +1,12 @@
 /******************************************************************************
- * Copyright © 2013-2016 The Nxt Core Developers.                             *
+ * Copyright © 2013-2016 The rcc Core Developers.                             *
  * Copyright © 2016-2022 Jelurida IP B.V.                                     *
  *                                                                            *
  * See the LICENSE.txt file at the top-level directory of this distribution   *
  * for licensing information.                                                 *
  *                                                                            *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,*
- * no part of the Nxt software, including this file, may be copied, modified, *
+ * no part of the rcc software, including this file, may be copied, modified, *
  * propagated, or distributed except according to the terms contained in the  *
  * LICENSE.txt file.                                                          *
  *                                                                            *
@@ -32,7 +32,7 @@
  * @depends {crypto/3rdparty/jssha256.js}
  * @depends {util/converters.js}
  * @depends {util/extensions.js}
- * @depends {util/nxtaddress.js}
+ * @depends {util/rccaddress.js}
  */
 var NRS = (function(NRS, $, undefined) {
 	"use strict";
@@ -384,7 +384,7 @@ var NRS = (function(NRS, $, undefined) {
 				// has to be enabled by activating this code on the specific widget
 				$("[data-toggle='tooltip']").tooltip();
 
-				$("#dgs_search_account_center").mask("NXT-****-****-****-*****");
+				$("#dgs_search_account_center").mask("rcc-****-****-****-*****");
 				console.log("done initialization");
 				if (NRS.getUrlParameter("account")) {
 					NRS.login(false, NRS.getUrlParameter("account"));
@@ -1133,9 +1133,9 @@ var NRS = (function(NRS, $, undefined) {
 	NRS.getRequestPath = function (noProxy) {
 		var url = NRS.getRemoteNodeUrl();
 		if (!NRS.state.apiProxy || noProxy) {
-			return url + "/nxt";
+			return url + "/rcc";
 		} else {
-			return url + "/nxt-proxy";
+			return url + "/rcc-proxy";
 		}
 	};
 
@@ -1501,7 +1501,7 @@ var NRS = (function(NRS, $, undefined) {
 				}
 				rows += "<tr>" +
 					"<td>" + NRS.getAccountLink({ lessorRS: lessor }, "lessor") + "</td>" +
-					"<td>" + NRS.escapeRespStr(lessorInfo.effectiveBalanceNXT) + "</td>" +
+					"<td>" + NRS.escapeRespStr(lessorInfo.effectiveBalancercc) + "</td>" +
 					"<td><label>" + String(blocksLeft).escapeHTML() + " <i class='fa fa-question-circle show_popover' data-toggle='tooltip' title='" + blocksLeftTooltip + "' data-placement='right' style='color:#4CAA6E'></i></label></td>" +
 					"<td><label>" + String(nextLessee).escapeHTML() + " <i class='fa fa-question-circle show_popover' data-toggle='tooltip' title='" + nextTooltip + "' data-placement='right' style='color:#4CAA6E'></i></label></td>" +
 				"</tr>";
@@ -1557,7 +1557,7 @@ var NRS = (function(NRS, $, undefined) {
 						data.maximum_duration_short = response.maxDuration;
 					}
 					if (response.maxFees) {
-						data.maximum_fees = NRS.convertToNXT(response.maxFees);
+						data.maximum_fees = NRS.convertTorcc(response.maxFees);
 					}
 					infoTable.find("tbody").append(NRS.createInfoTable(data));
 					infoTable.show();
@@ -1790,7 +1790,7 @@ var NRS = (function(NRS, $, undefined) {
 
 		var id = $.trim($("#id_search").find("input[name=q]").val());
 
-		if (/NXT\-/i.test(id)) {
+		if (/rcc\-/i.test(id)) {
 			NRS.sendRequest("getAccount", {
 				"account": id
 			}, function(response, input) {

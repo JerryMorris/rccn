@@ -4,5 +4,5 @@ if [ -x jdk/bin/java ]; then
 else
     JAVA=java
 fi
-${JAVA} -cp "classes:lib/*:conf" nxt.tools.SignTransactionJSON $@
+${JAVA} -cp "classes:lib/*:conf" rcc.tools.SignTransactionJSON $@
 exit $?

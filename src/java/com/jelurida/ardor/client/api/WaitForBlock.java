@@ -15,11 +15,11 @@
 
 package com.jelurida.ardor.client.api;
 
-import nxt.addons.JA;
-import nxt.addons.JO;
-import nxt.http.callers.EventRegisterCall;
-import nxt.http.callers.EventWaitCall;
-import nxt.util.Logger;
+import rcc.addons.JA;
+import rcc.addons.JO;
+import rcc.http.callers.EventRegisterCall;
+import rcc.http.callers.EventWaitCall;
+import rcc.util.Logger;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -35,7 +35,7 @@ public class WaitForBlock {
     }
 
     private void process() throws MalformedURLException {
-        URL remoteUrl = new URL("https://testnxt.jelurida.com/nxt");
+        URL remoteUrl = new URL("https://testrcc.redcobracoin.com/rcc");
         JO response;
         try {
             // Monitor the blockchain for a new block

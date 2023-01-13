@@ -1,12 +1,12 @@
 /******************************************************************************
- * Copyright © 2013-2016 The Nxt Core Developers.                             *
+ * Copyright © 2013-2016 The rcc Core Developers.                             *
  * Copyright © 2016-2022 Jelurida IP B.V.                                     *
  *                                                                            *
  * See the LICENSE.txt file at the top-level directory of this distribution   *
  * for licensing information.                                                 *
  *                                                                            *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,*
- * no part of the Nxt software, including this file, may be copied, modified, *
+ * no part of the rcc software, including this file, may be copied, modified, *
  * propagated, or distributed except according to the terms contained in the  *
  * LICENSE.txt file.                                                          *
  *                                                                            *
@@ -371,7 +371,7 @@ var NRS = (function(NRS, $) {
 		if (option == "add_contact") {
 			$("#add_contact_account_id").val(account).trigger("blur");
 			$("#add_contact_modal").modal("show");
-		} else if (option == "send_nxt") {
+		} else if (option == "send_rcc") {
 			$("#send_money_recipient").val(account).trigger("blur");
 			$("#send_money_modal").modal("show");
 		} else if (option == "account_info") {
@@ -386,7 +386,7 @@ var NRS = (function(NRS, $) {
 		NRS.closeContextMenu();
 		if (option == "update_contact") {
 			$("#update_contact_modal").modal("show");
-		} else if (option == "send_nxt") {
+		} else if (option == "send_rcc") {
 			$("#send_money_recipient").val(NRS.selectedContext.data("contact")).trigger("blur");
 			$("#send_money_modal").modal("show");
 		}
@@ -414,7 +414,7 @@ var NRS = (function(NRS, $) {
         var passpharse = $("#inline_message_password").val();
         var data = {
 			"recipient": $.trim($("#inline_message_recipient").val()),
-			"feeNXT": "1",
+			"feercc": "1",
 			"deadline": "1440",
 			"secretPhrase": $.trim(passpharse)
 		};

@@ -1,12 +1,12 @@
 /******************************************************************************
- * Copyright © 2013-2016 The Nxt Core Developers.                             *
+ * Copyright © 2013-2016 The rcc Core Developers.                             *
  * Copyright © 2016-2022 Jelurida IP B.V.                                     *
  *                                                                            *
  * See the LICENSE.txt file at the top-level directory of this distribution   *
  * for licensing information.                                                 *
  *                                                                            *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,*
- * no part of the Nxt software, including this file, may be copied, modified, *
+ * no part of the rcc software, including this file, may be copied, modified, *
  * propagated, or distributed except according to the terms contained in the  *
  * LICENSE.txt file.                                                          *
  *                                                                            *
@@ -425,12 +425,12 @@ var NRS = (function(NRS, $, undefined) {
 						if (vm == 1) {
 							$popoverTypeTR.find("td:first").html($.t('accounts', 'Accounts') + ":");
 							$popoverTypeTR.find("td:last").html(String(attachment.phasingWhitelist ? attachment.phasingWhitelist.length : ""));
-							votesFormatted = NRS.convertToNXT(responsePoll.result) + " / " + NRS.convertToNXT(attachment.phasingQuorum) + " NXT";
+							votesFormatted = NRS.convertTorcc(responsePoll.result) + " / " + NRS.convertTorcc(attachment.phasingQuorum) + " rcc";
 							$popoverVotesTR.find("td:last").html(votesFormatted);
 						}
 						if (mbModel == 1) {
 							if (minBalance > 0) {
-								minBalanceFormatted = NRS.convertToNXT(minBalance) + " NXT";
+								minBalanceFormatted = NRS.convertTorcc(minBalance) + " rcc";
 								$approveBtn.data('minBalanceFormatted', minBalanceFormatted.escapeHTML());
 							}
 						}
@@ -602,8 +602,8 @@ var NRS = (function(NRS, $, undefined) {
         }
         var change = entry.change;
         var balance = entry.balance;
-        var balanceType = "nxt";
-        var balanceEntity = "NXT";
+        var balanceType = "rcc";
+        var balanceEntity = "rcc";
         var holdingIcon = "";
         if (change < 0) {
             change = String(change).substring(1);
@@ -653,7 +653,7 @@ var NRS = (function(NRS, $, undefined) {
         html += "<a class='" + linkClass + "' href='#' data-timestamp='" + NRS.escapeRespStr(entry.timestamp) + "' " + dataToken + ">";
         html += " <i class='fa fa-info'></i></a>";
 		html += '</td>';
-		if (balanceType == "nxt") {
+		if (balanceType == "rcc") {
             html += "<td style='vertical-align:middle;" + color + "' class='numeric'>" + sign + change + "</td>";
             html += "<td style='vertical-align:middle;' class='numeric'>" + balance + "</td>";
             html += "<td></td>";

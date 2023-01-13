@@ -20,11 +20,11 @@
 ### Database ###
   
   - H2 embedded database
-  - main database: `nxt_db/`
-  - test database: `nxt_test_db/`
+  - main database: `rcc_db/`
+  - test database: `rcc_test_db/`
   - the database directories do not contain user specific data and can be safely deleted
   - but no need to delete them on upgrade, the DbVersion code takes care of schema updates
-  - use the nxt.db framework when accessing the database from your code
+  - use the rcc.db framework when accessing the database from your code
 
 ----
 ## Coding Process ##
@@ -97,7 +97,7 @@
 
 Translation of the client UI to other languages is done by the community within a crowdsourced process on the platform **Crowdin**:
 
-- https://crowdin.com/project/nxt-ui-translation
+- https://crowdin.com/project/rcc-ui-translation
 
 If you feel comfortable translating you are very welcome to join and help with translations.
 
@@ -158,7 +158,7 @@ To build the Android APK application follow these steps (Tested on Windows 10 64
 5 To generate icons and splash screens: 
   5.1 Install imagemagick https://www.imagemagick.org and check "install legacy utilities (e.g. convert)" in the "Select Additional Tasks" panel
   5.2 Install node packages cordova-icon and cordova-splash
-6. Under the <NXTRoot>\mobile\app folder execute the command: createapp.bat, see that all the plugins dependencies are downloaded and that the process completes without errors. If necessary adjust the plugin dependencies in 
+6. Under the <rccRoot>\mobile\app folder execute the command: createapp.bat, see that all the plugins dependencies are downloaded and that the process completes without errors. If necessary adjust the plugin dependencies in 
    ./html/config.xml this file is copied to the wallet folder by the script.
 7. To run the app invoke the command: runapp.bat, to update the app resources after making changes to the web wallet use updateapp.bat
 8. Debug the application on the device or emulator using Chrome desktop development tools, open the options menu, more tools --> Remote Devices choose the device and click "Inspect"

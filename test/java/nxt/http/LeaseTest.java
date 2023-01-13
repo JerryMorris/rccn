@@ -1,12 +1,12 @@
 /*
- * Copyright © 2013-2016 The Nxt Core Developers.
+ * Copyright © 2013-2016 The rcc Core Developers.
  * Copyright © 2016-2022 Jelurida IP B.V.
  *
  * See the LICENSE.txt file at the top-level directory of this distribution
  * for licensing information.
  *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,
- * no part of the Nxt software, including this file, may be copied, modified,
+ * no part of the rcc software, including this file, may be copied, modified,
  * propagated, or distributed except according to the terms contained in the
  * LICENSE.txt file.
  *
@@ -14,13 +14,13 @@
  *
  */
 
-package nxt.http;
+package rcc.http;
 
-import nxt.BlockchainTest;
-import nxt.Constants;
-import nxt.http.callers.GetAccountCall;
-import nxt.http.callers.LeaseBalanceCall;
-import nxt.util.Logger;
+import rcc.BlockchainTest;
+import rcc.Constants;
+import rcc.http.callers.GetAccountCall;
+import rcc.http.callers.LeaseBalanceCall;
+import rcc.util.Logger;
 import org.json.simple.JSONObject;
 import org.junit.Assert;
 import org.junit.Test;
@@ -34,7 +34,7 @@ public class LeaseTest extends BlockchainTest {
                 secretPhrase(BOB.getSecretPhrase()).
                 recipient(ALICE.getStrId()).
                 period("2").
-                feeNQT(Constants.ONE_NXT).
+                feeNQT(Constants.ONE_rcc).
                 build().invokeNoError();
 
         Logger.logDebugMessage("leaseBalance: " + response);
@@ -42,7 +42,7 @@ public class LeaseTest extends BlockchainTest {
                 secretPhrase(CHUCK.getSecretPhrase()).
                 recipient(ALICE.getStrId()).
                 period("3").
-                feeNQT(Constants.ONE_NXT).
+                feeNQT(Constants.ONE_rcc).
                 build().invokeNoError();
         Logger.logDebugMessage("leaseBalance: " + response);
         generateBlock();
@@ -53,7 +53,7 @@ public class LeaseTest extends BlockchainTest {
                 includeEffectiveBalance(true).
                 build().invokeNoError();
         Logger.logDebugMessage("getLesseeAccount: " + lesseeResponse);
-        Assert.assertEquals(ALICE.getInitialEffectiveBalance(), lesseeResponse.get("effectiveBalanceNXT"));
+        Assert.assertEquals(ALICE.getInitialEffectiveBalance(), lesseeResponse.get("effectiveBalancercc"));
 
         // lease is registered
         JSONObject leasedResponse1 = GetAccountCall.create().
@@ -78,8 +78,8 @@ public class LeaseTest extends BlockchainTest {
                 includeEffectiveBalance(true).
                 build().invoke();
         Logger.logDebugMessage("getLesseeAccount: " + lesseeResponse);
-        Assert.assertEquals((ALICE.getInitialBalance() + BOB.getInitialBalance() + CHUCK.getInitialBalance()) / Constants.ONE_NXT - 2,
-                lesseeResponse.get("effectiveBalanceNXT"));
+        Assert.assertEquals((ALICE.getInitialBalance() + BOB.getInitialBalance() + CHUCK.getInitialBalance()) / Constants.ONE_rcc - 2,
+                lesseeResponse.get("effectiveBalancercc"));
         generateBlock();
         generateBlock();
         lesseeResponse = GetAccountCall.create().
@@ -87,15 +87,15 @@ public class LeaseTest extends BlockchainTest {
                 includeEffectiveBalance(true).
                 build().invoke();
         Logger.logDebugMessage("getLesseeAccount: " + lesseeResponse);
-        Assert.assertEquals((ALICE.getInitialBalance() + CHUCK.getInitialBalance()) / Constants.ONE_NXT - 1 /* fees */,
-                lesseeResponse.get("effectiveBalanceNXT"));
+        Assert.assertEquals((ALICE.getInitialBalance() + CHUCK.getInitialBalance()) / Constants.ONE_rcc - 1 /* fees */,
+                lesseeResponse.get("effectiveBalancercc"));
         generateBlock();
         lesseeResponse = GetAccountCall.create().
                 account(ALICE.getRsAccount()).
                 includeEffectiveBalance(true).
                 build().invoke();
         Logger.logDebugMessage("getLesseeAccount: " + lesseeResponse);
-        Assert.assertEquals((ALICE.getInitialBalance()) / Constants.ONE_NXT,
-                lesseeResponse.get("effectiveBalanceNXT"));
+        Assert.assertEquals((ALICE.getInitialBalance()) / Constants.ONE_rcc,
+                lesseeResponse.get("effectiveBalancercc"));
     }
 }

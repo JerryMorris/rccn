@@ -1,12 +1,12 @@
 /*
- * Copyright © 2013-2016 The Nxt Core Developers.
+ * Copyright © 2013-2016 The rcc Core Developers.
  * Copyright © 2016-2022 Jelurida IP B.V.
  *
  * See the LICENSE.txt file at the top-level directory of this distribution
  * for licensing information.
  *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,
- * no part of the Nxt software, including this file, may be copied, modified,
+ * no part of the rcc software, including this file, may be copied, modified,
  * propagated, or distributed except according to the terms contained in the
  * LICENSE.txt file.
  *
@@ -14,16 +14,16 @@
  *
  */
 
-package nxt.http.monetarysystem;
+package rcc.http.monetarysystem;
 
-import nxt.BlockchainTest;
-import nxt.Constants;
-import nxt.http.APICall;
-import nxt.http.callers.DeleteCurrencyCall;
-import nxt.http.callers.GetAllCurrenciesCall;
-import nxt.http.callers.GetCurrencyCall;
-import nxt.http.callers.TransferCurrencyCall;
-import nxt.util.Logger;
+import rcc.BlockchainTest;
+import rcc.Constants;
+import rcc.http.APICall;
+import rcc.http.callers.DeleteCurrencyCall;
+import rcc.http.callers.GetAllCurrenciesCall;
+import rcc.http.callers.GetCurrencyCall;
+import rcc.http.callers.TransferCurrencyCall;
+import rcc.util.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.junit.Assert;
@@ -44,7 +44,7 @@ public class DeleteCurrencyTest extends BlockchainTest {
         // Delete the currency
         apiCall = DeleteCurrencyCall.create().
                 secretPhrase(ALICE.getSecretPhrase()).
-                feeNQT(Constants.ONE_NXT).
+                feeNQT(Constants.ONE_rcc).
                 currency(currencyId).
                 build();
         response = apiCall.invoke();
@@ -81,7 +81,7 @@ public class DeleteCurrencyTest extends BlockchainTest {
 
         // Delete the currency
         apiCall = DeleteCurrencyCall.create().
-                secretPhrase(BOB.getSecretPhrase()).feeNQT(Constants.ONE_NXT).
+                secretPhrase(BOB.getSecretPhrase()).feeNQT(Constants.ONE_rcc).
                 currency(currencyId).
                 build();
         response = apiCall.invoke();
@@ -108,7 +108,7 @@ public class DeleteCurrencyTest extends BlockchainTest {
         // Transfer all units
         apiCall = TransferCurrencyCall.create().
                 secretPhrase(ALICE.getSecretPhrase()).
-                feeNQT(Constants.ONE_NXT).
+                feeNQT(Constants.ONE_rcc).
                 recipient(Long.toUnsignedString(BOB.getId())).
                 currency(currencyId).
                 units((Long.parseLong((String) response.get("maxSupply")))).
@@ -119,7 +119,7 @@ public class DeleteCurrencyTest extends BlockchainTest {
 
         // Delete the currency
         apiCall = DeleteCurrencyCall.create().
-                secretPhrase(BOB.getSecretPhrase()).feeNQT(Constants.ONE_NXT).
+                secretPhrase(BOB.getSecretPhrase()).feeNQT(Constants.ONE_rcc).
                 currency(currencyId).
                 build();
         response = apiCall.invoke();

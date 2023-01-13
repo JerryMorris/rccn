@@ -15,8 +15,8 @@
 
 package com.jelurida.ardor.client.api;
 
-import nxt.addons.JO;
-import nxt.http.callers.GetPeersCall;
+import rcc.addons.JO;
+import rcc.http.callers.GetPeersCall;
 
 import java.net.URL;
 
@@ -27,7 +27,7 @@ public class GetPeersForMobileApp {
 
     public static void main(String[] args) throws Exception {
         if (args.length == 0) {
-            System.out.println("Specify remote node url, for example https://testnxt.jelurida.com/nxt");
+            System.out.println("Specify remote node url, for example https://testrcc.redcobracoin.com/rcc");
             System.exit(0);
         }
         URL url = new URL(args[0]);

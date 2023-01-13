@@ -13,12 +13,12 @@
  *
  */
 
-package nxt.http.client;
+package rcc.http.client;
 
-import nxt.Constants;
-import nxt.Tester;
-import nxt.http.APICall;
-import nxt.util.JSONAssert;
+import rcc.Constants;
+import rcc.Tester;
+import rcc.http.APICall;
+import rcc.util.JSONAssert;
 import org.json.simple.JSONObject;
 
 public class TransferAssetBuilder {
@@ -26,7 +26,7 @@ public class TransferAssetBuilder {
     private final Tester from;
     private final Tester to;
     private long quantityQNT = 1;
-    private long fee = Constants.ONE_NXT;
+    private long fee = Constants.ONE_rcc;
 
     public TransferAssetBuilder(String assetId, Tester from, Tester to) {
         this(Long.parseUnsignedLong(assetId), from, to);

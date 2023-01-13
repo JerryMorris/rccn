@@ -1,12 +1,12 @@
 /*
- * Copyright © 2013-2016 The Nxt Core Developers.
+ * Copyright © 2013-2016 The rcc Core Developers.
  * Copyright © 2016-2022 Jelurida IP B.V.
  *
  * See the LICENSE.txt file at the top-level directory of this distribution
  * for licensing information.
  *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,
- * no part of the Nxt software, including this file, may be copied, modified,
+ * no part of the rcc software, including this file, may be copied, modified,
  * propagated, or distributed except according to the terms contained in the
  * LICENSE.txt file.
  *
@@ -14,18 +14,18 @@
  *
  */
 
-package nxt.http.shuffling;
+package rcc.http.shuffling;
 
-import nxt.Constants;
-import nxt.Tester;
-import nxt.http.APICall;
-import nxt.http.callers.ShufflingCancelCall;
-import nxt.http.callers.ShufflingCreateCall;
-import nxt.http.callers.ShufflingProcessCall;
-import nxt.http.callers.ShufflingRegisterCall;
-import nxt.http.callers.ShufflingVerifyCall;
-import nxt.util.Convert;
-import nxt.util.Logger;
+import rcc.Constants;
+import rcc.Tester;
+import rcc.http.APICall;
+import rcc.http.callers.ShufflingCancelCall;
+import rcc.http.callers.ShufflingCreateCall;
+import rcc.http.callers.ShufflingProcessCall;
+import rcc.http.callers.ShufflingRegisterCall;
+import rcc.http.callers.ShufflingVerifyCall;
+import rcc.util.Convert;
+import rcc.util.Logger;
 import org.json.simple.JSONObject;
 
 class ShufflingUtil {
@@ -45,7 +45,7 @@ class ShufflingUtil {
     static JSONObject create(Tester creator, int participantCount) {
         APICall apiCall = ShufflingCreateCall.create().
                 secretPhrase(creator.getSecretPhrase()).
-                feeNQT(Constants.ONE_NXT).
+                feeNQT(Constants.ONE_rcc).
                 param("amount", String.valueOf(defaultShufflingAmount)).
                 param("participantCount", String.valueOf(participantCount)).
                 param("registrationPeriod", 10).
@@ -58,7 +58,7 @@ class ShufflingUtil {
     static JSONObject register(String shufflingFullHash, Tester tester) {
         APICall apiCall = ShufflingRegisterCall.create().
                 secretPhrase(tester.getSecretPhrase()).
-                feeNQT(Constants.ONE_NXT).
+                feeNQT(Constants.ONE_rcc).
                 param("shufflingFullHash", shufflingFullHash).
                 build();
         JSONObject response = apiCall.invokeNoError();
@@ -108,7 +108,7 @@ class ShufflingUtil {
                 shuffling(shufflingId).
                 secretPhrase(tester.getSecretPhrase()).
                 shufflingStateHash(shufflingStateHash).
-                feeNQT(Constants.ONE_NXT).
+                feeNQT(Constants.ONE_rcc).
                 build();
         JSONObject response = apiCall.invoke();
         Logger.logDebugMessage("shufflingVerifyResponse:" + response);
@@ -124,7 +124,7 @@ class ShufflingUtil {
                 shuffling(shufflingId).
                 secretPhrase(tester.getSecretPhrase()).
                 shufflingStateHash(shufflingStateHash).
-                feeNQT(10 * Constants.ONE_NXT);
+                feeNQT(10 * Constants.ONE_rcc);
         if (cancellingAccountId != 0) {
             builder.param("cancellingAccount", Long.toUnsignedString(cancellingAccountId));
         }
@@ -181,12 +181,12 @@ class ShufflingUtil {
         return response;
     }
 
-    static JSONObject sendMoney(Tester sender, Tester recipient, long amountNXT) {
+    static JSONObject sendMoney(Tester sender, Tester recipient, long amountrcc) {
         JSONObject response = new APICall.Builder("sendMoney").
                 param("secretPhrase", sender.getSecretPhrase()).
                 param("recipient", recipient.getStrId()).
-                param("amountNQT", amountNXT * Constants.ONE_NXT).
-                param("feeNQT", Constants.ONE_NXT).
+                param("amountNQT", amountrcc * Constants.ONE_rcc).
+                param("feeNQT", Constants.ONE_rcc).
                 build().invoke();
         Logger.logMessage("sendMoneyReponse: " + response.toJSONString());
         return response;

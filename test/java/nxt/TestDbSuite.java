@@ -1,5 +1,5 @@
 /*
- * Copyright © 2013-2016 The Nxt Core Developers.
+ * Copyright © 2013-2016 The rcc Core Developers.
  * Copyright © 2016-2022 Jelurida IP B.V.
  *
  * See the LICENSE.txt file at the top-level directory of this distribution
@@ -14,18 +14,18 @@
  *
  */
 
-package nxt;
+package rcc;
 
-import nxt.addons.AddonsSuite;
-import nxt.http.PaymentAndMessagesSuite;
-import nxt.http.accountControl.AccountControlSuite;
-import nxt.http.accountproperties.AccountPropertiesSuite;
-import nxt.http.alias.CreateAliasTest;
-import nxt.http.assetexchange.AssetExchangeSuite;
-import nxt.http.monetarysystem.CurrencySuite;
-import nxt.http.shuffling.ShufflingSuite;
-import nxt.http.twophased.TwoPhasedSuite;
-import nxt.http.votingsystem.VotingSuite;
+import rcc.addons.AddonsSuite;
+import rcc.http.PaymentAndMessagesSuite;
+import rcc.http.accountControl.AccountControlSuite;
+import rcc.http.accountproperties.AccountPropertiesSuite;
+import rcc.http.alias.CreateAliasTest;
+import rcc.http.assetexchange.AssetExchangeSuite;
+import rcc.http.monetarysystem.CurrencySuite;
+import rcc.http.shuffling.ShufflingSuite;
+import rcc.http.twophased.TwoPhasedSuite;
+import rcc.http.votingsystem.VotingSuite;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 

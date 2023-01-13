@@ -1,12 +1,12 @@
 /******************************************************************************
- * Copyright © 2013-2016 The Nxt Core Developers.                             *
+ * Copyright © 2013-2016 The rcc Core Developers.                             *
  * Copyright © 2016-2022 Jelurida IP B.V.                                     *
  *                                                                            *
  * See the LICENSE.txt file at the top-level directory of this distribution   *
  * for licensing information.                                                 *
  *                                                                            *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,*
- * no part of the Nxt software, including this file, may be copied, modified, *
+ * no part of the rcc software, including this file, may be copied, modified, *
  * propagated, or distributed except according to the terms contained in the  *
  * LICENSE.txt file.                                                          *
  *                                                                            *
@@ -48,8 +48,8 @@ body {
 body::after{
   position:absolute; width:0; height:0; overflow:hidden; z-index:-1;
   content:url(../img/client_background.png)
-  url(../img/nxt-load-progress-logo-circle.png)
-  url(../img/nxt-load-progress-logo-circle.png);
+  url(../img/rcc-load-progress-logo-circle.png)
+  url(../img/rcc-load-progress-logo-circle.png);
 }
 html.lockscreen, html.lockscreen body {
   height:100%;
@@ -3860,7 +3860,7 @@ body > .header .navbar {
 /*
  * @duckx 20150812 - login screen  */
 
-#logo-nxt-img {
+#logo-rcc-img {
     margin: 0 auto 40px auto;
     display: block;
 }
@@ -3924,7 +3924,7 @@ body > .header .navbar {
         bottom: initial;
     }
 
-    #logo-nxt-img {
+    #logo-rcc-img {
         width: 221px;
         margin-bottom: 9px;
     }
@@ -3942,7 +3942,7 @@ body > .header .navbar {
         margin-top: 25px
     }
 
-    #logo-nxt-img {
+    #logo-rcc-img {
         display: none;
     }
 

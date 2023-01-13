@@ -9,9 +9,9 @@ fi
 
 BETA_VERSION_NUMBER=$1
 
-PUBLIC_VERSION=$(grep nxt.version ./conf/nxt-default.properties | cut -d'=' -f2)
+PUBLIC_VERSION=$(grep rcc.version ./conf/rcc-default.properties | cut -d'=' -f2)
 
-PACKAGE_NAME=nxt-${PUBLIC_VERSION}-b${BETA_VERSION_NUMBER}.zip
+PACKAGE_NAME=rcc-${PUBLIC_VERSION}-b${BETA_VERSION_NUMBER}.zip
 echo PACKAGE_NAME="${PACKAGE_NAME}"
 
 git log -n1 --format="%h" > commit_hash.txt

@@ -1,12 +1,12 @@
 /*
- * Copyright © 2013-2016 The Nxt Core Developers.
+ * Copyright © 2013-2016 The rcc Core Developers.
  * Copyright © 2016-2022 Jelurida IP B.V.
  *
  * See the LICENSE.txt file at the top-level directory of this distribution
  * for licensing information.
  *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,
- * no part of the Nxt software, including this file, may be copied, modified,
+ * no part of the rcc software, including this file, may be copied, modified,
  * propagated, or distributed except according to the terms contained in the
  * LICENSE.txt file.
  *
@@ -14,30 +14,30 @@
  *
  */
 
-package nxt.http.shuffling;
+package rcc.http.shuffling;
 
-import nxt.BlockchainTest;
-import nxt.Constants;
-import nxt.Nxt;
-import nxt.Shuffling;
+import rcc.BlockchainTest;
+import rcc.Constants;
+import rcc.rcc;
+import rcc.Shuffling;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static nxt.http.shuffling.ShufflingUtil.ALICE_RECIPIENT;
-import static nxt.http.shuffling.ShufflingUtil.BOB_RECIPIENT;
-import static nxt.http.shuffling.ShufflingUtil.CHUCK_RECIPIENT;
-import static nxt.http.shuffling.ShufflingUtil.DAVE_RECIPIENT;
-import static nxt.http.shuffling.ShufflingUtil.broadcast;
-import static nxt.http.shuffling.ShufflingUtil.cancel;
-import static nxt.http.shuffling.ShufflingUtil.create;
-import static nxt.http.shuffling.ShufflingUtil.defaultShufflingAmount;
-import static nxt.http.shuffling.ShufflingUtil.getShuffling;
-import static nxt.http.shuffling.ShufflingUtil.getShufflingParticipants;
-import static nxt.http.shuffling.ShufflingUtil.process;
-import static nxt.http.shuffling.ShufflingUtil.register;
-import static nxt.http.shuffling.ShufflingUtil.verify;
+import static rcc.http.shuffling.ShufflingUtil.ALICE_RECIPIENT;
+import static rcc.http.shuffling.ShufflingUtil.BOB_RECIPIENT;
+import static rcc.http.shuffling.ShufflingUtil.CHUCK_RECIPIENT;
+import static rcc.http.shuffling.ShufflingUtil.DAVE_RECIPIENT;
+import static rcc.http.shuffling.ShufflingUtil.broadcast;
+import static rcc.http.shuffling.ShufflingUtil.cancel;
+import static rcc.http.shuffling.ShufflingUtil.create;
+import static rcc.http.shuffling.ShufflingUtil.defaultShufflingAmount;
+import static rcc.http.shuffling.ShufflingUtil.getShuffling;
+import static rcc.http.shuffling.ShufflingUtil.getShufflingParticipants;
+import static rcc.http.shuffling.ShufflingUtil.process;
+import static rcc.http.shuffling.ShufflingUtil.register;
+import static rcc.http.shuffling.ShufflingUtil.verify;
 
 
 public class TestShuffling extends BlockchainTest {
@@ -55,14 +55,14 @@ public class TestShuffling extends BlockchainTest {
         register(shufflingFullHash, DAVE);
         generateBlock();
 
-        Assert.assertEquals(-Constants.ONE_NXT, ALICE.getBalanceDiff());
-        Assert.assertEquals(-(defaultShufflingAmount + Constants.ONE_NXT), ALICE.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-Constants.ONE_NXT, BOB.getBalanceDiff());
-        Assert.assertEquals(-(defaultShufflingAmount + Constants.ONE_NXT), BOB.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-Constants.ONE_NXT, CHUCK.getBalanceDiff());
-        Assert.assertEquals(-(defaultShufflingAmount + Constants.ONE_NXT), CHUCK.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-Constants.ONE_NXT, DAVE.getBalanceDiff());
-        Assert.assertEquals(-(defaultShufflingAmount + Constants.ONE_NXT), DAVE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-Constants.ONE_rcc, ALICE.getBalanceDiff());
+        Assert.assertEquals(-(defaultShufflingAmount + Constants.ONE_rcc), ALICE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-Constants.ONE_rcc, BOB.getBalanceDiff());
+        Assert.assertEquals(-(defaultShufflingAmount + Constants.ONE_rcc), BOB.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-Constants.ONE_rcc, CHUCK.getBalanceDiff());
+        Assert.assertEquals(-(defaultShufflingAmount + Constants.ONE_rcc), CHUCK.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-Constants.ONE_rcc, DAVE.getBalanceDiff());
+        Assert.assertEquals(-(defaultShufflingAmount + Constants.ONE_rcc), DAVE.getUnconfirmedBalanceDiff());
 
         JSONObject getShufflingResponse = getShuffling(shufflingId);
         Assert.assertEquals((long) Shuffling.Stage.PROCESSING.getCode(), getShufflingResponse.get("stage"));
@@ -95,14 +95,14 @@ public class TestShuffling extends BlockchainTest {
         shufflingAssignee = (String) getShufflingResponse.get("assignee");
         Assert.assertNull(shufflingAssignee);
 
-        Assert.assertEquals(-(defaultShufflingAmount + 12 * Constants.ONE_NXT), ALICE.getBalanceDiff());
-        Assert.assertEquals(-(defaultShufflingAmount + 12 * Constants.ONE_NXT), ALICE.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-(defaultShufflingAmount + 12 * Constants.ONE_NXT), BOB.getBalanceDiff());
-        Assert.assertEquals(-(defaultShufflingAmount + 12 * Constants.ONE_NXT), BOB.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-(defaultShufflingAmount + 12 * Constants.ONE_NXT), CHUCK.getBalanceDiff());
-        Assert.assertEquals(-(defaultShufflingAmount + 12 * Constants.ONE_NXT), CHUCK.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-(defaultShufflingAmount + 12 * Constants.ONE_NXT), DAVE.getBalanceDiff());
-        Assert.assertEquals(-(defaultShufflingAmount + 12 * Constants.ONE_NXT), DAVE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-(defaultShufflingAmount + 12 * Constants.ONE_rcc), ALICE.getBalanceDiff());
+        Assert.assertEquals(-(defaultShufflingAmount + 12 * Constants.ONE_rcc), ALICE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-(defaultShufflingAmount + 12 * Constants.ONE_rcc), BOB.getBalanceDiff());
+        Assert.assertEquals(-(defaultShufflingAmount + 12 * Constants.ONE_rcc), BOB.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-(defaultShufflingAmount + 12 * Constants.ONE_rcc), CHUCK.getBalanceDiff());
+        Assert.assertEquals(-(defaultShufflingAmount + 12 * Constants.ONE_rcc), CHUCK.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-(defaultShufflingAmount + 12 * Constants.ONE_rcc), DAVE.getBalanceDiff());
+        Assert.assertEquals(-(defaultShufflingAmount + 12 * Constants.ONE_rcc), DAVE.getUnconfirmedBalanceDiff());
 
         Assert.assertEquals(defaultShufflingAmount, ALICE_RECIPIENT.getBalanceDiff());
         Assert.assertEquals(defaultShufflingAmount, ALICE_RECIPIENT.getUnconfirmedBalanceDiff());
@@ -113,8 +113,8 @@ public class TestShuffling extends BlockchainTest {
         Assert.assertEquals(defaultShufflingAmount, DAVE_RECIPIENT.getBalanceDiff());
         Assert.assertEquals(defaultShufflingAmount, DAVE_RECIPIENT.getUnconfirmedBalanceDiff());
 
-        Assert.assertEquals(48 * Constants.ONE_NXT, FORGY.getBalanceDiff());
-        Assert.assertEquals(48 * Constants.ONE_NXT, FORGY.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(48 * Constants.ONE_rcc, FORGY.getBalanceDiff());
+        Assert.assertEquals(48 * Constants.ONE_rcc, FORGY.getUnconfirmedBalanceDiff());
 
     }
 
@@ -138,16 +138,16 @@ public class TestShuffling extends BlockchainTest {
         String shufflingAssignee = (String) getShufflingResponse.get("assignee");
         Assert.assertNull(shufflingAssignee);
 
-        Assert.assertEquals(-Constants.ONE_NXT, ALICE.getBalanceDiff());
-        Assert.assertEquals(-Constants.ONE_NXT, ALICE.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-Constants.ONE_NXT, BOB.getBalanceDiff());
-        Assert.assertEquals(-Constants.ONE_NXT, BOB.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-Constants.ONE_rcc, ALICE.getBalanceDiff());
+        Assert.assertEquals(-Constants.ONE_rcc, ALICE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-Constants.ONE_rcc, BOB.getBalanceDiff());
+        Assert.assertEquals(-Constants.ONE_rcc, BOB.getUnconfirmedBalanceDiff());
 
         Assert.assertNull(ALICE_RECIPIENT.getAccount());
         Assert.assertNull(BOB_RECIPIENT.getAccount());
 
-        Assert.assertEquals(2 * Constants.ONE_NXT, FORGY.getBalanceDiff());
-        Assert.assertEquals(2 * Constants.ONE_NXT, FORGY.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(2 * Constants.ONE_rcc, FORGY.getBalanceDiff());
+        Assert.assertEquals(2 * Constants.ONE_rcc, FORGY.getUnconfirmedBalanceDiff());
 
     }
 
@@ -175,22 +175,22 @@ public class TestShuffling extends BlockchainTest {
         String shufflingAssignee = (String) getShufflingResponse.get("assignee");
         Assert.assertEquals(ALICE.getStrId(), shufflingAssignee);
 
-        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + Constants.ONE_NXT), ALICE.getBalanceDiff());
-        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + Constants.ONE_NXT), ALICE.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-Constants.ONE_NXT, BOB.getBalanceDiff());
-        Assert.assertEquals(-Constants.ONE_NXT, BOB.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-Constants.ONE_NXT, CHUCK.getBalanceDiff());
-        Assert.assertEquals(-Constants.ONE_NXT, CHUCK.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-Constants.ONE_NXT, DAVE.getBalanceDiff());
-        Assert.assertEquals(-Constants.ONE_NXT, DAVE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + Constants.ONE_rcc), ALICE.getBalanceDiff());
+        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + Constants.ONE_rcc), ALICE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-Constants.ONE_rcc, BOB.getBalanceDiff());
+        Assert.assertEquals(-Constants.ONE_rcc, BOB.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-Constants.ONE_rcc, CHUCK.getBalanceDiff());
+        Assert.assertEquals(-Constants.ONE_rcc, CHUCK.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-Constants.ONE_rcc, DAVE.getBalanceDiff());
+        Assert.assertEquals(-Constants.ONE_rcc, DAVE.getUnconfirmedBalanceDiff());
 
         Assert.assertNull(ALICE_RECIPIENT.getAccount());
         Assert.assertNull(BOB_RECIPIENT.getAccount());
         Assert.assertNull(CHUCK_RECIPIENT.getAccount());
         Assert.assertNull(DAVE_RECIPIENT.getAccount());
 
-        Assert.assertEquals(4 * Constants.ONE_NXT + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getBalanceDiff());
-        Assert.assertEquals(4 * Constants.ONE_NXT + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(4 * Constants.ONE_rcc + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getBalanceDiff());
+        Assert.assertEquals(4 * Constants.ONE_rcc + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getUnconfirmedBalanceDiff());
 
     }
 
@@ -207,7 +207,7 @@ public class TestShuffling extends BlockchainTest {
         for (int i = 0; i < 10; i++) {
             generateBlock();
         }
-        Nxt.getTransactionProcessor().clearUnconfirmedTransactions();
+        rcc.getTransactionProcessor().clearUnconfirmedTransactions();
         JSONObject getShufflingResponse = getShuffling(shufflingId);
         Assert.assertEquals((long) Shuffling.Stage.CANCELLED.getCode(), getShufflingResponse.get("stage"));
 
@@ -217,16 +217,16 @@ public class TestShuffling extends BlockchainTest {
         String shufflingAssignee = (String) getShufflingResponse.get("assignee");
         Assert.assertEquals(ALICE.getStrId(), shufflingAssignee);
 
-        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + Constants.ONE_NXT), ALICE.getBalanceDiff());
-        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + Constants.ONE_NXT), ALICE.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-Constants.ONE_NXT, BOB.getBalanceDiff());
-        Assert.assertEquals(-Constants.ONE_NXT, BOB.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-Constants.ONE_NXT, CHUCK.getBalanceDiff());
-        Assert.assertEquals(-Constants.ONE_NXT, CHUCK.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + Constants.ONE_rcc), ALICE.getBalanceDiff());
+        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + Constants.ONE_rcc), ALICE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-Constants.ONE_rcc, BOB.getBalanceDiff());
+        Assert.assertEquals(-Constants.ONE_rcc, BOB.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-Constants.ONE_rcc, CHUCK.getBalanceDiff());
+        Assert.assertEquals(-Constants.ONE_rcc, CHUCK.getUnconfirmedBalanceDiff());
         Assert.assertEquals(0, DAVE.getBalanceDiff());
         Assert.assertEquals(0, DAVE.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(3 * Constants.ONE_NXT + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getBalanceDiff());
-        Assert.assertEquals(3 * Constants.ONE_NXT + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(3 * Constants.ONE_rcc + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getBalanceDiff());
+        Assert.assertEquals(3 * Constants.ONE_rcc + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getUnconfirmedBalanceDiff());
 
         Assert.assertNull(ALICE_RECIPIENT.getAccount());
         Assert.assertNull(BOB_RECIPIENT.getAccount());
@@ -271,22 +271,22 @@ public class TestShuffling extends BlockchainTest {
         shufflingAssignee = (String) getShufflingResponse.get("assignee");
         Assert.assertEquals(Long.toUnsignedString(DAVE.getId()), shufflingAssignee);
 
-        Assert.assertEquals(-11 * Constants.ONE_NXT, ALICE.getBalanceDiff());
-        Assert.assertEquals(-11 * Constants.ONE_NXT, ALICE.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-11 * Constants.ONE_NXT, BOB.getBalanceDiff());
-        Assert.assertEquals(-11 * Constants.ONE_NXT, BOB.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-11 * Constants.ONE_NXT, CHUCK.getBalanceDiff());
-        Assert.assertEquals(-11 * Constants.ONE_NXT, CHUCK.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + Constants.ONE_NXT), DAVE.getBalanceDiff());
-        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + Constants.ONE_NXT), DAVE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-11 * Constants.ONE_rcc, ALICE.getBalanceDiff());
+        Assert.assertEquals(-11 * Constants.ONE_rcc, ALICE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-11 * Constants.ONE_rcc, BOB.getBalanceDiff());
+        Assert.assertEquals(-11 * Constants.ONE_rcc, BOB.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-11 * Constants.ONE_rcc, CHUCK.getBalanceDiff());
+        Assert.assertEquals(-11 * Constants.ONE_rcc, CHUCK.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + Constants.ONE_rcc), DAVE.getBalanceDiff());
+        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + Constants.ONE_rcc), DAVE.getUnconfirmedBalanceDiff());
 
         Assert.assertNull(ALICE_RECIPIENT.getAccount());
         Assert.assertNull(BOB_RECIPIENT.getAccount());
         Assert.assertNull(CHUCK_RECIPIENT.getAccount());
         Assert.assertNull(DAVE_RECIPIENT.getAccount());
 
-        Assert.assertEquals(34 * Constants.ONE_NXT + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getBalanceDiff());
-        Assert.assertEquals(34 * Constants.ONE_NXT + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(34 * Constants.ONE_rcc + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getBalanceDiff());
+        Assert.assertEquals(34 * Constants.ONE_rcc + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getUnconfirmedBalanceDiff());
 
     }
 
@@ -329,14 +329,14 @@ public class TestShuffling extends BlockchainTest {
         shufflingAssignee = (String) getShufflingResponse.get("assignee");
         Assert.assertEquals(Long.toUnsignedString(ALICE.getId()), shufflingAssignee);
 
-        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 11 * Constants.ONE_NXT), ALICE.getBalanceDiff());
-        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 11 * Constants.ONE_NXT), ALICE.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-11 * Constants.ONE_NXT, BOB.getBalanceDiff());
-        Assert.assertEquals(-11 * Constants.ONE_NXT, BOB.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-11 * Constants.ONE_NXT, CHUCK.getBalanceDiff());
-        Assert.assertEquals(-11 * Constants.ONE_NXT, CHUCK.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-12 * Constants.ONE_NXT, DAVE.getBalanceDiff());
-        Assert.assertEquals(-12 * Constants.ONE_NXT, DAVE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 11 * Constants.ONE_rcc), ALICE.getBalanceDiff());
+        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 11 * Constants.ONE_rcc), ALICE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-11 * Constants.ONE_rcc, BOB.getBalanceDiff());
+        Assert.assertEquals(-11 * Constants.ONE_rcc, BOB.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-11 * Constants.ONE_rcc, CHUCK.getBalanceDiff());
+        Assert.assertEquals(-11 * Constants.ONE_rcc, CHUCK.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-12 * Constants.ONE_rcc, DAVE.getBalanceDiff());
+        Assert.assertEquals(-12 * Constants.ONE_rcc, DAVE.getUnconfirmedBalanceDiff());
 
         Assert.assertNotNull(ALICE_RECIPIENT.getAccount());
         Assert.assertNotNull(BOB_RECIPIENT.getAccount());
@@ -352,8 +352,8 @@ public class TestShuffling extends BlockchainTest {
         Assert.assertEquals(0, DAVE_RECIPIENT.getBalanceDiff());
         Assert.assertEquals(0, DAVE_RECIPIENT.getUnconfirmedBalanceDiff());
 
-        Assert.assertEquals(45 * Constants.ONE_NXT + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getBalanceDiff());
-        Assert.assertEquals(45 * Constants.ONE_NXT + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(45 * Constants.ONE_rcc + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getBalanceDiff());
+        Assert.assertEquals(45 * Constants.ONE_rcc + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getUnconfirmedBalanceDiff());
 
     }
 
@@ -401,14 +401,14 @@ public class TestShuffling extends BlockchainTest {
         shufflingAssignee = (String) getShufflingResponse.get("assignee");
         Assert.assertEquals(Long.toUnsignedString(CHUCK.getId()), shufflingAssignee);
 
-        Assert.assertEquals(-12 * Constants.ONE_NXT, ALICE.getBalanceDiff());
-        Assert.assertEquals(-12 * Constants.ONE_NXT, ALICE.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-12 * Constants.ONE_NXT, BOB.getBalanceDiff());
-        Assert.assertEquals(-12 * Constants.ONE_NXT, BOB.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 11 * Constants.ONE_NXT), CHUCK.getBalanceDiff());
-        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 11 * Constants.ONE_NXT), CHUCK.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-12 * Constants.ONE_NXT, DAVE.getBalanceDiff());
-        Assert.assertEquals(-12 * Constants.ONE_NXT, DAVE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-12 * Constants.ONE_rcc, ALICE.getBalanceDiff());
+        Assert.assertEquals(-12 * Constants.ONE_rcc, ALICE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-12 * Constants.ONE_rcc, BOB.getBalanceDiff());
+        Assert.assertEquals(-12 * Constants.ONE_rcc, BOB.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 11 * Constants.ONE_rcc), CHUCK.getBalanceDiff());
+        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 11 * Constants.ONE_rcc), CHUCK.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-12 * Constants.ONE_rcc, DAVE.getBalanceDiff());
+        Assert.assertEquals(-12 * Constants.ONE_rcc, DAVE.getUnconfirmedBalanceDiff());
 
         Assert.assertNotNull(ALICE_RECIPIENT.getAccount());
         Assert.assertNotNull(BOB_RECIPIENT.getAccount());
@@ -424,8 +424,8 @@ public class TestShuffling extends BlockchainTest {
         Assert.assertEquals(0, DAVE_RECIPIENT.getBalanceDiff());
         Assert.assertEquals(0, DAVE_RECIPIENT.getUnconfirmedBalanceDiff());
 
-        Assert.assertEquals(47 * Constants.ONE_NXT + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getBalanceDiff());
-        Assert.assertEquals(47 * Constants.ONE_NXT + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(47 * Constants.ONE_rcc + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getBalanceDiff());
+        Assert.assertEquals(47 * Constants.ONE_rcc + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getUnconfirmedBalanceDiff());
 
     }
 
@@ -481,14 +481,14 @@ public class TestShuffling extends BlockchainTest {
         shufflingAssignee = (String) getShufflingResponse.get("assignee");
         Assert.assertEquals(Long.toUnsignedString(CHUCK.getId()), shufflingAssignee);
 
-        Assert.assertEquals(-22 * Constants.ONE_NXT, ALICE.getBalanceDiff());
-        Assert.assertEquals(-22 * Constants.ONE_NXT, ALICE.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-22 * Constants.ONE_NXT, BOB.getBalanceDiff());
-        Assert.assertEquals(-22 * Constants.ONE_NXT, BOB.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 21 * Constants.ONE_NXT), CHUCK.getBalanceDiff());
-        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 21 * Constants.ONE_NXT), CHUCK.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-12 * Constants.ONE_NXT, DAVE.getBalanceDiff());
-        Assert.assertEquals(-12 * Constants.ONE_NXT, DAVE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-22 * Constants.ONE_rcc, ALICE.getBalanceDiff());
+        Assert.assertEquals(-22 * Constants.ONE_rcc, ALICE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-22 * Constants.ONE_rcc, BOB.getBalanceDiff());
+        Assert.assertEquals(-22 * Constants.ONE_rcc, BOB.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 21 * Constants.ONE_rcc), CHUCK.getBalanceDiff());
+        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 21 * Constants.ONE_rcc), CHUCK.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-12 * Constants.ONE_rcc, DAVE.getBalanceDiff());
+        Assert.assertEquals(-12 * Constants.ONE_rcc, DAVE.getUnconfirmedBalanceDiff());
 
         Assert.assertNotNull(ALICE_RECIPIENT.getAccount());
         Assert.assertNotNull(BOB_RECIPIENT.getAccount());
@@ -504,8 +504,8 @@ public class TestShuffling extends BlockchainTest {
         Assert.assertEquals(0, DAVE_RECIPIENT.getBalanceDiff());
         Assert.assertEquals(0, DAVE_RECIPIENT.getUnconfirmedBalanceDiff());
 
-        Assert.assertEquals(77 * Constants.ONE_NXT + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getBalanceDiff());
-        Assert.assertEquals(77 * Constants.ONE_NXT + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(77 * Constants.ONE_rcc + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getBalanceDiff());
+        Assert.assertEquals(77 * Constants.ONE_rcc + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getUnconfirmedBalanceDiff());
 
     }
 
@@ -566,14 +566,14 @@ public class TestShuffling extends BlockchainTest {
         shufflingAssignee = (String) getShufflingResponse.get("assignee");
         Assert.assertEquals(Long.toUnsignedString(CHUCK.getId()), shufflingAssignee);
 
-        Assert.assertEquals(-22 * Constants.ONE_NXT, ALICE.getBalanceDiff());
-        Assert.assertEquals(-22 * Constants.ONE_NXT, ALICE.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-22 * Constants.ONE_NXT, BOB.getBalanceDiff());
-        Assert.assertEquals(-22 * Constants.ONE_NXT, BOB.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 21 * Constants.ONE_NXT), CHUCK.getBalanceDiff());
-        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 21 * Constants.ONE_NXT), CHUCK.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-12 * Constants.ONE_NXT, DAVE.getBalanceDiff());
-        Assert.assertEquals(-12 * Constants.ONE_NXT, DAVE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-22 * Constants.ONE_rcc, ALICE.getBalanceDiff());
+        Assert.assertEquals(-22 * Constants.ONE_rcc, ALICE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-22 * Constants.ONE_rcc, BOB.getBalanceDiff());
+        Assert.assertEquals(-22 * Constants.ONE_rcc, BOB.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 21 * Constants.ONE_rcc), CHUCK.getBalanceDiff());
+        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 21 * Constants.ONE_rcc), CHUCK.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-12 * Constants.ONE_rcc, DAVE.getBalanceDiff());
+        Assert.assertEquals(-12 * Constants.ONE_rcc, DAVE.getUnconfirmedBalanceDiff());
 
         Assert.assertNotNull(ALICE_RECIPIENT.getAccount());
         Assert.assertNotNull(BOB_RECIPIENT.getAccount());
@@ -589,8 +589,8 @@ public class TestShuffling extends BlockchainTest {
         Assert.assertEquals(0, DAVE_RECIPIENT.getBalanceDiff());
         Assert.assertEquals(0, DAVE_RECIPIENT.getUnconfirmedBalanceDiff());
 
-        Assert.assertEquals(77 * Constants.ONE_NXT + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getBalanceDiff());
-        Assert.assertEquals(77 * Constants.ONE_NXT + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(77 * Constants.ONE_rcc + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getBalanceDiff());
+        Assert.assertEquals(77 * Constants.ONE_rcc + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getUnconfirmedBalanceDiff());
 
     }
 
@@ -652,14 +652,14 @@ public class TestShuffling extends BlockchainTest {
         shufflingAssignee = (String) getShufflingResponse.get("assignee");
         Assert.assertEquals(Long.toUnsignedString(ALICE.getId()), shufflingAssignee);
 
-        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 22 * Constants.ONE_NXT), ALICE.getBalanceDiff());
-        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 22 * Constants.ONE_NXT), ALICE.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-22 * Constants.ONE_NXT, BOB.getBalanceDiff());
-        Assert.assertEquals(-22 * Constants.ONE_NXT, BOB.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-21 * Constants.ONE_NXT, CHUCK.getBalanceDiff());
-        Assert.assertEquals(-21 * Constants.ONE_NXT, CHUCK.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-12 * Constants.ONE_NXT, DAVE.getBalanceDiff());
-        Assert.assertEquals(-12 * Constants.ONE_NXT, DAVE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 22 * Constants.ONE_rcc), ALICE.getBalanceDiff());
+        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 22 * Constants.ONE_rcc), ALICE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-22 * Constants.ONE_rcc, BOB.getBalanceDiff());
+        Assert.assertEquals(-22 * Constants.ONE_rcc, BOB.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-21 * Constants.ONE_rcc, CHUCK.getBalanceDiff());
+        Assert.assertEquals(-21 * Constants.ONE_rcc, CHUCK.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-12 * Constants.ONE_rcc, DAVE.getBalanceDiff());
+        Assert.assertEquals(-12 * Constants.ONE_rcc, DAVE.getUnconfirmedBalanceDiff());
 
         Assert.assertNotNull(ALICE_RECIPIENT.getAccount());
         Assert.assertNotNull(BOB_RECIPIENT.getAccount());
@@ -675,8 +675,8 @@ public class TestShuffling extends BlockchainTest {
         Assert.assertEquals(0, DAVE_RECIPIENT.getBalanceDiff());
         Assert.assertEquals(0, DAVE_RECIPIENT.getUnconfirmedBalanceDiff());
 
-        Assert.assertEquals(77 * Constants.ONE_NXT + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getBalanceDiff());
-        Assert.assertEquals(77 * Constants.ONE_NXT + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(77 * Constants.ONE_rcc + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getBalanceDiff());
+        Assert.assertEquals(77 * Constants.ONE_rcc + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getUnconfirmedBalanceDiff());
 
     }
 
@@ -738,14 +738,14 @@ public class TestShuffling extends BlockchainTest {
         shufflingAssignee = (String) getShufflingResponse.get("assignee");
         Assert.assertEquals(Long.toUnsignedString(ALICE.getId()), shufflingAssignee);
 
-        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 22 * Constants.ONE_NXT), ALICE.getBalanceDiff());
-        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 22 * Constants.ONE_NXT), ALICE.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-22 * Constants.ONE_NXT, BOB.getBalanceDiff());
-        Assert.assertEquals(-22 * Constants.ONE_NXT, BOB.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-21 * Constants.ONE_NXT, CHUCK.getBalanceDiff());
-        Assert.assertEquals(-21 * Constants.ONE_NXT, CHUCK.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-12 * Constants.ONE_NXT, DAVE.getBalanceDiff());
-        Assert.assertEquals(-12 * Constants.ONE_NXT, DAVE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 22 * Constants.ONE_rcc), ALICE.getBalanceDiff());
+        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 22 * Constants.ONE_rcc), ALICE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-22 * Constants.ONE_rcc, BOB.getBalanceDiff());
+        Assert.assertEquals(-22 * Constants.ONE_rcc, BOB.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-21 * Constants.ONE_rcc, CHUCK.getBalanceDiff());
+        Assert.assertEquals(-21 * Constants.ONE_rcc, CHUCK.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-12 * Constants.ONE_rcc, DAVE.getBalanceDiff());
+        Assert.assertEquals(-12 * Constants.ONE_rcc, DAVE.getUnconfirmedBalanceDiff());
 
         Assert.assertNotNull(ALICE_RECIPIENT.getAccount());
         Assert.assertNotNull(BOB_RECIPIENT.getAccount());
@@ -761,8 +761,8 @@ public class TestShuffling extends BlockchainTest {
         Assert.assertEquals(0, DAVE_RECIPIENT.getBalanceDiff());
         Assert.assertEquals(0, DAVE_RECIPIENT.getUnconfirmedBalanceDiff());
 
-        Assert.assertEquals(77 * Constants.ONE_NXT + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getBalanceDiff());
-        Assert.assertEquals(77 * Constants.ONE_NXT + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(77 * Constants.ONE_rcc + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getBalanceDiff());
+        Assert.assertEquals(77 * Constants.ONE_rcc + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getUnconfirmedBalanceDiff());
 
     }
 
@@ -811,22 +811,22 @@ public class TestShuffling extends BlockchainTest {
         shufflingAssignee = (String) getShufflingResponse.get("assignee");
         Assert.assertEquals(Long.toUnsignedString(ALICE.getId()), shufflingAssignee);
 
-        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 11 * Constants.ONE_NXT), ALICE.getBalanceDiff());
-        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 11 * Constants.ONE_NXT), ALICE.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-11 * Constants.ONE_NXT, BOB.getBalanceDiff());
-        Assert.assertEquals(-11 * Constants.ONE_NXT, BOB.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-1 * Constants.ONE_NXT, CHUCK.getBalanceDiff());
-        Assert.assertEquals(-1 * Constants.ONE_NXT, CHUCK.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-1 * Constants.ONE_NXT, DAVE.getBalanceDiff());
-        Assert.assertEquals(-1 * Constants.ONE_NXT, DAVE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 11 * Constants.ONE_rcc), ALICE.getBalanceDiff());
+        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 11 * Constants.ONE_rcc), ALICE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-11 * Constants.ONE_rcc, BOB.getBalanceDiff());
+        Assert.assertEquals(-11 * Constants.ONE_rcc, BOB.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-1 * Constants.ONE_rcc, CHUCK.getBalanceDiff());
+        Assert.assertEquals(-1 * Constants.ONE_rcc, CHUCK.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-1 * Constants.ONE_rcc, DAVE.getBalanceDiff());
+        Assert.assertEquals(-1 * Constants.ONE_rcc, DAVE.getUnconfirmedBalanceDiff());
 
         Assert.assertNull(ALICE_RECIPIENT.getAccount());
         Assert.assertNull(BOB_RECIPIENT.getAccount());
         Assert.assertNull(CHUCK_RECIPIENT.getAccount());
         Assert.assertNull(DAVE_RECIPIENT.getAccount());
 
-        Assert.assertEquals(24 * Constants.ONE_NXT + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getBalanceDiff());
-        Assert.assertEquals(24 * Constants.ONE_NXT + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(24 * Constants.ONE_rcc + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getBalanceDiff());
+        Assert.assertEquals(24 * Constants.ONE_rcc + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getUnconfirmedBalanceDiff());
 
     }
 
@@ -882,22 +882,22 @@ public class TestShuffling extends BlockchainTest {
         shufflingAssignee = (String) getShufflingResponse.get("assignee");
         Assert.assertEquals(Long.toUnsignedString(BOB.getId()), shufflingAssignee);
 
-        Assert.assertEquals(-21 * Constants.ONE_NXT, ALICE.getBalanceDiff());
-        Assert.assertEquals(-21 * Constants.ONE_NXT, ALICE.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + (bobCancelFailed ? 11 : 21) * Constants.ONE_NXT), BOB.getBalanceDiff());
-        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + (bobCancelFailed ? 11 : 21) * Constants.ONE_NXT), BOB.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-11 * Constants.ONE_NXT, CHUCK.getBalanceDiff());
-        Assert.assertEquals(-11 * Constants.ONE_NXT, CHUCK.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-1 * Constants.ONE_NXT, DAVE.getBalanceDiff());
-        Assert.assertEquals(-1 * Constants.ONE_NXT, DAVE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-21 * Constants.ONE_rcc, ALICE.getBalanceDiff());
+        Assert.assertEquals(-21 * Constants.ONE_rcc, ALICE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + (bobCancelFailed ? 11 : 21) * Constants.ONE_rcc), BOB.getBalanceDiff());
+        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + (bobCancelFailed ? 11 : 21) * Constants.ONE_rcc), BOB.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-11 * Constants.ONE_rcc, CHUCK.getBalanceDiff());
+        Assert.assertEquals(-11 * Constants.ONE_rcc, CHUCK.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-1 * Constants.ONE_rcc, DAVE.getBalanceDiff());
+        Assert.assertEquals(-1 * Constants.ONE_rcc, DAVE.getUnconfirmedBalanceDiff());
 
         Assert.assertNull(ALICE_RECIPIENT.getAccount());
         Assert.assertNull(BOB_RECIPIENT.getAccount());
         Assert.assertNull(CHUCK_RECIPIENT.getAccount());
         Assert.assertNull(DAVE_RECIPIENT.getAccount());
 
-        Assert.assertEquals((bobCancelFailed ? 44 : 54) * Constants.ONE_NXT + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getBalanceDiff());
-        Assert.assertEquals((bobCancelFailed ? 44 : 54) * Constants.ONE_NXT + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getUnconfirmedBalanceDiff());
+        Assert.assertEquals((bobCancelFailed ? 44 : 54) * Constants.ONE_rcc + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getBalanceDiff());
+        Assert.assertEquals((bobCancelFailed ? 44 : 54) * Constants.ONE_rcc + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getUnconfirmedBalanceDiff());
 
     }
 
@@ -956,22 +956,22 @@ public class TestShuffling extends BlockchainTest {
         shufflingAssignee = (String) getShufflingResponse.get("assignee");
         Assert.assertEquals(Long.toUnsignedString(CHUCK.getId()), shufflingAssignee);
 
-        Assert.assertEquals(-21 * Constants.ONE_NXT, ALICE.getBalanceDiff());
-        Assert.assertEquals(-21 * Constants.ONE_NXT, ALICE.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-21 * Constants.ONE_NXT, BOB.getBalanceDiff());
-        Assert.assertEquals(-21 * Constants.ONE_NXT, BOB.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + (chuckCancelFailed ? 11 : 21) * Constants.ONE_NXT), CHUCK.getBalanceDiff());
-        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + (chuckCancelFailed ? 11 : 21) * Constants.ONE_NXT), CHUCK.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-12 * Constants.ONE_NXT, DAVE.getBalanceDiff());
-        Assert.assertEquals(-12 * Constants.ONE_NXT, DAVE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-21 * Constants.ONE_rcc, ALICE.getBalanceDiff());
+        Assert.assertEquals(-21 * Constants.ONE_rcc, ALICE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-21 * Constants.ONE_rcc, BOB.getBalanceDiff());
+        Assert.assertEquals(-21 * Constants.ONE_rcc, BOB.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + (chuckCancelFailed ? 11 : 21) * Constants.ONE_rcc), CHUCK.getBalanceDiff());
+        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + (chuckCancelFailed ? 11 : 21) * Constants.ONE_rcc), CHUCK.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-12 * Constants.ONE_rcc, DAVE.getBalanceDiff());
+        Assert.assertEquals(-12 * Constants.ONE_rcc, DAVE.getUnconfirmedBalanceDiff());
 
         Assert.assertNull(ALICE_RECIPIENT.getAccount());
         Assert.assertNull(BOB_RECIPIENT.getAccount());
         Assert.assertNull(CHUCK_RECIPIENT.getAccount());
         Assert.assertNull(DAVE_RECIPIENT.getAccount());
 
-        Assert.assertEquals((chuckCancelFailed ? 65 : 75) * Constants.ONE_NXT + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getBalanceDiff());
-        Assert.assertEquals((chuckCancelFailed ? 65 : 75) * Constants.ONE_NXT + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getUnconfirmedBalanceDiff());
+        Assert.assertEquals((chuckCancelFailed ? 65 : 75) * Constants.ONE_rcc + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getBalanceDiff());
+        Assert.assertEquals((chuckCancelFailed ? 65 : 75) * Constants.ONE_rcc + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getUnconfirmedBalanceDiff());
 
     }
 
@@ -1033,14 +1033,14 @@ public class TestShuffling extends BlockchainTest {
         shufflingAssignee = (String) getShufflingResponse.get("assignee");
         Assert.assertEquals(Long.toUnsignedString(DAVE.getId()), shufflingAssignee);
 
-        Assert.assertEquals(-21 * Constants.ONE_NXT, ALICE.getBalanceDiff());
-        Assert.assertEquals(-21 * Constants.ONE_NXT, ALICE.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-21 * Constants.ONE_NXT, BOB.getBalanceDiff());
-        Assert.assertEquals(-21 * Constants.ONE_NXT, BOB.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-21 * Constants.ONE_NXT, CHUCK.getBalanceDiff());
-        Assert.assertEquals(-21 * Constants.ONE_NXT, CHUCK.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 12 * Constants.ONE_NXT), DAVE.getBalanceDiff());
-        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 12 * Constants.ONE_NXT), DAVE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-21 * Constants.ONE_rcc, ALICE.getBalanceDiff());
+        Assert.assertEquals(-21 * Constants.ONE_rcc, ALICE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-21 * Constants.ONE_rcc, BOB.getBalanceDiff());
+        Assert.assertEquals(-21 * Constants.ONE_rcc, BOB.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-21 * Constants.ONE_rcc, CHUCK.getBalanceDiff());
+        Assert.assertEquals(-21 * Constants.ONE_rcc, CHUCK.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 12 * Constants.ONE_rcc), DAVE.getBalanceDiff());
+        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 12 * Constants.ONE_rcc), DAVE.getUnconfirmedBalanceDiff());
 
         Assert.assertTrue(ALICE_RECIPIENT.getAccount() == null || ALICE_RECIPIENT.getBalanceDiff() == 0);
         Assert.assertTrue(ALICE_RECIPIENT.getAccount() == null || ALICE_RECIPIENT.getUnconfirmedBalanceDiff() == 0);
@@ -1051,8 +1051,8 @@ public class TestShuffling extends BlockchainTest {
         Assert.assertTrue(DAVE_RECIPIENT.getAccount() == null || DAVE_RECIPIENT.getBalanceDiff() == 0);
         Assert.assertTrue(DAVE_RECIPIENT.getAccount() == null || DAVE_RECIPIENT.getUnconfirmedBalanceDiff() == 0);
 
-        Assert.assertEquals(75 * Constants.ONE_NXT + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getBalanceDiff());
-        Assert.assertEquals(75 * Constants.ONE_NXT + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(75 * Constants.ONE_rcc + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getBalanceDiff());
+        Assert.assertEquals(75 * Constants.ONE_rcc + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getUnconfirmedBalanceDiff());
 
     }
 
@@ -1100,22 +1100,22 @@ public class TestShuffling extends BlockchainTest {
         shufflingAssignee = (String) getShufflingResponse.get("assignee");
         Assert.assertEquals(Long.toUnsignedString(DAVE.getId()), shufflingAssignee);
 
-        Assert.assertEquals(-11 * Constants.ONE_NXT, ALICE.getBalanceDiff());
-        Assert.assertEquals(-11 * Constants.ONE_NXT, ALICE.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-11 * Constants.ONE_NXT, BOB.getBalanceDiff());
-        Assert.assertEquals(-11 * Constants.ONE_NXT, BOB.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-11 * Constants.ONE_NXT, CHUCK.getBalanceDiff());
-        Assert.assertEquals(-11 * Constants.ONE_NXT, CHUCK.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + Constants.ONE_NXT), DAVE.getBalanceDiff());
-        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + Constants.ONE_NXT), DAVE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-11 * Constants.ONE_rcc, ALICE.getBalanceDiff());
+        Assert.assertEquals(-11 * Constants.ONE_rcc, ALICE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-11 * Constants.ONE_rcc, BOB.getBalanceDiff());
+        Assert.assertEquals(-11 * Constants.ONE_rcc, BOB.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-11 * Constants.ONE_rcc, CHUCK.getBalanceDiff());
+        Assert.assertEquals(-11 * Constants.ONE_rcc, CHUCK.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + Constants.ONE_rcc), DAVE.getBalanceDiff());
+        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + Constants.ONE_rcc), DAVE.getUnconfirmedBalanceDiff());
 
         Assert.assertNull(ALICE_RECIPIENT.getAccount());
         Assert.assertNull(BOB_RECIPIENT.getAccount());
         Assert.assertNull(CHUCK_RECIPIENT.getAccount());
         Assert.assertNull(DAVE_RECIPIENT.getAccount());
 
-        Assert.assertEquals(34 * Constants.ONE_NXT + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getBalanceDiff());
-        Assert.assertEquals(34 * Constants.ONE_NXT + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(34 * Constants.ONE_rcc + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getBalanceDiff());
+        Assert.assertEquals(34 * Constants.ONE_rcc + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getUnconfirmedBalanceDiff());
 
     }
 
@@ -1161,22 +1161,22 @@ public class TestShuffling extends BlockchainTest {
         shufflingAssignee = (String) getShufflingResponse.get("assignee");
         Assert.assertEquals(Long.toUnsignedString(CHUCK.getId()), shufflingAssignee);
 
-        Assert.assertEquals(-11 * Constants.ONE_NXT, ALICE.getBalanceDiff());
-        Assert.assertEquals(-11 * Constants.ONE_NXT, ALICE.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-11 * Constants.ONE_NXT, BOB.getBalanceDiff());
-        Assert.assertEquals(-11 * Constants.ONE_NXT, BOB.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + Constants.ONE_NXT), CHUCK.getBalanceDiff());
-        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + Constants.ONE_NXT), CHUCK.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-1 * Constants.ONE_NXT, DAVE.getBalanceDiff());
-        Assert.assertEquals(-1 * Constants.ONE_NXT, DAVE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-11 * Constants.ONE_rcc, ALICE.getBalanceDiff());
+        Assert.assertEquals(-11 * Constants.ONE_rcc, ALICE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-11 * Constants.ONE_rcc, BOB.getBalanceDiff());
+        Assert.assertEquals(-11 * Constants.ONE_rcc, BOB.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + Constants.ONE_rcc), CHUCK.getBalanceDiff());
+        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + Constants.ONE_rcc), CHUCK.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-1 * Constants.ONE_rcc, DAVE.getBalanceDiff());
+        Assert.assertEquals(-1 * Constants.ONE_rcc, DAVE.getUnconfirmedBalanceDiff());
 
         Assert.assertNull(ALICE_RECIPIENT.getAccount());
         Assert.assertNull(BOB_RECIPIENT.getAccount());
         Assert.assertNull(CHUCK_RECIPIENT.getAccount());
         Assert.assertNull(DAVE_RECIPIENT.getAccount());
 
-        Assert.assertEquals(24 * Constants.ONE_NXT + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getBalanceDiff());
-        Assert.assertEquals(24 * Constants.ONE_NXT + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(24 * Constants.ONE_rcc + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getBalanceDiff());
+        Assert.assertEquals(24 * Constants.ONE_rcc + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getUnconfirmedBalanceDiff());
 
     }
 
@@ -1229,22 +1229,22 @@ public class TestShuffling extends BlockchainTest {
         shufflingAssignee = (String) getShufflingResponse.get("assignee");
         Assert.assertEquals(Long.toUnsignedString(CHUCK.getId()), shufflingAssignee);
 
-        Assert.assertEquals(-21 * Constants.ONE_NXT, ALICE.getBalanceDiff());
-        Assert.assertEquals(-21 * Constants.ONE_NXT, ALICE.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-21 * Constants.ONE_NXT, BOB.getBalanceDiff());
-        Assert.assertEquals(-21 * Constants.ONE_NXT, BOB.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 21 * Constants.ONE_NXT), CHUCK.getBalanceDiff());
-        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 21 * Constants.ONE_NXT), CHUCK.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-12 * Constants.ONE_NXT, DAVE.getBalanceDiff());
-        Assert.assertEquals(-12 * Constants.ONE_NXT, DAVE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-21 * Constants.ONE_rcc, ALICE.getBalanceDiff());
+        Assert.assertEquals(-21 * Constants.ONE_rcc, ALICE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-21 * Constants.ONE_rcc, BOB.getBalanceDiff());
+        Assert.assertEquals(-21 * Constants.ONE_rcc, BOB.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 21 * Constants.ONE_rcc), CHUCK.getBalanceDiff());
+        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 21 * Constants.ONE_rcc), CHUCK.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-12 * Constants.ONE_rcc, DAVE.getBalanceDiff());
+        Assert.assertEquals(-12 * Constants.ONE_rcc, DAVE.getUnconfirmedBalanceDiff());
 
         Assert.assertNull(ALICE_RECIPIENT.getAccount());
         Assert.assertNull(BOB_RECIPIENT.getAccount());
         Assert.assertNull(CHUCK_RECIPIENT.getAccount());
         Assert.assertNull(DAVE_RECIPIENT.getAccount());
 
-        Assert.assertEquals(75 * Constants.ONE_NXT + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getBalanceDiff());
-        Assert.assertEquals(75 * Constants.ONE_NXT + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(75 * Constants.ONE_rcc + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getBalanceDiff());
+        Assert.assertEquals(75 * Constants.ONE_rcc + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getUnconfirmedBalanceDiff());
 
     }
 
@@ -1297,22 +1297,22 @@ public class TestShuffling extends BlockchainTest {
         shufflingAssignee = (String) getShufflingResponse.get("assignee");
         Assert.assertEquals(Long.toUnsignedString(BOB.getId()), shufflingAssignee);
 
-        Assert.assertEquals(-21 * Constants.ONE_NXT, ALICE.getBalanceDiff());
-        Assert.assertEquals(-21 * Constants.ONE_NXT, ALICE.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 21 * Constants.ONE_NXT), BOB.getBalanceDiff());
-        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 21 * Constants.ONE_NXT), BOB.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-21 * Constants.ONE_NXT, CHUCK.getBalanceDiff());
-        Assert.assertEquals(-21 * Constants.ONE_NXT, CHUCK.getUnconfirmedBalanceDiff());
-        Assert.assertEquals(-12 * Constants.ONE_NXT, DAVE.getBalanceDiff());
-        Assert.assertEquals(-12 * Constants.ONE_NXT, DAVE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-21 * Constants.ONE_rcc, ALICE.getBalanceDiff());
+        Assert.assertEquals(-21 * Constants.ONE_rcc, ALICE.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 21 * Constants.ONE_rcc), BOB.getBalanceDiff());
+        Assert.assertEquals(-(Constants.SHUFFLING_DEPOSIT_NQT + 21 * Constants.ONE_rcc), BOB.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-21 * Constants.ONE_rcc, CHUCK.getBalanceDiff());
+        Assert.assertEquals(-21 * Constants.ONE_rcc, CHUCK.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(-12 * Constants.ONE_rcc, DAVE.getBalanceDiff());
+        Assert.assertEquals(-12 * Constants.ONE_rcc, DAVE.getUnconfirmedBalanceDiff());
 
         Assert.assertNull(ALICE_RECIPIENT.getAccount());
         Assert.assertNull(BOB_RECIPIENT.getAccount());
         Assert.assertNull(CHUCK_RECIPIENT.getAccount());
         Assert.assertNull(DAVE_RECIPIENT.getAccount());
 
-        Assert.assertEquals(75 * Constants.ONE_NXT + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getBalanceDiff());
-        Assert.assertEquals(75 * Constants.ONE_NXT + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getUnconfirmedBalanceDiff());
+        Assert.assertEquals(75 * Constants.ONE_rcc + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getBalanceDiff());
+        Assert.assertEquals(75 * Constants.ONE_rcc + Constants.SHUFFLING_DEPOSIT_NQT, FORGY.getUnconfirmedBalanceDiff());
 
     }
 

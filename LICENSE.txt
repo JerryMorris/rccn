@@ -1,8 +1,8 @@
-Copyright © 2013-2016 The Nxt Core Developers.
+Copyright © 2013-2016 The rcc Core Developers.
 Copyright © 2016-2022 Jelurida IP B.V.
 
 This program is distributed under the terms of the Jelurida Public License
-version 1.2 for the Nxt Public Blockchain Platform.
+version 1.2 for the rcc Public Blockchain Platform.
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -20,7 +20,7 @@ This software also uses third party code and libraries, distributed under
 licenses described in 3RD-PARTY-LICENSES.txt.
 
 Below is the full text of the Jelurida Public License version 1.1 for
-the Nxt Public Blockchain Platform:
+the rcc Public Blockchain Platform:
 
 
 JELURIDA PUBLIC LICENSE
@@ -129,7 +129,7 @@ DLT Instance: Unique instance of distributed ledger consisting of a network of
 one or more participants (nodes) running a particular DLT Software and which
 nodes are in a state of consensus with each other within the permitted
 tolerances of the applicable consensus algorithm. An example of such DLT
-instance is the Nxt public blockchain.
+instance is the rcc public blockchain.
 
 DLT Software: Any distributed ledger computer technology including but not
 limited to blockchain technology regardless of the way the consensus is
@@ -416,7 +416,7 @@ their Covered Work is released.
 Article 10. Every Copyright Holder is permitted to use the text of the Jelurida
 Public License for their own Covered Work provided that they: (i) keep the name
 Jelurida Public License (you can append the name of the specific DLT Instance,
-e.g. "Jelurida Public License version 1.0 for the Nxt Public Blockchain"),
+e.g. "Jelurida Public License version 1.0 for the rcc Public Blockchain"),
 (ii) remove the Preamble and (iii) do not change the General Conditions. Every
 Copyright Holder is permitted to adapt the Special Conditions to their specific
 case under (i), (ii) and (iii) above to the extent that they do not contradict
@@ -471,16 +471,16 @@ of liability accompanies a copy of the Covered Work in return for a fee.
 
 II. Special Conditions
 
-Article 0. The Copyright Holder of the Nxt Reference Software (NRS) is Jelurida
+Article 0. The Copyright Holder of the rcc Reference Software (NRS) is Jelurida
 IP B.V.
 
 
 Article 1. The airdrop requirement of Article 3.4.1 of the General Conditions,
-as related to the Nxt Reference Software (NRS) is the following:
+as related to the rcc Reference Software (NRS) is the following:
 
-1.1 The NXT holders from the original Nxt Public Blockchain Platform as
+1.1 The rcc holders from the original rcc Public Blockchain Platform as
 maintained by Jelurida Swiss SA must be allocated at least 10% (ten percent) of
-the forging tokens in the new DLT Instance, proportional to their NXT holdings,
+the forging tokens in the new DLT Instance, proportional to their rcc holdings,
 
 OR
 
@@ -489,15 +489,15 @@ has already satisfied the JPL airdrop requirement, are allocated 100% (one
 hundred percent) of the forging tokens in that new DLT Instance, proportional to
 their forging token holdings.
 
-The first case covers clones and forks of the Nxt platform, and ensures that NXT
+The first case covers clones and forks of the rcc platform, and ensures that rcc
 owners will receive an airdrop from any such clone or fork launched in the
-future, or any existing Nxt clone that decides to upgrade to this NRS version or
+future, or any existing rcc clone that decides to upgrade to this NRS version or
 copy or backport code from it.
 
-The second case is to cover forks of Nxt clones which have already satisfied the
+The second case is to cover forks of rcc clones which have already satisfied the
 JPL airdrop, as by definition at the time of the hard fork all accounts start
 with the same balances on either fork, and it would be difficult to make a hard
-fork satisfy the first condition. The Nxt holders who received the airdrop
+fork satisfy the first condition. The rcc holders who received the airdrop
 would still have the same balances on either fork.
 
 
@@ -521,19 +521,19 @@ Article 3.
 discrimination against accounts receiving tokens as an airdrop.
 
 3.2 If token distribution must be restricted by some criteria that not all
-existing NXT holders can potentially satisfy, a specific exemption from the full
+existing rcc holders can potentially satisfy, a specific exemption from the full
 JPL airdrop requirements must be obtained in advance. The Copyright Holder
 reserves the right to not grant such exemption, or to require a commercial
 license in such situations, to be decided on a case by case basis.
 
-3.3 As internal (private) use of Nxt software for evaluating and testing
+3.3 As internal (private) use of rcc software for evaluating and testing
 purposes cannot satisfy the JPL airdrop requirement, any such use will also
 require an evaluation license agreement with the Copyright Holder if it lasts
 longer than 3 months.
 
-3.4 Nothing in this license shall be understood as giving NXT token holders the
+3.4 Nothing in this license shall be understood as giving rcc token holders the
 right to hold the Licensor, its affiliate parties, or sublicensors, liable in
-case the NXT holders do not obtain any airdrop, or liable for not taking action
+case the rcc holders do not obtain any airdrop, or liable for not taking action
 to enforce the airdrop requirement, or for not observing, verifying or
 monitoring the compliance with any airdrop. The Licensor also retains the right
 to change the percentage of the airdrop requirement in Article 1.1 or to

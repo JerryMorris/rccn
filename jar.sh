@@ -9,10 +9,10 @@ else
     JAVA=java
     JAR=jar
 fi
-${JAVA} -cp classes nxt.tools.ManifestGenerator
-/bin/rm -f nxt.jar
-${JAR} cfm nxt.jar resource/nxt.manifest.mf -C classes . || exit 1
-/bin/rm -f nxtservice.jar
-${JAR} cfm nxtservice.jar resource/nxtservice.manifest.mf -C classes . || exit 1
+${JAVA} -cp classes rcc.tools.ManifestGenerator
+/bin/rm -f rcc.jar
+${JAR} cfm rcc.jar resource/rcc.manifest.mf -C classes . || exit 1
+/bin/rm -f rccservice.jar
+${JAR} cfm rccservice.jar resource/rccservice.manifest.mf -C classes . || exit 1
 
 echo "jar files generated successfully"

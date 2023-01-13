@@ -1,12 +1,12 @@
 /******************************************************************************
- * Copyright © 2013-2016 The Nxt Core Developers.                             *
+ * Copyright © 2013-2016 The rcc Core Developers.                             *
  * Copyright © 2016-2022 Jelurida IP B.V.                                     *
  *                                                                            *
  * See the LICENSE.txt file at the top-level directory of this distribution   *
  * for licensing information.                                                 *
  *                                                                            *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,*
- * no part of the Nxt software, including this file, may be copied, modified, *
+ * no part of the rcc software, including this file, may be copied, modified, *
  * propagated, or distributed except according to the terms contained in the  *
  * LICENSE.txt file.                                                          *
  *                                                                            *
@@ -197,8 +197,8 @@ var NRS = (function(NRS, $) {
 
     $("#add_monitored_account_modal").on("show.bs.modal", function() {
         $("#add_monitored_account_property").val(currentMonitor.property);
-        $("#add_monitored_account_amount").val(NRS.convertToNXT(currentMonitor.amount));
-        $("#add_monitored_account_threshold").val(NRS.convertToNXT(currentMonitor.threshold));
+        $("#add_monitored_account_amount").val(NRS.convertTorcc(currentMonitor.amount));
+        $("#add_monitored_account_threshold").val(NRS.convertTorcc(currentMonitor.threshold));
         $("#add_monitored_account_interval").val(currentMonitor.interval);
         $("#add_monitored_account_value").val("");
     });

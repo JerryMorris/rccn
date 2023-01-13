@@ -5,16 +5,16 @@ then
 	echo VERSION not defined
 	exit 1
 fi
-PACKAGE=nxt-client-${VERSION}
+PACKAGE=rcc-client-${VERSION}
 echo PACKAGE="${PACKAGE}"
-CHANGELOG=nxt-client-${VERSION}.changelog.txt
+CHANGELOG=rcc-client-${VERSION}.changelog.txt
 OBFUSCATE=$2
 
 FILES="changelogs conf html lib resource contrib"
 FILES="${FILES} 3RD-PARTY-LICENSES.txt AUTHORS.txt LICENSE.txt"
 FILES="${FILES} DEVELOPERS-GUIDE.md OPERATORS-GUIDE.md README.md README.txt USERS-GUIDE.md"
 FILES="${FILES} mint.bat mint.sh run.bat run.sh run-tor.sh run-desktop.sh start.sh stop.sh compact.sh compact.bat sign.sh sign.bat passphraseRecovery.sh passphraseRecovery.bat pem.to.pkcs12.keystore.certbot.hook.sh"
-FILES="${FILES} nxt.policy nxtdesktop.policy NXT_Wallet.url Dockerfile"
+FILES="${FILES} rcc.policy rccdesktop.policy rcc_Wallet.url Dockerfile"
 
 unix2dos *.bat
 echo compile
@@ -22,20 +22,20 @@ echo compile
 echo updating constants.js
 ./constants-export.sh > /dev/null 2>&1
 rm -rf html/doc/*
-rm -rf nxt
+rm -rf rcc
 rm -rf ${PACKAGE}.jar
 rm -rf ${PACKAGE}.sh
 rm -rf ${PACKAGE}.exe
 rm -rf ${PACKAGE}.zip
-mkdir -p nxt/
-mkdir -p nxt/logs
-mkdir -p nxt/addons/src
+mkdir -p rcc/
+mkdir -p rcc/logs
+mkdir -p rcc/addons/src
 
 if [ "${OBFUSCATE}" = "obfuscate" ]; 
 then
 echo obfuscate
-/opt/proguard/bin/proguard.sh @nxt.pro
-mv ../nxt.map ../nxt.map.${VERSION}
+/opt/proguard/bin/proguard.sh @rcc.pro
+mv ../rcc.map ../rcc.map.${VERSION}
 else
 FILES="${FILES} classes src JPL-NRS.pdf"
 FILES="${FILES} compile.sh javadoc.sh jar.sh package.sh"
@@ -43,20 +43,20 @@ echo javadoc
 ./javadoc.sh
 fi
 echo copy resources
-cp installer/lib/JavaExe.exe nxt.exe
-cp installer/lib/JavaExe.exe nxtservice.exe
-cp -a ${FILES} nxt
-cp -a logs/placeholder.txt nxt/logs
+cp installer/lib/JavaExe.exe rcc.exe
+cp installer/lib/JavaExe.exe rccservice.exe
+cp -a ${FILES} rcc
+cp -a logs/placeholder.txt rcc/logs
 echo gzip
-for f in `find nxt/html -name *.gz`
+for f in `find rcc/html -name *.gz`
 do
 	rm -f "$f"
 done
-for f in `find nxt/html -name *.html -o -name *.js -o -name *.css -o -name *.json  -o -name *.ttf -o -name *.svg -o -name *.otf`
+for f in `find rcc/html -name *.html -o -name *.js -o -name *.css -o -name *.json  -o -name *.ttf -o -name *.svg -o -name *.otf`
 do
 	gzip -9c "$f" > "$f".gz
 done
-cd nxt
+cd rcc
 echo generate jar files
 ../jar.sh
 echo package installer Jar
@@ -65,8 +65,8 @@ echo package installer Jar
 #../installer/build-exe.bat ${PACKAGE}
 echo create installer zip
 cd -
-zip -q -X -r ${PACKAGE}.zip nxt -x \*/.idea/\* \*/.gitignore \*/.git/\* \*/\*.log \*.iml nxt/conf/nxt.properties nxt/conf/logging.properties nxt/conf/localstorage/\*
-rm -rf nxt
+zip -q -X -r ${PACKAGE}.zip rcc -x \*/.idea/\* \*/.gitignore \*/.git/\* \*/\*.log \*.iml rcc/conf/rcc.properties rcc/conf/logging.properties rcc/conf/localstorage/\*
+rm -rf rcc
 
 echo creating full changelog
 echo "${PACKAGE}, released `date +%Y-%m-%d`:" > changelog-full.txt
@@ -92,7 +92,7 @@ rm -f ${PACKAGE}.jar
 echo creating change log ${CHANGELOG}
 echo "Release $1" > ${CHANGELOG}
 echo >> ${CHANGELOG}
-echo "https://www.jelurida.com/nxt/downloads" >> ${CHANGELOG}
+echo "https://www.jelurida.com/rcc/downloads" >> ${CHANGELOG}
 echo >> ${CHANGELOG}
 echo "sha256 checksums:" >> ${CHANGELOG}
 echo >> ${CHANGELOG}

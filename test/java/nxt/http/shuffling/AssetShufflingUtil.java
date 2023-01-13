@@ -1,12 +1,12 @@
 /*
- * Copyright © 2013-2016 The Nxt Core Developers.
+ * Copyright © 2013-2016 The rcc Core Developers.
  * Copyright © 2016-2022 Jelurida IP B.V.
  *
  * See the LICENSE.txt file at the top-level directory of this distribution
  * for licensing information.
  *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,
- * no part of the Nxt software, including this file, may be copied, modified,
+ * no part of the rcc software, including this file, may be copied, modified,
  * propagated, or distributed except according to the terms contained in the
  * LICENSE.txt file.
  *
@@ -14,17 +14,17 @@
  *
  */
 
-package nxt.http.shuffling;
+package rcc.http.shuffling;
 
-import nxt.Constants;
-import nxt.HoldingType;
-import nxt.Tester;
-import nxt.http.APICall;
-import nxt.http.callers.ShufflingCreateCall;
-import nxt.util.Logger;
+import rcc.Constants;
+import rcc.HoldingType;
+import rcc.Tester;
+import rcc.http.APICall;
+import rcc.http.callers.ShufflingCreateCall;
+import rcc.util.Logger;
 import org.json.simple.JSONObject;
 
-import static nxt.BlockchainTest.generateBlock;
+import static rcc.BlockchainTest.generateBlock;
 
 class AssetShufflingUtil {
     static final long defaultHoldingShufflingAmount = 40000;
@@ -35,7 +35,7 @@ class AssetShufflingUtil {
     JSONObject createAssetShuffling(Tester creator) {
         APICall apiCall = ShufflingCreateCall.create().
                 secretPhrase(creator.getSecretPhrase()).
-                feeNQT(Constants.ONE_NXT).
+                feeNQT(Constants.ONE_rcc).
                 amount(String.valueOf(defaultHoldingShufflingAmount)).
                 participantCount("4").
                 registrationPeriod("10").

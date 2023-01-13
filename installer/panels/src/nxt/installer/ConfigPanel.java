@@ -1,12 +1,12 @@
 /*
- * Copyright © 2013-2016 The Nxt Core Developers.
+ * Copyright © 2013-2016 The rcc Core Developers.
  * Copyright © 2016-2022 Jelurida IP B.V.
  *
  * See the LICENSE.txt file at the top-level directory of this distribution
  * for licensing information.
  *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,
- * no part of the Nxt software, including this file, may be copied, modified,
+ * no part of the rcc software, including this file, may be copied, modified,
  * propagated, or distributed except according to the terms contained in the
  * LICENSE.txt file.
  *
@@ -14,7 +14,7 @@
  *
  */
 
-package nxt.installer;
+package rcc.installer;
 
 import com.izforge.izpack.api.data.Panel;
 import com.izforge.izpack.api.resource.Resources;
@@ -36,10 +36,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import static nxt.installer.ConfigHandler.Setting;
-import static nxt.installer.ConfigHandler.VAR_CLEAN_INSTALL_DIR;
-import static nxt.installer.ConfigHandler.VAR_FILE_CONTENTS;
-import static nxt.installer.ConfigHandler.VAR_SHUTDOWN_SERVER;
+import static rcc.installer.ConfigHandler.Setting;
+import static rcc.installer.ConfigHandler.VAR_CLEAN_INSTALL_DIR;
+import static rcc.installer.ConfigHandler.VAR_FILE_CONTENTS;
+import static rcc.installer.ConfigHandler.VAR_SHUTDOWN_SERVER;
 
 public class ConfigPanel extends IzPanel implements ItemListener {
     private final ConfigHandler handler = new ConfigHandler();
@@ -65,7 +65,7 @@ public class ConfigPanel extends IzPanel implements ItemListener {
                 add(LabelFactory.create("A running server was detected. Do you want to stop it?"), NEXT_LINE);
                 add(stopServerCheck, NEXT_LINE);
             }
-            if (handler.isNxtInstallDir(installData.getInstallPath())) {
+            if (handler.isrccInstallDir(installData.getInstallPath())) {
                 add(IzPanelLayout.createParagraphGap());
                 add(LabelFactory.create("An existing installation was found. Do you want to remove it?"), NEXT_LINE);
                 add(uninstallCheck, NEXT_LINE);

@@ -1,12 +1,12 @@
 /*
- * Copyright © 2013-2016 The Nxt Core Developers.
+ * Copyright © 2013-2016 The rcc Core Developers.
  * Copyright © 2016-2022 Jelurida IP B.V.
  *
  * See the LICENSE.txt file at the top-level directory of this distribution
  * for licensing information.
  *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,
- * no part of the Nxt software, including this file, may be copied, modified,
+ * no part of the rcc software, including this file, may be copied, modified,
  * propagated, or distributed except according to the terms contained in the
  * LICENSE.txt file.
  *
@@ -14,12 +14,12 @@
  *
  */
 
-package nxt;
+package rcc;
 
-import nxt.crypto.Crypto;
-import nxt.util.Convert;
-import nxt.util.Logger;
-import nxt.util.Time;
+import rcc.crypto.Crypto;
+import rcc.util.Convert;
+import rcc.util.Logger;
+import rcc.util.Time;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -62,36 +62,36 @@ public abstract class BlockchainTest extends AbstractBlockchainTest {
     private static final String chuckSecretPhrase = "eOdBVLMgySFvyiTy8xMuRXDTr45oTzB7L5J";
     private static final String daveSecretPhrase = "t9G2ymCmDsQij7VtYinqrbGCOAtDDA3WiNr";
 
-    private static boolean isNxtInitialized = false;
+    private static boolean isrccInitialized = false;
     private static boolean isRunInSuite = false;
 
-    public static void initNxt() {
-        if (!isNxtInitialized) {
+    public static void initrcc() {
+        if (!isrccInitialized) {
             Properties properties = ManualForgingTest.newTestProperties();
-            properties.setProperty("nxt.isTestnet", "true");
-            properties.setProperty("nxt.isOffline", "true");
-            properties.setProperty("nxt.enableFakeForging", "true");
-            properties.setProperty("nxt.fakeForgingPublicKeys", forgerPublicKey);
-            properties.setProperty("nxt.timeMultiplier", "1");
-            properties.setProperty("nxt.testnetGuaranteedBalanceConfirmations", "1");
-            properties.setProperty("nxt.testnetLeasingDelay", "1");
-            properties.setProperty("nxt.disableProcessTransactionsThread", "true");
-            properties.setProperty("nxt.deleteFinishedShufflings", "false");
-            properties.setProperty("nxt.disableSecurityPolicy", "true");
-            properties.setProperty("nxt.disableAdminPassword", "true");
-            properties.setProperty("nxt.testDbDir", "./nxt_unit_test_db/nxt");
-            properties.setProperty("nxt.isAutomatedTest", "true");
-            properties.setProperty("nxt.addOns", "nxt.addons.JPLSnapshot");
+            properties.setProperty("rcc.isTestnet", "true");
+            properties.setProperty("rcc.isOffline", "true");
+            properties.setProperty("rcc.enableFakeForging", "true");
+            properties.setProperty("rcc.fakeForgingPublicKeys", forgerPublicKey);
+            properties.setProperty("rcc.timeMultiplier", "1");
+            properties.setProperty("rcc.testnetGuaranteedBalanceConfirmations", "1");
+            properties.setProperty("rcc.testnetLeasingDelay", "1");
+            properties.setProperty("rcc.disableProcessTransactionsThread", "true");
+            properties.setProperty("rcc.deleteFinishedShufflings", "false");
+            properties.setProperty("rcc.disableSecurityPolicy", "true");
+            properties.setProperty("rcc.disableAdminPassword", "true");
+            properties.setProperty("rcc.testDbDir", "./rcc_unit_test_db/rcc");
+            properties.setProperty("rcc.isAutomatedTest", "true");
+            properties.setProperty("rcc.addOns", "rcc.addons.JPLSnapshot");
             AbstractBlockchainTest.init(properties);
-            Logger.logMessage("Initialized Nxt for unit testing.");
-            isNxtInitialized = true;
+            Logger.logMessage("Initialized rcc for unit testing.");
+            isrccInitialized = true;
         }
     }
     
     @BeforeClass
     public static void init() {
-        initNxt();
-        Nxt.setTime(new Time.CounterTime(Nxt.getEpochTime()));
+        initrcc();
+        rcc.setTime(new Time.CounterTime(rcc.getEpochTime()));
 
         baseHeight = blockchain.getHeight();
         Logger.logMessage("baseHeight: " + baseHeight);
@@ -100,7 +100,7 @@ public abstract class BlockchainTest extends AbstractBlockchainTest {
     @Before
     public final void setUp() {
         Logger.logMessage("Creating test accounts.");
-        final long amountNQT = Constants.ONE_NXT * 1000000;
+        final long amountNQT = Constants.ONE_rcc * 1000000;
         FORGY = Tester.createAndAdd(forgerSecretPhrase, amountNQT);
         ALICE = Tester.createAndAdd(aliceSecretPhrase, amountNQT);
         BOB =   Tester.createAndAdd(bobSecretPhrase2, amountNQT);
@@ -117,8 +117,8 @@ public abstract class BlockchainTest extends AbstractBlockchainTest {
     @AfterClass
     public static void afterClass() {
         if (!isRunInSuite) {
-            Logger.logMessage("@AfterClass - Nxt.shutdown()");
-            Nxt.shutdown();
+            Logger.logMessage("@AfterClass - rcc.shutdown()");
+            rcc.shutdown();
         }
     }
 
@@ -131,7 +131,7 @@ public abstract class BlockchainTest extends AbstractBlockchainTest {
 
     public static void generateBlock() {
         try {
-            blockchainProcessor.generateBlock(forgerSecretPhrase, Nxt.getEpochTime());
+            blockchainProcessor.generateBlock(forgerSecretPhrase, rcc.getEpochTime());
         } catch (BlockchainProcessor.BlockNotAcceptedException e) {
             throw new AssertionError(e);
         }

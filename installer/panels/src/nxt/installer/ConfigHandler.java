@@ -1,12 +1,12 @@
 /*
- * Copyright © 2013-2016 The Nxt Core Developers.
+ * Copyright © 2013-2016 The rcc Core Developers.
  * Copyright © 2016-2022 Jelurida IP B.V.
  *
  * See the LICENSE.txt file at the top-level directory of this distribution
  * for licensing information.
  *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,
- * no part of the Nxt software, including this file, may be copied, modified,
+ * no part of the rcc software, including this file, may be copied, modified,
  * propagated, or distributed except according to the terms contained in the
  * LICENSE.txt file.
  *
@@ -14,7 +14,7 @@
  *
  */
 
-package nxt.installer;
+package rcc.installer;
 
 import java.io.BufferedReader;
 import java.io.FileWriter;
@@ -40,13 +40,13 @@ final class ConfigHandler {
     private static final String FILE_HEADER =
             "# This file contains customized settings.\n" +
             "# You can modify this file and add more settings.\n" +
-            "# See conf/nxt-default.properties for a full list\n#\n\n";
-    private static final String JAR = "nxt.jar";
+            "# See conf/rcc-default.properties for a full list\n#\n\n";
+    private static final String JAR = "rcc.jar";
     private static final String SERVER = "http://localhost";
     private static final int[] PORTS = { 6876, 7876 };   // try to detect both testnet and real servers
-    private static final String VAR_PREFIX = "nxt.installer.";
+    private static final String VAR_PREFIX = "rcc.installer.";
 
-    public static final String FILE_PATH = "conf/nxt-installer.properties";
+    public static final String FILE_PATH = "conf/rcc-installer.properties";
     public static final String VAR_CLEAN_INSTALL_DIR = VAR_PREFIX + "cleanInstallDir";
     public static final String VAR_SHUTDOWN_SERVER = VAR_PREFIX + "shutdownServer";
     public static final String VAR_FILE_CONTENTS = "settings";
@@ -71,7 +71,7 @@ final class ConfigHandler {
         boolean done = false;
         for (int port: PORTS) {
             try {
-                URL url = new URL(SERVER + ':' + port + "/nxt?requestType=shutdown");
+                URL url = new URL(SERVER + ':' + port + "/rcc?requestType=shutdown");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
                 done |= (conn.getResponseCode() == HttpURLConnection.HTTP_OK);
@@ -82,12 +82,12 @@ final class ConfigHandler {
         return done;
     }
 
-    public boolean isNxtInstallDir(String path) {
+    public boolean isrccInstallDir(String path) {
         return path != null && Files.exists(Paths.get(path, JAR));
     }
 
-    public boolean cleanNxtInstallDir(String installPath, boolean retry) {
-        if (isNxtInstallDir(installPath)) {
+    public boolean cleanrccInstallDir(String installPath, boolean retry) {
+        if (isrccInstallDir(installPath)) {
             if (rmdir(installPath)) {
                 return true;
             }

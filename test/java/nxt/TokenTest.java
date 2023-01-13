@@ -1,12 +1,12 @@
 /*
- * Copyright © 2013-2016 The Nxt Core Developers.
+ * Copyright © 2013-2016 The rcc Core Developers.
  * Copyright © 2016-2022 Jelurida IP B.V.
  *
  * See the LICENSE.txt file at the top-level directory of this distribution
  * for licensing information.
  *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,
- * no part of the Nxt software, including this file, may be copied, modified,
+ * no part of the rcc software, including this file, may be copied, modified,
  * propagated, or distributed except according to the terms contained in the
  * LICENSE.txt file.
  *
@@ -14,7 +14,7 @@
  *
  */
 
-package nxt;
+package rcc;
 
 import org.junit.Test;
 
@@ -26,7 +26,7 @@ public class TokenTest extends BlockchainTest {
     @Test
     public void testParseValidToken() throws Exception {
         String token = "6s7hchl9q0e5jgrrtgscoip2lcb2o3oi7ndso1bnjr475suv001ug93uu8aq2f00o7q6pvs2ivrpra1svouvb4k5nreco0tt94qest9mq5jg2qihcvj5n5ljqht5fl6n39nslr7kidqh8kh8u8v6e4rn92f47l3i";
-        Token actual = Token.parseToken(token, "http://nxt.org");
+        Token actual = Token.parseToken(token, "http://rcc.org");
 
         assertEquals(1000, actual.getTimestamp());
         assertTrue(actual.isValid());
@@ -43,10 +43,10 @@ public class TokenTest extends BlockchainTest {
 
     @Test
     public void testGenerateToken() throws Exception {
-        int start = Nxt.getEpochTime();
-        String tokenString = Token.generateToken("secret", "http://nxt.org");
-        int end = Nxt.getEpochTime();
-        Token token = Token.parseToken(tokenString, "http://nxt.org");
+        int start = rcc.getEpochTime();
+        String tokenString = Token.generateToken("secret", "http://rcc.org");
+        int end = rcc.getEpochTime();
+        Token token = Token.parseToken(tokenString, "http://rcc.org");
 
         assertTrue(token.isValid());
         assertTrue(token.getTimestamp() >= start);
@@ -55,8 +55,8 @@ public class TokenTest extends BlockchainTest {
 
     @Test
     public void emptySecret() throws Exception {
-        String tokenString = Token.generateToken("", "http://nxt.org");
-        Token token = Token.parseToken(tokenString, "http://nxt.org");
+        String tokenString = Token.generateToken("", "http://rcc.org");
+        Token token = Token.parseToken(tokenString, "http://rcc.org");
         assertTrue(token.isValid());
     }
 

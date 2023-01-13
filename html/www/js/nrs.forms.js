@@ -1,12 +1,12 @@
 /******************************************************************************
- * Copyright © 2013-2016 The Nxt Core Developers.                             *
+ * Copyright © 2013-2016 The rcc Core Developers.                             *
  * Copyright © 2016-2022 Jelurida IP B.V.                                     *
  *                                                                            *
  * See the LICENSE.txt file at the top-level directory of this distribution   *
  * for licensing information.                                                 *
  *                                                                            *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,*
- * no part of the Nxt software, including this file, may be copied, modified, *
+ * no part of the rcc software, including this file, may be copied, modified, *
  * propagated, or distributed except according to the terms contained in the  *
  * LICENSE.txt file.                                                          *
  *                                                                            *
@@ -281,7 +281,7 @@ var NRS = (function(NRS, $) {
 		$form.find(":input").each(function() {
 			if ($(this).is(":invalid")) {
 				var error = "";
-				var name = String($(this).attr("name")).replace("NXT", "").replace("NQT", "").capitalize();
+				var name = String($(this).attr("name")).replace("rcc", "").replace("NQT", "").capitalize();
 				var value = $(this).val();
 
 				if ($(this).hasAttr("max")) {
@@ -389,12 +389,12 @@ var NRS = (function(NRS, $) {
 		}
         if ($btn.hasClass("btn-calculate-fee")) {
             data.calculateFee = true;
-            data.feeNXT = "0";
+            data.feercc = "0";
             $form.find(".error_message").html("").hide();
         } else {
             delete data.calculateFee;
-            if (!data.feeNXT) {
-                data.feeNXT = "0";
+            if (!data.feercc) {
+                data.feercc = "0";
             }
         }
 
@@ -407,9 +407,9 @@ var NRS = (function(NRS, $) {
 				}
 				NRS.unlockForm($modal, $btn);
 				return;
-			} else if (!/^NXT\-[A-Z0-9]+\-[A-Z0-9]+\-[A-Z0-9]+\-[A-Z0-9]+/i.test(data.recipient)) {
+			} else if (!/^rcc\-[A-Z0-9]+\-[A-Z0-9]+\-[A-Z0-9]+\-[A-Z0-9]+/i.test(data.recipient)) {
 				var convertedAccountId = $modal.find("input[name=converted_account_id]").val();
-				if (!convertedAccountId || (!/^\d+$/.test(convertedAccountId) && !/^NXT\-[A-Z0-9]+\-[A-Z0-9]+\-[A-Z0-9]+\-[A-Z0-9]+/i.test(convertedAccountId))) {
+				if (!convertedAccountId || (!/^\d+$/.test(convertedAccountId) && !/^rcc\-[A-Z0-9]+\-[A-Z0-9]+\-[A-Z0-9]+\-[A-Z0-9]+/i.test(convertedAccountId))) {
 					$form.find(".error_message").html($.t("error_account_id")).show();
 					if (formErrorFunction) {
 						formErrorFunction(false, data);
@@ -549,9 +549,9 @@ var NRS = (function(NRS, $) {
 		}
 
 		if (!NRS.showedFormWarning) {
-			if ("amountNXT" in data && NRS.settings["amount_warning"] && NRS.settings["amount_warning"] != "0") {
+			if ("amountrcc" in data && NRS.settings["amount_warning"] && NRS.settings["amount_warning"] != "0") {
 				try {
-					var amountNQT = NRS.convertToNQT(data.amountNXT);
+					var amountNQT = NRS.convertToNQT(data.amountrcc);
 				} catch (err) {
 					$form.find(".error_message").html(String(err).escapeHTML() + " (" + $.t("amount") + ")").show();
 					if (formErrorFunction) {
@@ -564,7 +564,7 @@ var NRS = (function(NRS, $) {
 				if (new BigInteger(amountNQT).compareTo(new BigInteger(NRS.settings["amount_warning"])) > 0) {
 					NRS.showedFormWarning = true;
 					$form.find(".error_message").html($.t("error_max_amount_warning", {
-						"nxt": NRS.formatAmount(NRS.settings["amount_warning"])
+						"rcc": NRS.formatAmount(NRS.settings["amount_warning"])
 					})).show();
 					if (formErrorFunction) {
 						formErrorFunction(false, data);
@@ -574,9 +574,9 @@ var NRS = (function(NRS, $) {
 				}
 			}
 
-			if ("feeNXT" in data && NRS.settings["fee_warning"] && NRS.settings["fee_warning"] != "0") {
+			if ("feercc" in data && NRS.settings["fee_warning"] && NRS.settings["fee_warning"] != "0") {
 				try {
-					var feeNQT = NRS.convertToNQT(data.feeNXT);
+					var feeNQT = NRS.convertToNQT(data.feercc);
 				} catch (err) {
 					$form.find(".error_message").html(String(err).escapeHTML() + " (" + $.t("fee") + ")").show();
 					if (formErrorFunction) {
@@ -589,7 +589,7 @@ var NRS = (function(NRS, $) {
 				if (new BigInteger(feeNQT).compareTo(new BigInteger(NRS.settings["fee_warning"])) > 0) {
 					NRS.showedFormWarning = true;
 					$form.find(".error_message").html($.t("error_max_fee_warning", {
-						"nxt": NRS.formatAmount(NRS.settings["fee_warning"])
+						"rcc": NRS.formatAmount(NRS.settings["fee_warning"])
 					})).show();
 					if (formErrorFunction) {
 						formErrorFunction(false, data);
@@ -624,8 +624,8 @@ var NRS = (function(NRS, $) {
 				}
 			}
 
-			var convertNXTFields = ["phasingQuorumNXT", "phasingMinBalanceNXT"];
-			$.each(convertNXTFields, function(key, field) {
+			var convertrccFields = ["phasingQuorumrcc", "phasingMinBalancercc"];
+			$.each(convertrccFields, function(key, field) {
 				if (field in data) {
 					try {
 						NRS.convertToNQT(data[field]);
@@ -799,7 +799,7 @@ var NRS = (function(NRS, $) {
 
     function updateFee(modal, feeNQT) {
         var fee = $("#" + modal.attr('id').replace('_modal', '') + "_fee");
-        fee.val(NRS.convertToNXT(feeNQT));
+        fee.val(NRS.convertTorcc(feeNQT));
         var recalcIndicator = $("#" + modal.attr('id').replace('_modal', '') + "_recalc");
         recalcIndicator.hide();
     }

@@ -10,4 +10,4 @@ if [ -x jdk/bin/java ]; then
 else
     JAVA=java
 fi
-${JAVA} -cp classes:lib/*:conf:addons/classes:addons/lib/*:javafx-sdk/lib/* -Dnxt.runtime.mode=desktop -Dnxt.runtime.dirProvider=nxt.env.DefaultDirProvider nxt.Nxt
+${JAVA} -cp classes:lib/*:conf:addons/classes:addons/lib/*:javafx-sdk/lib/* -Drcc.runtime.mode=desktop -Drcc.runtime.dirProvider=rcc.env.DefaultDirProvider rcc.rcc

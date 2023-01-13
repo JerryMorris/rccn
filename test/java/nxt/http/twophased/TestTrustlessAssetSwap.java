@@ -1,12 +1,12 @@
 /*
- * Copyright © 2013-2016 The Nxt Core Developers.
+ * Copyright © 2013-2016 The rcc Core Developers.
  * Copyright © 2016-2022 Jelurida IP B.V.
  *
  * See the LICENSE.txt file at the top-level directory of this distribution
  * for licensing information.
  *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,
- * no part of the Nxt software, including this file, may be copied, modified,
+ * no part of the rcc software, including this file, may be copied, modified,
  * propagated, or distributed except according to the terms contained in the
  * LICENSE.txt file.
  *
@@ -14,13 +14,13 @@
  *
  */
 
-package nxt.http.twophased;
+package rcc.http.twophased;
 
-import nxt.Account;
-import nxt.BlockchainTest;
-import nxt.Constants;
-import nxt.http.APICall;
-import nxt.util.Convert;
+import rcc.Account;
+import rcc.BlockchainTest;
+import rcc.Constants;
+import rcc.http.APICall;
+import rcc.util.Convert;
 import org.json.simple.JSONObject;
 import org.junit.Assert;
 import org.junit.Test;
@@ -36,7 +36,7 @@ public class TestTrustlessAssetSwap extends BlockchainTest {
                 param("description", "AliceAssetDescription").
                 param("quantityQNT", 1000).
                 param("decimals", 0).
-                param("feeNQT", 1000 * Constants.ONE_NXT).
+                param("feeNQT", 1000 * Constants.ONE_rcc).
                 build().invoke();
         generateBlock();
         JSONObject bobAsset = new APICall.Builder("issueAsset").
@@ -45,7 +45,7 @@ public class TestTrustlessAssetSwap extends BlockchainTest {
                 param("description", "BobAssetDescription").
                 param("quantityQNT", 1000).
                 param("decimals", 0).
-                param("feeNQT", 2000 * Constants.ONE_NXT).
+                param("feeNQT", 2000 * Constants.ONE_rcc).
                 build().invoke();
         generateBlock();
 
@@ -58,7 +58,7 @@ public class TestTrustlessAssetSwap extends BlockchainTest {
                 param("recipient", BOB.getStrId()).
                 param("asset", aliceAssetId).
                 param("quantityQNT", 100).
-                param("feeNQT", Constants.ONE_NXT).
+                param("feeNQT", Constants.ONE_rcc).
                 build().invoke();
 
         JSONObject aliceSignedTransfer = new APICall.Builder("signTransaction").
@@ -78,7 +78,7 @@ public class TestTrustlessAssetSwap extends BlockchainTest {
                 param("recipient", ALICE.getStrId()).
                 param("asset", bobAssetId).
                 param("quantityQNT", 200).
-                param("feeNQT", 3 * Constants.ONE_NXT).
+                param("feeNQT", 3 * Constants.ONE_rcc).
                 param("phased", "true").
                 param("phasingFinishHeight", baseHeight + 5).
                 param("phasingVotingModel", 4).

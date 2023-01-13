@@ -1,12 +1,12 @@
 /******************************************************************************
- * Copyright © 2013-2016 The Nxt Core Developers.                             *
+ * Copyright © 2013-2016 The rcc Core Developers.                             *
  * Copyright © 2016-2022 Jelurida IP B.V.                                     *
  *                                                                            *
  * See the LICENSE.txt file at the top-level directory of this distribution   *
  * for licensing information.                                                 *
  *                                                                            *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,*
- * no part of the Nxt software, including this file, may be copied, modified, *
+ * no part of the rcc software, including this file, may be copied, modified, *
  * propagated, or distributed except according to the terms contained in the  *
  * LICENSE.txt file.                                                          *
  *                                                                            *
@@ -32,7 +32,7 @@ var NRS = (function(NRS, $) {
 			var value = $(this).val();
 			var modal = $(this).closest(".modal");
 
-			if (value && value != "NXT-____-____-____-_____") {
+			if (value && value != "rcc-____-____-____-_____") {
 				NRS.checkRecipient(value, modal);
 			} else {
 				modal.find(".account_info").hide();
@@ -56,7 +56,7 @@ var NRS = (function(NRS, $) {
 		}
 		if (account) {
 			var $inputField = $(this).find("input[name=recipient], input[name=account_id]").not("[type=hidden]");
-			if (!/NXT\-/i.test(account)) {
+			if (!/rcc\-/i.test(account)) {
 				$inputField.addClass("noMask");
 			}
 			$inputField.val(account).trigger("checkRecipient");
@@ -140,7 +140,7 @@ var NRS = (function(NRS, $) {
 						"type": "info",
 						"message": $.t("recipient_info_with_name", {
 							"name" : NRS.unescapeRespStr(response.name),
-							"nxt": NRS.formatAmount(response.unconfirmedBalanceNQT, false, true)
+							"rcc": NRS.formatAmount(response.unconfirmedBalanceNQT, false, true)
 						}),
 						"account": response
 					};
@@ -149,7 +149,7 @@ var NRS = (function(NRS, $) {
 					result = {
 						"type": "info",
 						"message": $.t("recipient_info", {
-							"nxt": NRS.formatAmount(response.unconfirmedBalanceNQT, false, true)
+							"rcc": NRS.formatAmount(response.unconfirmedBalanceNQT, false, true)
 						}),
 						"account": response
 					};
@@ -159,7 +159,7 @@ var NRS = (function(NRS, $) {
 					if (response.errorCode == 4) {
 						result = {
 							"type": "danger",
-							"message": $.t("recipient_malformed") + (!/^(NXT\-)/i.test(accountId) ? " " + $.t("recipient_alias_suggestion") : ""),
+							"message": $.t("recipient_malformed") + (!/^(rcc\-)/i.test(accountId) ? " " + $.t("recipient_alias_suggestion") : ""),
 							"account": null
 						};
 					} else if (response.errorCode == 5) {
@@ -180,7 +180,7 @@ var NRS = (function(NRS, $) {
 					result = {
 						"type": "warning",
 						"message": $.t("recipient_no_public_key_pka", {
-							"nxt": NRS.formatAmount(response.unconfirmedBalanceNQT, false, true)
+							"rcc": NRS.formatAmount(response.unconfirmedBalanceNQT, false, true)
 						}),
 						"account": response,
 						"noPublicKey": true
@@ -209,8 +209,8 @@ var NRS = (function(NRS, $) {
 		account = $.trim(account);
 
 		//solomon reed. Btw, this regex can be shortened..
-		if (/^(NXT\-)?[A-Z0-9]+\-[A-Z0-9]+\-[A-Z0-9]+\-[A-Z0-9]+/i.test(account)) {
-			var address = new NxtAddress();
+		if (/^(rcc\-)?[A-Z0-9]+\-[A-Z0-9]+\-[A-Z0-9]+\-[A-Z0-9]+/i.test(account)) {
+			var address = new rccAddress();
 
 			if (address.set(account)) {
 				NRS.getAccountError(account, function(response) {
@@ -310,7 +310,7 @@ var NRS = (function(NRS, $) {
 					var alias = String(response.aliasURI);
 					var timestamp = response.timestamp;
 
-					var regex_1 = /acct:(.*)@nxt/;
+					var regex_1 = /acct:(.*)@rcc/;
 					var regex_2 = /nacc:(.*)/;
 
 					var match = alias.match(regex_1);
@@ -323,7 +323,7 @@ var NRS = (function(NRS, $) {
 						match[1] = String(match[1]).toUpperCase();
 
 						if (/^\d+$/.test(match[1])) {
-							var address = new NxtAddress();
+							var address = new rccAddress();
 
 							if (address.set(match[1])) {
 								match[1] = address.toString();

@@ -1,12 +1,12 @@
 /******************************************************************************
- * Copyright © 2013-2016 The Nxt Core Developers.                             *
+ * Copyright © 2013-2016 The rcc Core Developers.                             *
  * Copyright © 2016-2022 Jelurida IP B.V.                                     *
  *                                                                            *
  * See the LICENSE.txt file at the top-level directory of this distribution   *
  * for licensing information.                                                 *
  *                                                                            *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,*
- * no part of the Nxt software, including this file, may be copied, modified, *
+ * no part of the rcc software, including this file, may be copied, modified, *
  * propagated, or distributed except according to the terms contained in the  *
  * LICENSE.txt file.                                                          *
  *                                                                            *
@@ -321,8 +321,8 @@ var NRS = (function(NRS, $, undefined) {
 			$('#create_poll_min_balance').attr('disabled', false);
 		}
 		if ((pollType == 0 && mbType == 1) || pollType == 1) {
-			$('#min_voting_balance_label_unit').html($.t('nxt_capital_letters'));
-			$('#create_poll_min_balance').attr('name', 'minBalanceNXT');
+			$('#min_voting_balance_label_unit').html($.t('rcc_capital_letters'));
+			$('#create_poll_min_balance').attr('name', 'minBalancercc');
 		}
 		if ((pollType == 0 && mbType == 2) || pollType == 2) {
 			$('#min_voting_balance_label_unit').html($.t('asset'));
@@ -829,7 +829,7 @@ var NRS = (function(NRS, $, undefined) {
 			};
 		}
 
-		if (!/^\d+$/.test(data.id) && !/^NXT\-/i.test(data.id)) {
+		if (!/^\d+$/.test(data.id) && !/^rcc\-/i.test(data.id)) {
 			return {
 				"error": $.t("error_poll_id_invalid")
 			};

@@ -15,11 +15,11 @@
 
 package com.jelurida.ardor.client.api;
 
-import nxt.addons.JO;
-import nxt.crypto.Crypto;
-import nxt.http.callers.BroadcastTransactionCall;
-import nxt.http.callers.SendMoneyCall;
-import nxt.http.callers.SignTransactionCall;
+import rcc.addons.JO;
+import rcc.crypto.Crypto;
+import rcc.http.callers.BroadcastTransactionCall;
+import rcc.http.callers.SendMoneyCall;
+import rcc.http.callers.SignTransactionCall;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -38,8 +38,8 @@ public class LocalSigning {
     }
 
     private void submitSignAndBroadcast() throws MalformedURLException {
-        URL localUrl = new URL("http://localhost:6876/nxt"); // Start your local testnet node and make sure it is fully synced with the blockchain
-        URL remoteUrl = new URL("https://testnxt.jelurida.com/nxt"); // Jelurida remote testnet node
+        URL localUrl = new URL("http://localhost:6876/rcc"); // Start your local testnet node and make sure it is fully synced with the blockchain
+        URL remoteUrl = new URL("https://testrcc.redcobracoin.com/rcc"); // Jelurida remote testnet node
         byte[] publicKey = Crypto.getPublicKey(SECRET_PHRASE); // Use to generate unsigned transaction without revealing the secret phrase
 
         // This is just a sample, you can submit any transaction type using its specific caller
@@ -76,7 +76,7 @@ public class LocalSigning {
 
     private JO submitRemotely(URL remoteUrl, byte[] publicKey) {
         JO unsignedTransactionResponse = SendMoneyCall.create().
-                recipient("NXT-KX2S-UULA-7YZ7-F3R8L").
+                recipient("rcc-KX2S-UULA-7YZ7-F3R8L").
                 amountNQT(12345678).
                 publicKey(publicKey).
                 deadline(15).

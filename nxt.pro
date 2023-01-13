@@ -1,5 +1,5 @@
 -injars classes #exclude_for_R8
--outjars nxt/classes #exclude_for_R8
+-outjars rcc/classes #exclude_for_R8
 
 -libraryjars <java.home>/lib/rt.jar #exclude_for_R8
 -libraryjars <java.home>/lib/jce.jar #exclude_for_R8
@@ -8,33 +8,33 @@
 -libraryjars lib #exclude_for_R8
 
 -dontoptimize #exclude_for_R8
--printmapping ../nxt.map #exclude_for_R8
+-printmapping ../rcc.map #exclude_for_R8
 -dontusemixedcaseclassnames
--flattenpackagehierarchy nxt
--repackageclasses nxt
+-flattenpackagehierarchy rcc
+-repackageclasses rcc
 -verbose
 
 -keepattributes EnclosingMethod,Signature,*Annotation*
--keep,allowshrinking class nxt.util.NxtLogManager,nxt.util.MemoryHandler
--keep,includedescriptorclasses class nxt.peer.PeerWebSocket,nxt.db.FullTextTrigger {
+-keep,allowshrinking class rcc.util.rccLogManager,rcc.util.MemoryHandler
+-keep,includedescriptorclasses class rcc.peer.PeerWebSocket,rcc.db.FullTextTrigger {
     <methods>;
 }
--keep class nxt.env.service.NxtService_ServiceManagement
--keep class * extends nxt.env.DirProvider
--keep class * extends nxt.addons.AddOn
--keep class nxt.addons.AddOn
--keep class nxt.db.pool.ConnectionPool
--keep class * extends nxt.db.pool.ConnectionPool
--keep class nxt.http.CustomAPISetup
--keep class * extends nxt.http.CustomAPISetup
+-keep class rcc.env.service.rccService_ServiceManagement
+-keep class * extends rcc.env.DirProvider
+-keep class * extends rcc.addons.AddOn
+-keep class rcc.addons.AddOn
+-keep class rcc.db.pool.ConnectionPool
+-keep class * extends rcc.db.pool.ConnectionPool
+-keep class rcc.http.CustomAPISetup
+-keep class * extends rcc.http.CustomAPISetup
 
--keep,includedescriptorclasses class nxtdesktop.JavaScriptBridge, nxtdesktop.DesktopApplication, nxtdesktop.WalletContextMenu {
+-keep,includedescriptorclasses class rccdesktop.JavaScriptBridge, rccdesktop.DesktopApplication, rccdesktop.WalletContextMenu {
     <methods>;
 }
--keepclassmembers class nxt.env.RuntimeEnvironment {
+-keepclassmembers class rcc.env.RuntimeEnvironment {
     static boolean isHeadless();
 }
--keepclassmembers class nxt.env.service.NxtService_ServiceManagement {
+-keepclassmembers class rcc.env.service.rccService_ServiceManagement {
 	public static boolean serviceInit();
     public static java.lang.String[] serviceGetInfo();
 	public static boolean serviceIsCreate();
@@ -52,7 +52,7 @@
     void refresh();
 }
 
--keepclasseswithmembers class nxt.db.TrimmableDbTable {
+-keepclasseswithmembers class rcc.db.TrimmableDbTable {
     public static boolean canBeTrimmed(...);
 }
 

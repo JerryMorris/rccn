@@ -1,11 +1,11 @@
 ----
-# Welcome to Nxt! #
+# Welcome to rcc! #
 
 ----
-## What is Nxt? ##
-Nxt is a modern economic system based on cryptography and blockchain technology.
+## What is rcc? ##
+rcc is a modern economic system based on cryptography and blockchain technology.
 
-With Nxt, you can manage and interact with
+With rcc, you can manage and interact with
 
  - your **assets**
  - your **businesses**
@@ -24,12 +24,12 @@ in such a way that no trusted third parties are required anymore.
     - *Debian* - `http://www.webupd8.org/2014/03/how-to-install-oracle-java-8-in-debian.html`
     - *FreeBSD* - `pkg install openjdk8`
 
-  - *repository* - `git clone https://bitbucket.org/Jelurida/nxt.git`
+  - *repository* - `git clone https://bitbucket.org/Jelurida/rcc.git`
   
 ----
 ## Run it! ##
 
-  - click on the Nxt icon, or start from the command line:
+  - click on the rcc icon, or start from the command line:
   - Unix: `./start.sh`
   - Mac: `./run.command`
   - Window: `run.bat`
@@ -54,10 +54,10 @@ in such a way that no trusted third parties are required anymore.
   - cf. coding guidelines in DEVELOPERS-GUIDE.md
 
 ----
-## Troubleshooting the NRS (Nxt Reference Software) ##
+## Troubleshooting the NRS (rcc Reference Software) ##
 
   - How to Stop the NRS Server?
-    - click on Nxt Stop icon, or run `./stop.sh`
+    - click on rcc Stop icon, or run `./stop.sh`
     - or if started from command line, ctrl+c or close the console window
 
   - UI Errors or Stacktraces?
@@ -76,10 +76,10 @@ in such a way that no trusted third parties are required anymore.
     - OPERATORS-GUIDE.md
 
   - in the wiki:
-    - nxtwiki.org
+    - rccwiki.org
 
   - on the forums:
-    - nxtforum.org
+    - rccforum.org
     
 ----
 

@@ -1,12 +1,12 @@
 /*
- * Copyright © 2013-2016 The Nxt Core Developers.
+ * Copyright © 2013-2016 The rcc Core Developers.
  * Copyright © 2016-2022 Jelurida IP B.V.
  *
  * See the LICENSE.txt file at the top-level directory of this distribution
  * for licensing information.
  *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,
- * no part of the Nxt software, including this file, may be copied, modified,
+ * no part of the rcc software, including this file, may be copied, modified,
  * propagated, or distributed except according to the terms contained in the
  * LICENSE.txt file.
  *
@@ -14,7 +14,7 @@
  *
  */
 
-package nxt.installer;
+package rcc.installer;
 
 import com.izforge.izpack.api.data.InstallData;
 import com.izforge.izpack.api.data.Pack;
@@ -24,8 +24,8 @@ import com.izforge.izpack.event.AbstractProgressInstallerListener;
 
 import java.util.List;
 
-import static nxt.installer.ConfigHandler.VAR_CLEAN_INSTALL_DIR;
-import static nxt.installer.ConfigHandler.VAR_SHUTDOWN_SERVER;
+import static rcc.installer.ConfigHandler.VAR_CLEAN_INSTALL_DIR;
+import static rcc.installer.ConfigHandler.VAR_SHUTDOWN_SERVER;
 
 public class InstallListener extends AbstractProgressInstallerListener {
 
@@ -44,7 +44,7 @@ public class InstallListener extends AbstractProgressInstallerListener {
 
         if (getVariable(VAR_CLEAN_INSTALL_DIR)) {
             // We might have to retry removal a few times until server shutdown is complete
-            if (!handler.cleanNxtInstallDir(getInstallData().getInstallPath(), shutdownServer)) {
+            if (!handler.cleanrccInstallDir(getInstallData().getInstallPath(), shutdownServer)) {
                 error("Failed to remove existing installation");
             }
         }

@@ -1,12 +1,12 @@
 /******************************************************************************
- * Copyright © 2013-2016 The Nxt Core Developers.                             *
+ * Copyright © 2013-2016 The rcc Core Developers.                             *
  * Copyright © 2016-2022 Jelurida IP B.V.                                     *
  *                                                                            *
  * See the LICENSE.txt file at the top-level directory of this distribution   *
  * for licensing information.                                                 *
  *                                                                            *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,*
- * no part of the Nxt software, including this file, may be copied, modified, *
+ * no part of the rcc software, including this file, may be copied, modified, *
  * propagated, or distributed except according to the terms contained in the  *
  * LICENSE.txt file.                                                          *
  *                                                                            *
@@ -46,7 +46,7 @@ var NRS = (function(NRS, $) {
         "changelly_coin0": "BTC",
         "changelly_coin1": "ARDR",
         "changelly_coin2": "ETH",
-		"max_nxt_decimals": "2",
+		"max_rcc_decimals": "2",
 		"fake_entity_warning": "1",
 		"transact_during_download": "0"
 	};
@@ -245,7 +245,7 @@ var NRS = (function(NRS, $) {
 			var setting = $("#settings_" + key);
             if (/_warning/i.test(key) && isAmountWarning(key)) {
 				if (setting.length) {
-					setting.val(NRS.convertToNXT(NRS.settings[key]));
+					setting.val(NRS.convertTorcc(NRS.settings[key]));
 				}
 			} else if (!/_color/i.test(key)) {
 				if (setting.length) {

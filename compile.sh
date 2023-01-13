@@ -38,21 +38,21 @@ fi
 CP="lib/*${PATHSEP}classes${PATHSEP}javafx-sdk/lib/*"
 SP=src/java/
 
-/bin/rm -f nxt.jar
-/bin/rm -f nxtservice.jar
+/bin/rm -f rcc.jar
+/bin/rm -f rccservice.jar
 /bin/rm -rf classes
 /bin/mkdir -p classes/
 /bin/rm -rf addons/classes
 /bin/mkdir -p addons/classes/
 
 echo "compiling core..."
-find src/java/nxt/ -name "*.java" > sources.tmp
+find src/java/rcc/ -name "*.java" > sources.tmp
 ${JAVAC} -encoding utf8 -sourcepath "${SP}" -classpath "${CP}" -d classes/ @sources.tmp || exit 1
 echo "core class files compiled successfully"
 
 if [ $skip_desktop -eq 0 ]; then
     echo "compiling desktop..."
-    find src/java/nxtdesktop/ -name "*.java" > sources.tmp
+    find src/java/rccdesktop/ -name "*.java" > sources.tmp
     ${JAVAC} -encoding utf8 -sourcepath "${SP}" -classpath "${CP}" -d classes/ @sources.tmp
     if [ $? -eq 0 ]; then
         echo "desktop class files compiled successfully"

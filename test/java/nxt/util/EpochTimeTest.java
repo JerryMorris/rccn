@@ -1,5 +1,5 @@
 /*
- * Copyright © 2013-2016 The Nxt Core Developers.
+ * Copyright © 2013-2016 The rcc Core Developers.
  * Copyright © 2016-2022 Jelurida IP B.V.
  *
  * See the LICENSE.txt file at the top-level directory of this distribution
@@ -14,9 +14,9 @@
  *
  */
 
-package nxt.util;
+package rcc.util;
 
-import nxt.Constants;
+import rcc.Constants;
 import org.junit.Assert;
 import org.junit.Assume;
 import org.junit.Test;

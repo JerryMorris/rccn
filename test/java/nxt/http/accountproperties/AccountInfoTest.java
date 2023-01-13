@@ -1,5 +1,5 @@
 /*
- * Copyright © 2013-2016 The Nxt Core Developers.
+ * Copyright © 2013-2016 The rcc Core Developers.
  * Copyright © 2016-2022 Jelurida IP B.V.
  *
  * See the LICENSE.txt file at the top-level directory of this distribution
@@ -14,12 +14,12 @@
  *
  */
 
-package nxt.http.accountproperties;
+package rcc.http.accountproperties;
 
-import nxt.BlockchainTest;
-import nxt.Constants;
-import nxt.http.APICall;
-import nxt.http.callers.SetAccountInfoCall;
+import rcc.BlockchainTest;
+import rcc.Constants;
+import rcc.http.APICall;
+import rcc.http.callers.SetAccountInfoCall;
 import org.json.simple.JSONObject;
 import org.junit.Assert;
 import org.junit.Test;
@@ -35,7 +35,7 @@ public class AccountInfoTest extends BlockchainTest {
         }
         String name = sb.toString();
         APICall.Builder builder = SetAccountInfoCall.create().
-                param("secretPhrase", ALICE.getSecretPhrase()).feeNQT(Constants.ONE_NXT * 20).
+                param("secretPhrase", ALICE.getSecretPhrase()).feeNQT(Constants.ONE_rcc * 20).
                 param("name", name);
         JSONObject response = builder.build().invoke();
         Assert.assertEquals(4L, response.get("errorCode"));
@@ -63,7 +63,7 @@ public class AccountInfoTest extends BlockchainTest {
         }
         String name = sb.toString();
         APICall.Builder builder = SetAccountInfoCall.create().
-                param("secretPhrase", ALICE.getSecretPhrase()).feeNQT(Constants.ONE_NXT * 20).
+                param("secretPhrase", ALICE.getSecretPhrase()).feeNQT(Constants.ONE_rcc * 20).
                 param("name", name);
         JSONObject response = builder.build().invoke();
         Assert.assertEquals(4L, response.get("errorCode"));

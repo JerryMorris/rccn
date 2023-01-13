@@ -13,12 +13,12 @@
  *
  */
 
-package nxt.addons;
+package rcc.addons;
 
-import nxt.BlockchainTest;
-import nxt.Constants;
-import nxt.http.APICall;
-import nxt.util.Convert;
+import rcc.BlockchainTest;
+import rcc.Constants;
+import rcc.http.APICall;
+import rcc.util.Convert;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -40,14 +40,14 @@ public class JPLSnapshotTest extends BlockchainTest {
     /**
      * This value came from genesis block.
      */
-    private static final long aliceCurrentBalance = 5033128 * Constants.ONE_NXT;
+    private static final long aliceCurrentBalance = 5033128 * Constants.ONE_rcc;
 
     private static final String INPUT_JSON_STR =
             "{\n" +
             "    \"balances\": {\n" +
-            "        \"NXT-NZKH-MZRE-2CTT-98NPZ\": 30000000000000000,\n" +
-            "        \"NXT-X5JH-TJKJ-DVGC-5T2V8\": 30000000000000000,\n" +
-            "        \"NXT-LTR8-GMHB-YG56-4NWSE\": 30000000000000000\n" +
+            "        \"rcc-NZKH-MZRE-2CTT-98NPZ\": 30000000000000000,\n" +
+            "        \"rcc-X5JH-TJKJ-DVGC-5T2V8\": 30000000000000000,\n" +
+            "        \"rcc-LTR8-GMHB-YG56-4NWSE\": 30000000000000000\n" +
             "    },\n" +
             "    \"publicKeys\": [\n" +
             "        \"bf0ced0472d8ba3df9e21808e98e61b34404aad737e2bae1778cebc698b40f37\",\n" +
@@ -76,7 +76,7 @@ public class JPLSnapshotTest extends BlockchainTest {
             }
         }
         Assert.assertEquals(aliceCurrentBalance, aliceSnapshotBalance); // 5033128 comes from genesis block
-        Assert.assertTrue(total > Constants.MAX_BALANCE_NQT - 100000 * Constants.ONE_NXT); // some funds were sent to genesis or are locked in claimable currency
+        Assert.assertTrue(total > Constants.MAX_BALANCE_NQT - 100000 * Constants.ONE_rcc); // some funds were sent to genesis or are locked in claimable currency
     }
 
     @Test

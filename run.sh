@@ -52,35 +52,35 @@ if [ $authbind -eq 1 ]; then
 fi
 
 JVM_OPTS=-Xms256M
-if [ -n "${NXT_JVM_OPTS}" ]; then
-    echo "JVM options: ${NXT_JVM_OPTS}"
-    JVM_OPTS=${NXT_JVM_OPTS}
+if [ -n "${rcc_JVM_OPTS}" ]; then
+    echo "JVM options: ${rcc_JVM_OPTS}"
+    JVM_OPTS=${rcc_JVM_OPTS}
 fi
 
-if [ -z "${NXT_PID_FILE}" ]; then
-    NXT_PID_FILE=~/.nxt/nxt.pid
+if [ -z "${rcc_PID_FILE}" ]; then
+    rcc_PID_FILE=~/.rcc/rcc.pid
 fi
 
 if [ $desktop -eq 1 ]; then
     echo "Starting desktop mode in current directory"
-    ${JAVACMD} ${JVM_OPTS} -cp classes:lib/*:conf:addons/classes:addons/lib/*:javafx-sdk/lib/* -Dnxt.runtime.mode=desktop -Dnxt.runtime.dirProvider=nxt.env.DefaultDirProvider nxt.Nxt
+    ${JAVACMD} ${JVM_OPTS} -cp classes:lib/*:conf:addons/classes:addons/lib/*:javafx-sdk/lib/* -Drcc.runtime.mode=desktop -Drcc.runtime.dirProvider=rcc.env.DefaultDirProvider rcc.rcc
 elif [ $daemon -eq 1 ]; then
     echo "Starting daemon mode"
-    if [ -e ${NXT_PID_FILE} ]; then
-        PID=`cat ${NXT_PID_FILE}`
+    if [ -e ${rcc_PID_FILE} ]; then
+        PID=`cat ${rcc_PID_FILE}`
         ps -p $PID > /dev/null
         STATUS=$?
         if [ $STATUS -eq 0 ]; then
-            echo "Nxt server already running"
+            echo "rcc server already running"
             exit 1
         fi
     fi
-    mkdir -p "$(dirname "${NXT_PID_FILE}")"
-    nohup ${JAVACMD} ${JVM_OPTS} -cp classes:lib/*:conf:addons/classes:addons/lib/*:javafx-sdk/lib/* nxt.Nxt > /dev/null 2>&1 &
-    echo $! > ${NXT_PID_FILE}
+    mkdir -p "$(dirname "${rcc_PID_FILE}")"
+    nohup ${JAVACMD} ${JVM_OPTS} -cp classes:lib/*:conf:addons/classes:addons/lib/*:javafx-sdk/lib/* rcc.rcc > /dev/null 2>&1 &
+    echo $! > ${rcc_PID_FILE}
 else
     echo "Starting default mode"
-    ${JAVACMD} ${JVM_OPTS} -cp classes:lib/*:conf:addons/classes:addons/lib/*:javafx-sdk/lib/* nxt.Nxt
+    ${JAVACMD} ${JVM_OPTS} -cp classes:lib/*:conf:addons/classes:addons/lib/*:javafx-sdk/lib/* rcc.rcc
 fi
 
 cd - > /dev/null

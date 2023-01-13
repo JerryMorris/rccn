@@ -1,12 +1,12 @@
 /*
- * Copyright © 2013-2016 The Nxt Core Developers.
+ * Copyright © 2013-2016 The rcc Core Developers.
  * Copyright © 2016-2022 Jelurida IP B.V.
  *
  * See the LICENSE.txt file at the top-level directory of this distribution
  * for licensing information.
  *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,
- * no part of the Nxt software, including this file, may be copied, modified,
+ * no part of the rcc software, including this file, may be copied, modified,
  * propagated, or distributed except according to the terms contained in the
  * LICENSE.txt file.
  *
@@ -14,7 +14,7 @@
  *
  */
 
-package nxtdesktop;
+package rccdesktop;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -29,17 +29,17 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import netscape.javascript.JSObject;
-import nxt.Block;
-import nxt.BlockchainProcessor;
-import nxt.Nxt;
-import nxt.PrunableMessage;
-import nxt.TaggedData;
-import nxt.Transaction;
-import nxt.TransactionProcessor;
-import nxt.http.API;
-import nxt.util.Convert;
-import nxt.util.Logger;
-import nxt.util.TrustAllSSLProvider;
+import rcc.Block;
+import rcc.BlockchainProcessor;
+import rcc.rcc;
+import rcc.PrunableMessage;
+import rcc.TaggedData;
+import rcc.Transaction;
+import rcc.TransactionProcessor;
+import rcc.http.API;
+import rcc.util.Convert;
+import rcc.util.Logger;
+import rcc.util.TrustAllSSLProvider;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.awt.Desktop;
@@ -132,7 +132,7 @@ public class DesktopApplication extends Application {
         browser.setMinHeight(height);
         browser.setMinWidth(width);
         webEngine = browser.getEngine();
-        webEngine.setUserDataDirectory(Nxt.getConfDir());
+        webEngine.setUserDataDirectory(rcc.getConfDir());
 
         Worker<Void> loadWorker = webEngine.getLoadWorker();
         loadWorker.stateProperty().addListener(
@@ -149,14 +149,14 @@ public class DesktopApplication extends Application {
                     String language = locale.getLanguage().toLowerCase() + "-" + locale.getCountry().toUpperCase();
                     window.setMember("javaFxLanguage", language);
                     webEngine.executeScript("console.log = function(msg) { java.log(msg); };");
-                    stage.setTitle("NXT Desktop - " + webEngine.getLocation());
+                    stage.setTitle("rcc Desktop - " + webEngine.getLocation());
                     nrs = (JSObject) webEngine.executeScript("NRS");
                     updateClientState("Desktop Wallet started");
-                    BlockchainProcessor blockchainProcessor = Nxt.getBlockchainProcessor();
+                    BlockchainProcessor blockchainProcessor = rcc.getBlockchainProcessor();
                     blockchainProcessor.addListener(this::updateClientState, BlockchainProcessor.Event.BLOCK_PUSHED);
-                    Nxt.getTransactionProcessor().addListener(transaction ->
+                    rcc.getTransactionProcessor().addListener(transaction ->
                             updateClientState(TransactionProcessor.Event.ADDED_UNCONFIRMED_TRANSACTIONS, transaction), TransactionProcessor.Event.ADDED_UNCONFIRMED_TRANSACTIONS);
-                    Nxt.getTransactionProcessor().addListener(transaction ->
+                    rcc.getTransactionProcessor().addListener(transaction ->
                             updateClientState(TransactionProcessor.Event.REMOVED_UNCONFIRMED_TRANSACTIONS, transaction), TransactionProcessor.Event.REMOVED_UNCONFIRMED_TRANSACTIONS);
 
                     if (ENABLE_JAVASCRIPT_DEBUGGER) {
@@ -195,7 +195,7 @@ public class DesktopApplication extends Application {
 
         Scene scene = new Scene(browser);
         String address = API.getServerRootUri().toString();
-        stage.getIcons().add(new Image(address + "/img/nxt-icon-32x32.png"));
+        stage.getIcons().add(new Image(address + "/img/rcc-icon-32x32.png"));
         stage.initStyle(StageStyle.DECORATED);
         stage.setScene(scene);
         stage.sizeToScene();
@@ -204,7 +204,7 @@ public class DesktopApplication extends Application {
     }
 
     private void updateClientState(Block block) {
-        if (Nxt.getBlockchainProcessor().isDownloading()) {
+        if (rcc.getBlockchainProcessor().isDownloading()) {
             if (System.currentTimeMillis() - updateTime < 10000L) {
                 return;
             }
@@ -231,7 +231,7 @@ public class DesktopApplication extends Application {
             HttpsURLConnection.setDefaultSSLSocketFactory(TrustAllSSLProvider.getSslSocketFactory());
             HttpsURLConnection.setDefaultHostnameVerifier(TrustAllSSLProvider.getHostNameVerifier());
         }
-        String defaultAccount = Nxt.getStringProperty("nxt.defaultDesktopAccount");
+        String defaultAccount = rcc.getStringProperty("rcc.defaultDesktopAccount");
         if (defaultAccount != null && !defaultAccount.equals("")) {
             url += "?account=" + defaultAccount;
         }
@@ -286,7 +286,7 @@ public class DesktopApplication extends Application {
         if (requestType.equals("downloadTaggedData")) {
             if (taggedData == null && retrieve) {
                 try {
-                    if (Nxt.getBlockchainProcessor().restorePrunedTransaction(transactionId) == null) {
+                    if (rcc.getBlockchainProcessor().restorePrunedTransaction(transactionId) == null) {
                         growl("Pruned transaction data not currently available from any peer");
                         return;
                     }
@@ -310,7 +310,7 @@ public class DesktopApplication extends Application {
             PrunableMessage prunableMessage = PrunableMessage.getPrunableMessage(transactionId);
             if (prunableMessage == null && retrieve) {
                 try {
-                    if (Nxt.getBlockchainProcessor().restorePrunedTransaction(transactionId) == null) {
+                    if (rcc.getBlockchainProcessor().restorePrunedTransaction(transactionId) == null) {
                         growl("Pruned message not currently available from any peer");
                         return;
                     }

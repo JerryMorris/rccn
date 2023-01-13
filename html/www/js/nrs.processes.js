@@ -1,5 +1,5 @@
 /******************************************************************************
- * Copyright © 2013-2016 The Nxt Core Developers.                             *
+ * Copyright © 2013-2016 The rcc Core Developers.                             *
  * Copyright © 2016-2022 Jelurida IP B.V.                                     *
  *                                                                            *
  * See the LICENSE.txt file at the top-level directory of this distribution   *
@@ -221,8 +221,8 @@ var NRS = (function(NRS, $) {
             forgingAccounts.push(forgingAccount);
             renderForgingAccountsTable();
             NRS.sendRequest('getBalance', {account: accountId, includeEffectiveBalance: true}, function (response) {
-                if (response.effectiveBalanceNXT !== undefined) {
-                    forgingAccount.effectiveBalance = response.effectiveBalanceNXT;
+                if (response.effectiveBalancercc !== undefined) {
+                    forgingAccount.effectiveBalance = response.effectiveBalancercc;
                     renderForgingAccountsTable();
                 }
             });

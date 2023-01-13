@@ -1,12 +1,12 @@
 /*
- * Copyright © 2013-2016 The Nxt Core Developers.
+ * Copyright © 2013-2016 The rcc Core Developers.
  * Copyright © 2016-2022 Jelurida IP B.V.
  *
  * See the LICENSE.txt file at the top-level directory of this distribution
  * for licensing information.
  *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,
- * no part of the Nxt software, including this file, may be copied, modified,
+ * no part of the rcc software, including this file, may be copied, modified,
  * propagated, or distributed except according to the terms contained in the
  * LICENSE.txt file.
  *
@@ -14,7 +14,7 @@
  *
  */
 
-package nxt.installer;
+package rcc.installer;
 
 import com.izforge.izpack.api.data.InstallData;
 import com.izforge.izpack.api.handler.Prompt;
@@ -29,10 +29,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import static nxt.installer.ConfigHandler.Setting;
-import static nxt.installer.ConfigHandler.VAR_CLEAN_INSTALL_DIR;
-import static nxt.installer.ConfigHandler.VAR_FILE_CONTENTS;
-import static nxt.installer.ConfigHandler.VAR_SHUTDOWN_SERVER;
+import static rcc.installer.ConfigHandler.Setting;
+import static rcc.installer.ConfigHandler.VAR_CLEAN_INSTALL_DIR;
+import static rcc.installer.ConfigHandler.VAR_FILE_CONTENTS;
+import static rcc.installer.ConfigHandler.VAR_SHUTDOWN_SERVER;
 
 public class ConfigConsolePanel extends AbstractConsolePanel
 {
@@ -58,7 +58,7 @@ public class ConfigConsolePanel extends AbstractConsolePanel
         }
 
         String installPath = installData.getInstallPath();
-        if (handler.isNxtInstallDir(installPath) &&
+        if (handler.isrccInstallDir(installPath) &&
             askUser("An existing installation was found.", "Do you want to remove it?"))
         {
             installData.setVariable(VAR_CLEAN_INSTALL_DIR, "true");
@@ -69,7 +69,7 @@ public class ConfigConsolePanel extends AbstractConsolePanel
 
         if (! allSettings.isEmpty() &&
             askUser("There are a few settings that can be customized now. " +
-                    "They will be put into conf/nxt.properties file which you can edit later.",
+                    "They will be put into conf/rcc.properties file which you can edit later.",
                     "Do you want to customize settings now?"))
         {
             Map<String, String> properties = new HashMap<>();

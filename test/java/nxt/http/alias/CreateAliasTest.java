@@ -13,13 +13,13 @@
  *
  */
 
-package nxt.http.alias;
+package rcc.http.alias;
 
-import nxt.BlockchainTest;
-import nxt.Constants;
-import nxt.http.APICall;
-import nxt.http.callers.SetAliasCall;
-import nxt.util.Logger;
+import rcc.BlockchainTest;
+import rcc.Constants;
+import rcc.http.APICall;
+import rcc.http.callers.SetAliasCall;
+import rcc.util.Logger;
 import org.json.simple.JSONObject;
 import org.junit.Assert;
 import org.junit.Test;
@@ -33,9 +33,9 @@ public class CreateAliasTest extends BlockchainTest {
             sb.append(char3Byte);
         }
         String name = sb.toString();
-        String uri = "nxt://test " + name + name;
+        String uri = "rcc://test " + name + name;
         APICall.Builder builder = SetAliasCall.create().
-                publicKey(ALICE.getPublicKeyStr()).feeNQT(Constants.ONE_NXT * 20).
+                publicKey(ALICE.getPublicKeyStr()).feeNQT(Constants.ONE_rcc * 20).
                 broadcast(false).
                 aliasName("153307605")
                 .aliasURI(uri);

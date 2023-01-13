@@ -13,18 +13,18 @@
  *
  */
 
-package nxt.http.assetexchange;
+package rcc.http.assetexchange;
 
-import nxt.BlockchainTest;
-import nxt.Constants;
-import nxt.HoldingType;
-import nxt.Nxt;
-import nxt.Tester;
-import nxt.http.APICall;
-import nxt.http.client.IssueAssetBuilder;
-import nxt.http.client.IssueAssetBuilder.IssueAssetResult;
-import nxt.http.client.TransferAssetBuilder;
-import nxt.http.monetarysystem.TestCurrencyIssuance;
+import rcc.BlockchainTest;
+import rcc.Constants;
+import rcc.HoldingType;
+import rcc.rcc;
+import rcc.Tester;
+import rcc.http.APICall;
+import rcc.http.client.IssueAssetBuilder;
+import rcc.http.client.IssueAssetBuilder.IssueAssetResult;
+import rcc.http.client.TransferAssetBuilder;
+import rcc.http.monetarysystem.TestCurrencyIssuance;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.junit.Assert;
@@ -61,20 +61,20 @@ public class AssetExchangeTest extends BlockchainTest {
     }
 
     @Test
-    public void nxtDividend() {
+    public void rccDividend() {
         String assetId = issueAsset(ALICE, "ACME").getAssetIdString();
         transfer(assetId, ALICE, BOB, 300 * 10000);
         transfer(assetId, ALICE, CHUCK, 200 * 10000);
         transfer(assetId, ALICE, DAVE, 100 * 10000);
         generateBlock();
-        payDividend(ALICE, assetId, HoldingType.NXT, "0", 10000);
+        payDividend(ALICE, assetId, HoldingType.rcc, "0", 10000);
         generateBlock();
 
-        Assert.assertEquals(300 * Constants.ONE_NXT, BOB.getBalanceDiff());
-        Assert.assertEquals(200 * Constants.ONE_NXT, CHUCK.getBalanceDiff());
-        Assert.assertEquals(100 * Constants.ONE_NXT, DAVE.getBalanceDiff());
-        assertGetAssetDividends(assetId, "0", 3, HoldingType.NXT, 10000,
-                (300 + 200 + 100) * Constants.ONE_NXT);
+        Assert.assertEquals(300 * Constants.ONE_rcc, BOB.getBalanceDiff());
+        Assert.assertEquals(200 * Constants.ONE_rcc, CHUCK.getBalanceDiff());
+        Assert.assertEquals(100 * Constants.ONE_rcc, DAVE.getBalanceDiff());
+        assertGetAssetDividends(assetId, "0", 3, HoldingType.rcc, 10000,
+                (300 + 200 + 100) * Constants.ONE_rcc);
     }
 
     @Test
@@ -157,11 +157,11 @@ public class AssetExchangeTest extends BlockchainTest {
         JSONObject response = new APICall.Builder("dividendPayment")
                 .param("secretPhrase", ALICE.getSecretPhrase())
                 .param("asset", "0")
-                .param("holdingType", HoldingType.NXT.getCode())
+                .param("holdingType", HoldingType.rcc.getCode())
                 .param("holding", "0")
                 .param("amountNQTPerQNT", (long) 10000)
-                .param("feeNQT", Constants.ONE_NXT)
-                .param("height", Nxt.getBlockchain().getHeight())
+                .param("feeNQT", Constants.ONE_rcc)
+                .param("height", rcc.getBlockchain().getHeight())
                 .build()
                 .invoke();
         Assert.assertNotNull(response.get("errorCode"));
@@ -174,11 +174,11 @@ public class AssetExchangeTest extends BlockchainTest {
         JSONObject response = new APICall.Builder("dividendPayment")
                 .param("secretPhrase", ALICE.getSecretPhrase())
                 .param("asset", Long.toUnsignedString(assetId))
-                .param("holdingType", HoldingType.NXT.getCode())
+                .param("holdingType", HoldingType.rcc.getCode())
                 .param("holding", "0")
                 .param("amountNQTPerQNT", 0L)
-                .param("feeNQT", Constants.ONE_NXT)
-                .param("height", Nxt.getBlockchain().getHeight())
+                .param("feeNQT", Constants.ONE_rcc)
+                .param("height", rcc.getBlockchain().getHeight())
                 .build()
                 .invoke();
         Assert.assertNotNull(response.get("errorCode"));
@@ -211,8 +211,8 @@ public class AssetExchangeTest extends BlockchainTest {
                 .param("holdingType", holdingType.getCode())
                 .param("holding", holdingId)
                 .param("amountNQTPerQNT", amountNQTPerQNT)
-                .param("feeNQT", Constants.ONE_NXT)
-                .param("height", Nxt.getBlockchain().getHeight())
+                .param("feeNQT", Constants.ONE_rcc)
+                .param("height", rcc.getBlockchain().getHeight())
                 .build()
                 .invokeNoError();
     }

@@ -1,12 +1,12 @@
 /******************************************************************************
- * Copyright © 2013-2016 The Nxt Core Developers.                             *
+ * Copyright © 2013-2016 The rcc Core Developers.                             *
  * Copyright © 2016-2022 Jelurida IP B.V.                                     *
  *                                                                            *
  * See the LICENSE.txt file at the top-level directory of this distribution   *
  * for licensing information.                                                 *
  *                                                                            *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,*
- * no part of the Nxt software, including this file, may be copied, modified, *
+ * no part of the rcc software, including this file, may be copied, modified, *
  * propagated, or distributed except according to the terms contained in the  *
  * LICENSE.txt file.                                                          *
  *                                                                            *
@@ -57,32 +57,32 @@ var NRS = (function (NRS, $, undefined) {
                 }
             }
         });
-        //convert NXT to NQT...
+        //convert rcc to NQT...
         var field = "N/A";
         try {
-            var nxtFields = [
-                ["feeNXT", "feeNQT"],
-                ["amountNXT", "amountNQT"],
-                ["priceNXT", "priceNQT"],
-                ["refundNXT", "refundNQT"],
-                ["discountNXT", "discountNQT"],
-                ["phasingQuorumNXT", "phasingQuorum"],
-                ["phasingMinBalanceNXT", "phasingMinBalance"],
-                ["controlQuorumNXT", "controlQuorum"],
-                ["controlMinBalanceNXT", "controlMinBalance"],
-                ["controlMaxFeesNXT", "controlMaxFees"],
-                ["minBalanceNXT", "minBalance"],
-                ["shufflingAmountNXT", "amount"],
-                ["monitorAmountNXT", "amount"],
-                ["monitorThresholdNXT", "threshold"]
+            var rccFields = [
+                ["feercc", "feeNQT"],
+                ["amountrcc", "amountNQT"],
+                ["pricercc", "priceNQT"],
+                ["refundrcc", "refundNQT"],
+                ["discountrcc", "discountNQT"],
+                ["phasingQuorumrcc", "phasingQuorum"],
+                ["phasingMinBalancercc", "phasingMinBalance"],
+                ["controlQuorumrcc", "controlQuorum"],
+                ["controlMinBalancercc", "controlMinBalance"],
+                ["controlMaxFeesrcc", "controlMaxFees"],
+                ["minBalancercc", "minBalance"],
+                ["shufflingAmountrcc", "amount"],
+                ["monitorAmountrcc", "amount"],
+                ["monitorThresholdrcc", "threshold"]
             ];
 
-            for (i = 0; i < nxtFields.length; i++) {
-                var nxtField = nxtFields[i][0];
-                var nqtField = nxtFields[i][1];
-                if (nxtField in data) {
-                    data[nqtField] = NRS.convertToNQT(data[nxtField]);
-                    delete data[nxtField];
+            for (i = 0; i < rccFields.length; i++) {
+                var rccField = rccFields[i][0];
+                var nqtField = rccFields[i][1];
+                if (rccField in data) {
+                    data[nqtField] = NRS.convertToNQT(data[rccField]);
+                    delete data[rccField];
                 }
             }
         } catch (err) {
@@ -139,7 +139,7 @@ var NRS = (function (NRS, $, undefined) {
                 callback({
                     "errorCode": 1,
                     "errorDescription": $.t("error_fee_exceeds_max_account_control_fee", {
-                        "maxFee": NRS.convertToNXT(phasingControl.maxFees)
+                        "maxFee": NRS.convertTorcc(phasingControl.maxFees)
                     })
                 });
                 return;
@@ -365,7 +365,7 @@ var NRS = (function (NRS, $, undefined) {
         }
         var url;
         if (options.remoteNode) {
-            url = options.remoteNode.getUrl() + "/nxt";
+            url = options.remoteNode.getUrl() + "/rcc";
         } else {
             url = NRS.getRequestPath(options.noProxy);
         }
@@ -1652,8 +1652,8 @@ var NRS = (function (NRS, $, undefined) {
 
     function addAddressData(data) {
         if (typeof data == "object" && ("recipient" in data)) {
-            var address = new NxtAddress();
-            if (/^NXT\-/i.test(data.recipient)) {
+            var address = new rccAddress();
+            if (/^rcc\-/i.test(data.recipient)) {
                 data.recipientRS = data.recipient;
                 if (address.set(data.recipient)) {
                     data.recipient = address.account_id();

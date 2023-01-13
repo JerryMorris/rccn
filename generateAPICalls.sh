@@ -11,5 +11,5 @@ if [ "$OSTYPE" = "cygwin" ] ; then
 PATHSEP=";" 
 fi
 
-${JAVA} -cp "classes${PATHSEP}lib/*${PATHSEP}conf" nxt.http.APICallGenerator
+${JAVA} -cp "classes${PATHSEP}lib/*${PATHSEP}conf" rcc.http.APICallGenerator
 

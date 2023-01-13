@@ -1,12 +1,12 @@
 /*
- * Copyright © 2013-2016 The Nxt Core Developers.
+ * Copyright © 2013-2016 The rcc Core Developers.
  * Copyright © 2016-2022 Jelurida IP B.V.
  *
  * See the LICENSE.txt file at the top-level directory of this distribution
  * for licensing information.
  *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,
- * no part of the Nxt software, including this file, may be copied, modified,
+ * no part of the rcc software, including this file, may be copied, modified,
  * propagated, or distributed except according to the terms contained in the
  * LICENSE.txt file.
  *
@@ -14,14 +14,14 @@
  *
  */
 
-package nxt.http.accountControl;
+package rcc.http.accountControl;
 
-import nxt.http.APICall;
-import nxt.http.callers.ApiSpec;
-import nxt.http.callers.CreateTransactionCallBuilder;
-import nxt.http.callers.IssueAssetCall;
-import nxt.http.monetarysystem.TestCurrencyIssuance;
-import nxt.util.Logger;
+import rcc.http.APICall;
+import rcc.http.callers.ApiSpec;
+import rcc.http.callers.CreateTransactionCallBuilder;
+import rcc.http.callers.IssueAssetCall;
+import rcc.http.monetarysystem.TestCurrencyIssuance;
+import rcc.util.Logger;
 import org.json.simple.JSONObject;
 import org.junit.Assert;
 
@@ -80,7 +80,7 @@ public class ACTestUtils {
         
         String errorMsg = (String) response.get("error");
         Assert.assertNotNull("Transaction should fail, but didn't", errorMsg);
-        Assert.assertTrue(errorMsg.contains("nxt.NxtException$AccountControlException"));
+        Assert.assertTrue(errorMsg.contains("rcc.rccException$AccountControlException"));
     }
     
     public static long getAccountBalance(long account, String balance) {

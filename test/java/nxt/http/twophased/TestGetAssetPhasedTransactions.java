@@ -1,12 +1,12 @@
 /*
- * Copyright © 2013-2016 The Nxt Core Developers.
+ * Copyright © 2013-2016 The rcc Core Developers.
  * Copyright © 2016-2022 Jelurida IP B.V.
  *
  * See the LICENSE.txt file at the top-level directory of this distribution
  * for licensing information.
  *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,
- * no part of the Nxt software, including this file, may be copied, modified,
+ * no part of the rcc software, including this file, may be copied, modified,
  * propagated, or distributed except according to the terms contained in the
  * LICENSE.txt file.
  *
@@ -14,14 +14,14 @@
  *
  */
 
-package nxt.http.twophased;
+package rcc.http.twophased;
 
-import nxt.BlockchainTest;
-import nxt.Constants;
-import nxt.VoteWeighting;
-import nxt.http.APICall;
-import nxt.util.Convert;
-import nxt.util.Logger;
+import rcc.BlockchainTest;
+import rcc.Constants;
+import rcc.VoteWeighting;
+import rcc.http.APICall;
+import rcc.util.Convert;
+import rcc.util.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.junit.Assert;
@@ -44,7 +44,7 @@ public class TestGetAssetPhasedTransactions extends BlockchainTest {
                 .votingModel(VoteWeighting.VotingModel.ASSET.getCode())
                 .holding(Convert.parseUnsignedLong(asset))
                 .minBalance(1, VoteWeighting.MinBalanceModel.ASSET.getCode())
-                .fee(21 * Constants.ONE_NXT)
+                .fee(21 * Constants.ONE_rcc)
                 .build();
     }
 
@@ -56,7 +56,7 @@ public class TestGetAssetPhasedTransactions extends BlockchainTest {
                 param("description", "AliceAssetDescription").
                 param("quantityQNT", 1000).
                 param("decimals", 0).
-                param("feeNQT", 1000 * Constants.ONE_NXT).
+                param("feeNQT", 1000 * Constants.ONE_rcc).
                 build().invokeNoError();
         generateBlock();
 

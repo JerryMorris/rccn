@@ -1,12 +1,12 @@
 /******************************************************************************
- * Copyright © 2013-2016 The Nxt Core Developers.                             *
+ * Copyright © 2013-2016 The rcc Core Developers.                             *
  * Copyright © 2016-2022 Jelurida IP B.V.                                     *
  *                                                                            *
  * See the LICENSE.txt file at the top-level directory of this distribution   *
  * for licensing information.                                                 *
  *                                                                            *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,*
- * no part of the Nxt software, including this file, may be copied, modified, *
+ * no part of the rcc software, including this file, may be copied, modified, *
  * propagated, or distributed except according to the terms contained in the  *
  * LICENSE.txt file.                                                          *
  *                                                                            *
@@ -18,17 +18,17 @@
  * @depends {nrs.js}
  */
 var NRS = (function(NRS, $) {
-	var DOWNLOAD_REPOSITORY_URL = "https://bitbucket.org/Jelurida/nxt/downloads/";
+	var DOWNLOAD_REPOSITORY_URL = "https://bitbucket.org/Jelurida/rcc/downloads/";
 	var index = 0;
 	var bundles = [
-		{alias: "nrsVersion", status: "release", prefix: "nxt-client-", ext: "zip"},
-		{alias: "nrsBetaVersion", status: "beta", prefix: "nxt-client-", ext: "zip"},
-		{alias: "nrsVersionWin", status: "release", prefix: "nxt-client-", ext: "exe"},
-		{alias: "nrsBetaVersionWin", status: "beta", prefix: "nxt-client-", ext: "exe"},
-		{alias: "nrsVersionMac", status: "release", prefix: "nxt-installer-", ext: "dmg"},
-		{alias: "nrsBetaVersionMac", status: "beta", prefix: "nxt-installer-", ext: "dmg"},
-		{alias: "nrsVersionLinux", status: "release", prefix: "nxt-client-", ext: "sh"},
-		{alias: "nrsBetaVersionLinux", status: "beta", prefix: "nxt-client-", ext: "sh"}
+		{alias: "nrsVersion", status: "release", prefix: "rcc-client-", ext: "zip"},
+		{alias: "nrsBetaVersion", status: "beta", prefix: "rcc-client-", ext: "zip"},
+		{alias: "nrsVersionWin", status: "release", prefix: "rcc-client-", ext: "exe"},
+		{alias: "nrsBetaVersionWin", status: "beta", prefix: "rcc-client-", ext: "exe"},
+		{alias: "nrsVersionMac", status: "release", prefix: "rcc-installer-", ext: "dmg"},
+		{alias: "nrsBetaVersionMac", status: "beta", prefix: "rcc-installer-", ext: "dmg"},
+		{alias: "nrsVersionLinux", status: "release", prefix: "rcc-client-", ext: "sh"},
+		{alias: "nrsBetaVersionLinux", status: "beta", prefix: "rcc-client-", ext: "sh"}
 	];
 	NRS.isOutdated = false;
 

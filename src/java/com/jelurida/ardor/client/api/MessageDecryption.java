@@ -15,12 +15,12 @@
 
 package com.jelurida.ardor.client.api;
 
-import nxt.addons.JO;
-import nxt.http.callers.DecryptFromCall;
-import nxt.http.callers.GetBlockCall;
-import nxt.http.callers.GetBlockchainTransactionsCall;
-import nxt.http.responses.BlockResponse;
-import nxt.http.responses.TransactionResponse;
+import rcc.addons.JO;
+import rcc.http.callers.DecryptFromCall;
+import rcc.http.callers.GetBlockCall;
+import rcc.http.callers.GetBlockchainTransactionsCall;
+import rcc.http.responses.BlockResponse;
+import rcc.http.responses.TransactionResponse;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -33,11 +33,11 @@ import java.util.stream.Collectors;
 public class MessageDecryption {
 
     private static final String RECIPIENT_SECRET_PHRASE = "no30FiiC95auuD0tbA1QJuhACtPdT6llpYInYREIT9GKlZhvBB";
-    private static final String SENDER_ACCOUNT = "NXT-XK4R-7VJU-6EQG-7R335";
+    private static final String SENDER_ACCOUNT = "rcc-XK4R-7VJU-6EQG-7R335";
 
     public static void main(String[] args) throws MalformedURLException {
-        URL remoteUrl = new URL("https://testnxt.jelurida.com/nxt");
-        URL localUrl = new URL("http://localhost:6876/nxt");
+        URL remoteUrl = new URL("https://testrcc.redcobracoin.com/rcc");
+        URL localUrl = new URL("http://localhost:6876/rcc");
         MessageDecryption messageDecryption = new MessageDecryption();
         List<TransactionResponse> transactions = messageDecryption.getTransactions(	2490135, SENDER_ACCOUNT, remoteUrl);
         for (TransactionResponse transaction : transactions) {

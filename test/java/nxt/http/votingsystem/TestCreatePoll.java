@@ -1,12 +1,12 @@
 /*
- * Copyright © 2013-2016 The Nxt Core Developers.
+ * Copyright © 2013-2016 The rcc Core Developers.
  * Copyright © 2016-2022 Jelurida IP B.V.
  *
  * See the LICENSE.txt file at the top-level directory of this distribution
  * for licensing information.
  *
  * Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,
- * no part of the Nxt software, including this file, may be copied, modified,
+ * no part of the rcc software, including this file, may be copied, modified,
  * propagated, or distributed except according to the terms contained in the
  * LICENSE.txt file.
  *
@@ -14,15 +14,15 @@
  *
  */
 
-package nxt.http.votingsystem;
+package rcc.http.votingsystem;
 
-import nxt.BlockchainTest;
-import nxt.Constants;
-import nxt.Nxt;
-import nxt.VoteWeighting;
-import nxt.http.APICall;
-import nxt.http.callers.CreatePollCall;
-import nxt.util.Logger;
+import rcc.BlockchainTest;
+import rcc.Constants;
+import rcc.rcc;
+import rcc.VoteWeighting;
+import rcc.http.APICall;
+import rcc.http.callers.CreatePollCall;
+import rcc.util.Logger;
 import org.json.simple.JSONObject;
 import org.junit.Assert;
 import org.junit.Test;
@@ -71,7 +71,7 @@ public class TestCreatePoll extends BlockchainTest {
 
     @Test
     public void createInvalidPoll() {
-        APICall apiCall = new CreatePollBuilder().minBalance(-Constants.ONE_NXT).build();
+        APICall apiCall = new CreatePollBuilder().minBalance(-Constants.ONE_rcc).build();
         issueCreatePoll(apiCall, true);
         generateBlock();
 
@@ -85,16 +85,16 @@ public class TestCreatePoll extends BlockchainTest {
 
         public CreatePollBuilder() {
             builder.secretPhrase(ALICE.getSecretPhrase());
-            builder.feeNQT(10 * Constants.ONE_NXT);
+            builder.feeNQT(10 * Constants.ONE_rcc);
             builder.name("Test1");
             builder.description("The most cool Beatles guy?");
-            builder.finishHeight(Nxt.getBlockchain().getHeight() + 100);
+            builder.finishHeight(rcc.getBlockchain().getHeight() + 100);
             builder.votingModel(VoteWeighting.VotingModel.ACCOUNT.getCode());
             builder.minNumberOfOptions(1);
             builder.maxNumberOfOptions(2);
             builder.minRangeValue(0);
             builder.maxRangeValue(1);
-            builder.minBalance(10 * Constants.ONE_NXT);
+            builder.minBalance(10 * Constants.ONE_rcc);
             builder.minBalanceModel(VoteWeighting.MinBalanceModel.NQT.getCode());
             builder.param("option00", "Ringo");
             builder.param("option01", "Paul");

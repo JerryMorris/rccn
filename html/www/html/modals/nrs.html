@@ -1,12 +1,12 @@
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  ~ Copyright © 2013-2016 The Nxt Core Developers.                            ~
+  ~ Copyright © 2013-2016 The rcc Core Developers.                            ~
   ~ Copyright © 2016-2022 Jelurida IP B.V.                                    ~
   ~                                                                           ~
   ~ See the LICENSE.txt file at the top-level directory of this distribution  ~
   ~ for licensing information.                                                ~
   ~                                                                           ~
   ~ Unless otherwise agreed in a custom licensing agreement with Jelurida B.V.,
-  ~ no part of the Nxt software, including this file, may be copied, modified,~
+  ~ no part of the rcc software, including this file, may be copied, modified,~
   ~ propagated, or distributed except according to the terms contained in the ~
   ~ LICENSE.txt file.                                                         ~
   ~                                                                           ~
@@ -19,7 +19,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" data-i18n="send_nxt">Send NXT</h4>
+                <h4 class="modal-title" data-i18n="send_rcc">Send rcc</h4>
             </div>
             <div class="modal-body">
                 <form role="form" autocomplete="off">
@@ -30,8 +30,8 @@
                             <div class="form-group">
                                 <label for="send_money_amount" data-i18n="amount">AMOUNT</label>
                                 <div class="input-group">
-                                    <input type="text" name="amountNXT" id="send_money_amount" step="any" min="0" class="form-control" placeholder="Amount" data-i18n="[placeholder]amount" tabindex="3">
-                                    <span class="input-group-addon">NXT</span>
+                                    <input type="text" name="amountrcc" id="send_money_amount" step="any" min="0" class="form-control" placeholder="Amount" data-i18n="[placeholder]amount" tabindex="3">
+                                    <span class="input-group-addon">rcc</span>
                                 </div>
                             </div>
                         </div>
@@ -55,7 +55,7 @@
                 <div class="advanced_info"><a href="#" data-i18n="advanced">advanced</a></div>
 
                 <button type="button" class="btn btn-default" data-dismiss="modal" data-i18n="cancel">Cancel</button>
-                <button type="button" class="btn btn-primary" data-loading-text="Submitting..." data-i18n="send_nxt;[data-loading-text]submitting">Send NXT</button>
+                <button type="button" class="btn btn-primary" data-loading-text="Submitting..." data-i18n="send_rcc;[data-loading-text]submitting">Send rcc</button>
             </div>
         </div>
     </div>
@@ -427,7 +427,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" data-i18n="nxt_token_generation_validation">Nxt Token Generation / Validation</h4>
+                <h4 class="modal-title" data-i18n="rcc_token_generation_validation">rcc Token Generation / Validation</h4>
             </div>
             <div class="modal-body">
                 <ul class="nav nav-pills nav-justified" style="margin-bottom:10px">
@@ -627,18 +627,18 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" data-i18n="about_nxt">About Nxt</h4>
+                <h4 class="modal-title" data-i18n="about_rcc">About rcc</h4>
             </div>
             <div class="modal-body">
                 <div>
-                    <img height="128px" width="128px" src="img/nxt_logo.png" align="left" hspace="10" vspace="10">
+                    <img height="128px" width="128px" src="img/rcc_logo.png" align="left" hspace="10" vspace="10">
                     <p id="copyright_notice">
-                        Copyright © 2013-2016 The Nxt Core Developers.<br />
+                        Copyright © 2013-2016 The rcc Core Developers.<br />
                         Copyright © 2016-2022 Jelurida IP B.V.<br />
-                        Distributed under the <a href="https://www.jelurida.com/jpl" target="_new">Jelurida Public License (JPL)</a> version 1.2 for the Nxt Public Blockchain Platform, with ABSOLUTELY NO WARRANTY.<br />
+                        Distributed under the <a href="https://www.jelurida.com/jpl" target="_new">Jelurida Public License (JPL)</a> version 1.2 for the rcc Public Blockchain Platform, with ABSOLUTELY NO WARRANTY.<br />
                     </p>
                     <p>
-                        The Nxt Reference Software (NRS) is developed by <a href="https://www.jelurida.com" target="_new"><img src="img/jelurida_logo.png" height="24px" alt="Jelurida" align="center" hspace="2">Jelurida</a>,<br />
+                        The rcc Reference Software (NRS) is developed by <a href="https://www.jelurida.com" target="_new"><img src="img/jelurida_logo.png" height="24px" alt="Jelurida" align="center" hspace="2">Jelurida</a>,<br />
                         the creators of open source blockchain solutions.<br />
                     </p>
                     <p align="center">
@@ -916,7 +916,7 @@
                 <div class="user_info_modal_content data-never-loading" id="user_info_modal_actions" style="display:none;">
                     <div class="row">
                         <div class="col-xs-6 col-md-6" style="margin-left:auto;margin-right:auto;float:none;">
-                            <button type="button" class="btn btn-default btn-lg btn-block" data-toggle="modal" data-target="#send_money_modal" data-account="" data-i18n="send_nxt">Send NXT</button>
+                            <button type="button" class="btn btn-default btn-lg btn-block" data-toggle="modal" data-target="#send_money_modal" data-account="" data-i18n="send_rcc">Send rcc</button>
                             <button type="button" class="btn btn-default btn-lg btn-block" data-toggle="modal" data-target="#transfer_currency_modal" data-account="" data-i18n="send_currency">Send Currency</button>
                             <button type="button" class="btn btn-default btn-lg btn-block" data-toggle="modal" data-target="#send_message_modal" data-account="" data-i18n="send_a_message">Send a Message</button>
                             <button type="button" id="user_info_modal_add_as_contact" class="btn btn-default btn-lg btn-block" data-toggle="modal" data-target="#add_contact_modal" data-account="" data-i18n="add_as_contact">Add as Contact</button>

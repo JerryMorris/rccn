@@ -1,5 +1,5 @@
 /*
- * Copyright © 2013-2016 The Nxt Core Developers.
+ * Copyright © 2013-2016 The rcc Core Developers.
  * Copyright © 2016-2022 Jelurida IP B.V.
  *
  * See the LICENSE.txt file at the top-level directory of this distribution
@@ -14,7 +14,7 @@
  *
  */
 
-package nxt.http;
+package rcc.http;
 
 import org.junit.Test;
 
@@ -28,7 +28,7 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.emptyMap;
 import static java.util.Collections.singletonList;
 import static java.util.Collections.singletonMap;
-import static nxt.http.APIRemoteConnector.paramsToQueryString;
+import static rcc.http.APIRemoteConnector.paramsToQueryString;
 import static org.junit.Assert.assertEquals;
 
 public class APIRemoteConnectorTest {

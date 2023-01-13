@@ -16,4 +16,4 @@ SP=src/java/${PATHSEP}addons/src/java/
 
 /bin/rm -rf html/doc/*
 
-${JAVADOC} -quiet -sourcepath ${SP} -classpath "${CP}" -protected -splitindex -subpackages nxt -d html/doc/
+${JAVADOC} -quiet -sourcepath ${SP} -classpath "${CP}" -protected -splitindex -subpackages rcc -d html/doc/

@@ -13,11 +13,11 @@
  *
  */
 
-package nxt.http.client;
+package rcc.http.client;
 
-import nxt.Constants;
-import nxt.Tester;
-import nxt.http.APICall;
+import rcc.Constants;
+import rcc.Tester;
+import rcc.http.APICall;
 import org.json.simple.JSONObject;
 
 public class SetAssetPropertyBuilder {
@@ -25,7 +25,7 @@ public class SetAssetPropertyBuilder {
     private final long assetId;
     private final String property;
     private final String value;
-    private long feeNQT = 3 * Constants.ONE_NXT;
+    private long feeNQT = 3 * Constants.ONE_rcc;
 
     public SetAssetPropertyBuilder(Tester setter, long assetId, String name, String value) {
         this.secretPhrase = setter.getSecretPhrase();
